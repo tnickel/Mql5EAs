@@ -1,11 +1,11 @@
 //+------------------------------------------------------------------+
-//|                                     ADR_Reversion_Grid_v130.mq5  |
+//|                                     ADR_Reversion_Grid_v136.mq5  |
 //|                               Copyright 2025, Algorithm Factory  |
 //|       Feature: CSV Signals + MQL5 Economic Calendar News Filter  |
 //+------------------------------------------------------------------+
 #property copyright "Algorithm Factory"
 #property link      ""
-#property version   "1.30"
+#property version   "1.36"
 #property strict
 
 #include <Trade\Trade.mqh>
@@ -36,6 +36,7 @@ input group "=== CSV Signal Integration ==="
 input bool     InpUseCSVSignals      = true;        // CSV-Signale nutzen?
 input int      InpCSVCheckInterval   = 15;          // CSV Check Interval (Minuten)
 input string   InpCSVFilename        = "last_known_signals.csv"; // CSV Dateiname
+input bool     InpDebugMode          = false;       // Debug-Modus (ausführliche Logs)
 
 input group "=== News Filter (MQL5 Calendar) ==="
 input bool     InpUseNewsFilter           = true;           // News-Filter aktivieren?
@@ -113,7 +114,7 @@ datetime g_LastCSVCheck = 0;
 string g_CSVStatus = "Not checked yet";
 string g_CSVSignalText = "N/A";
 
-// News Filter (NEU)
+// News Filter
 bool g_NewsBlockActive = false;          // Ist News-Blockierung aktiv?
 string g_NextNewsInfo = "Keine News";    // Info über nächste News
 datetime g_NextNewsTime = 0;             // Zeit der nächsten relevanten News
@@ -131,7 +132,8 @@ string lblStatusName  = "Lbl_Info_Status";
 string lblSetupName   = "Lbl_Info_Setup";
 string lblCSVInfoName = "Lbl_CSV_Info";
 string lblCSVTimeName = "Lbl_CSV_Time";
-string lblNewsInfoName = "Lbl_News_Info";    // NEU: News-Filter Info
+string lblNewsInfoName = "Lbl_News_Info";
+string lblCSVDirectionName = "Lbl_CSV_Direction";  // NEU: CSV-Traderichtung
 
 //+------------------------------------------------------------------+
 //| Init                                                             |
@@ -191,7 +193,7 @@ int OnInit()
    // WICHTIG: Im Strategy Tester macht CSV-Steuerung keinen Sinn!
    if(InpUseCSVSignals && !isInTester)
    {
-      Print("CSV-Signal Mode aktiviert. Prüfe Datei: ", InpCSVFilename);
+      if(InpDebugMode) Print("CSV-Signal Mode aktiviert. Prüfe Datei: ", InpCSVFilename);
       CheckCSVFile();
       
       // Timer für periodische CSV-Prüfung starten (in Sekunden)
@@ -201,49 +203,31 @@ int OnInit()
          Print("FEHLER: Timer konnte nicht gestartet werden!");
          return(INIT_FAILED);
       }
-      Print("Timer gestartet: Prüfe CSV alle ", InpCSVCheckInterval, " Minuten");
+      if(InpDebugMode) Print("Timer gestartet: Prüfe CSV alle ", InpCSVCheckInterval, " Minuten");
    }
    else
    {
       if(isInTester)
       {
-         Print("CSV-Signal Mode DEAKTIVIERT im Strategy Tester (keine Datei-Zugriffe im Tester)");
+         if(InpDebugMode) Print("CSV-Signal Mode DEAKTIVIERT im Strategy Tester (keine Datei-Zugriffe im Tester)");
          g_CSVMode = false;
-         g_CSVStatus = "Tester-Mode - CSV-Steuerung AUS";
-         g_CSVSignalText = "TESTER MODE";
       }
       else
       {
-         g_CSVMode = false;
-         g_CSVStatus = "CSV-Mode deaktiviert";
-         Print("CSV-Signal Mode deaktiviert. Nutze manuelle Button-Steuerung.");
+         if(InpDebugMode) Print("CSV-Signal Mode deaktiviert. Nutze manuelle Button-Steuerung.");
       }
    }
    
    // News-Filter initialisieren
-   // WICHTIG: Im Strategy Tester gibt es keine Calendar-Daten!
-   if(InpUseNewsFilter && !isInTester)
+   if(InpUseNewsFilter)
    {
-      Print("News-Filter aktiviert. Prüfe Economic Calendar...");
-      Print("Wichtigkeit: ", (InpNewsImportance == NEWS_HIGH_ONLY ? "Nur HIGH" : "MEDIUM + HIGH"));
-      Print("Zeitfenster: ", InpMinutesBeforeNews, " Min vorher, ", InpMinutesAfterNews, " Min nachher");
-      
-      // Initial News-Check
+      if(InpDebugMode)
+      {
+         Print("News-Filter aktiviert. Wichtigkeit: ", 
+               (InpNewsImportance == NEWS_HIGH_ONLY) ? "Nur HIGH" : "MEDIUM + HIGH",
+               " | Zeitfenster: ", InpMinutesBeforeNews, " Min vorher / ", InpMinutesAfterNews, " Min nachher");
+      }
       CheckUpcomingNews();
-   }
-   else
-   {
-      if(isInTester)
-      {
-         Print("News-Filter DEAKTIVIERT im Strategy Tester (keine Calendar-Daten verfügbar)");
-         g_NextNewsInfo = "Tester-Mode - News-Filter AUS";
-      }
-      else
-      {
-         Print("News-Filter deaktiviert.");
-         g_NextNewsInfo = "News-Filter AUS";
-      }
-      g_NewsBlockActive = false;
    }
    
    return(INIT_SUCCEEDED);
@@ -254,10 +238,9 @@ int OnInit()
 //+------------------------------------------------------------------+
 void OnDeinit(const int reason)
 {
-   IndicatorRelease(handleStoch);
-   if (handleRSI != INVALID_HANDLE) IndicatorRelease(handleRSI);
+   if(handleStoch != INVALID_HANDLE) IndicatorRelease(handleStoch);
+   if(handleRSI != INVALID_HANDLE) IndicatorRelease(handleRSI);
    
-   // Timer stoppen
    EventKillTimer();
    
    ObjectDelete(0, btnBothName);
@@ -272,56 +255,24 @@ void OnDeinit(const int reason)
    ObjectDelete(0, lblCSVInfoName);
    ObjectDelete(0, lblCSVTimeName);
    ObjectDelete(0, lblNewsInfoName);
+   ObjectDelete(0, lblCSVDirectionName);  // NEU
    
    Comment("");
 }
 
 //+------------------------------------------------------------------+
-//| Timer Event - Wird alle X Minuten aufgerufen                    |
+//| Timer Event                                                      |
 //+------------------------------------------------------------------+
 void OnTimer()
 {
-   // CSV-Check nur im Live-Mode, nicht im Tester
-   if(InpUseCSVSignals && !MQLInfoInteger(MQL_TESTER) && !MQLInfoInteger(MQL_OPTIMIZATION))
+   if(InpUseCSVSignals)
    {
-      Print("Timer ausgelöst - Prüfe CSV-Datei...");
       CheckCSVFile();
    }
 }
 
 //+------------------------------------------------------------------+
-//| Chart Event                                                      |
-//+------------------------------------------------------------------+
-void OnChartEvent(const int id, const long &lparam, const double &dparam, const string &sparam)
-{
-   if(id == CHARTEVENT_OBJECT_CLICK)
-   {
-      // Wenn CSV-Mode aktiv ist, Buttons ignorieren
-      if(g_CSVMode)
-      {
-         Print("CSV-Mode aktiv - Buttons sind deaktiviert!");
-         ObjectSetInteger(0, sparam, OBJPROP_STATE, false);
-         return;
-      }
-      
-      bool changed = false;
-      
-      if(sparam == btnBothName    && g_currentFilter != FILTER_BOTH)    { g_currentFilter = FILTER_BOTH; changed = true; }
-      if(sparam == btnLongName    && g_currentFilter != FILTER_LONG)    { g_currentFilter = FILTER_LONG; changed = true; }
-      if(sparam == btnShortName   && g_currentFilter != FILTER_SHORT)   { g_currentFilter = FILTER_SHORT; changed = true; }
-      if(sparam == btnNeutralName && g_currentFilter != FILTER_NEUTRAL) { g_currentFilter = FILTER_NEUTRAL; changed = true; }
-      
-      if(changed)
-      {
-         UpdateButtonsState();
-         ValidatePositionsAgainstFilter();
-         ChartRedraw();
-      }
-   }
-}
-
-//+------------------------------------------------------------------+
-//| Tick                                                             |
+//| OnTick                                                           |
 //+------------------------------------------------------------------+
 void OnTick()
 {
@@ -331,490 +282,455 @@ void OnTick()
    
    if(currentBalance > stat_HighWaterMark) stat_HighWaterMark = currentBalance;
    
-   double currentDD = stat_HighWaterMark - currentEquity;
-   if(currentDD > stat_MaxDD_Equity_Money)
-   {
-      stat_MaxDD_Equity_Money = currentDD;
-      if(stat_HighWaterMark > 0) stat_MaxDD_Equity_Percent = (stat_MaxDD_Equity_Money / stat_HighWaterMark) * 100.0;
-   }
+   double equityDD_Money = stat_HighWaterMark - currentEquity;
+   if(equityDD_Money > stat_MaxDD_Equity_Money) stat_MaxDD_Equity_Money = equityDD_Money;
    
+   double equityDD_Pct = 0.0;
+   if(stat_HighWaterMark > 0) equityDD_Pct = (equityDD_Money / stat_HighWaterMark) * 100.0;
+   if(equityDD_Pct > stat_MaxDD_Equity_Percent) stat_MaxDD_Equity_Percent = equityDD_Pct;
+
    // --- 2. PREPARATIONS ---
    ValidatePositionsAgainstFilter();
    CalculateADR_and_Range();
-   
-   // News-Filter prüfen (bei jedem Tick um aktuell zu bleiben)
-   // ABER NUR wenn nicht im Tester (dort keine Calendar-Daten)
-   if(InpUseNewsFilter && !MQLInfoInteger(MQL_TESTER) && !MQLInfoInteger(MQL_OPTIMIZATION))
-   {
-      CheckUpcomingNews();
-   }
+   CheckUpcomingNews();  // News-Filter prüfen
    
    int openPositions = 0;
-   double lastEntryPrice = 0;
-   ENUM_POSITION_TYPE basketType = -1;
-   datetime lastEntryTime = 0;
-
-   // Nur Positionen mit der richtigen Magic Number zählen
-   for(int i = PositionsTotal() - 1; i >= 0; i--)
-   {
-      ulong ticket = PositionGetTicket(i);
-      if(PositionSelectByTicket(ticket))
-      {
-         if(PositionGetString(POSITION_SYMBOL) == _Symbol && PositionGetInteger(POSITION_MAGIC) == InpMagicNumber)
-         {
+   ENUM_POSITION_TYPE openType = POSITION_TYPE_BUY;
+   for(int i=0; i<PositionsTotal(); i++) {
+      if(PositionSelectByTicket(PositionGetTicket(i))) {
+         if(PositionGetString(POSITION_SYMBOL) == _Symbol && PositionGetInteger(POSITION_MAGIC) == InpMagicNumber) {
             openPositions++;
-            basketType = (ENUM_POSITION_TYPE)PositionGetInteger(POSITION_TYPE);
-            datetime tTime = (datetime)PositionGetInteger(POSITION_TIME);
-            
-            if(tTime > lastEntryTime)
-            {
-               lastEntryTime = tTime;
-               lastEntryPrice = PositionGetDouble(POSITION_PRICE_OPEN);
-            }
+            openType = (ENUM_POSITION_TYPE)PositionGetInteger(POSITION_TYPE);
          }
       }
    }
 
    // --- 3. STATUS LOGIC ---
-   if(openPositions == 0) stat_EA_Action = "Scanning for Entry...";
-   else stat_EA_Action = "Managing Basket...";
+   if(openPositions > 0) {
+      double lastEntry = 0.0;
+      for(int i=PositionsTotal()-1; i>=0; i--) {
+         if(PositionSelectByTicket(PositionGetTicket(i))) {
+            if(PositionGetString(POSITION_SYMBOL) == _Symbol && PositionGetInteger(POSITION_MAGIC) == InpMagicNumber) {
+               lastEntry = PositionGetDouble(POSITION_PRICE_OPEN);
+               break;
+            }
+         }
+      }
+      stat_EA_Action = StringFormat("Managing Basket (%s). Next Grid: %.5f", 
+                                    (openType == POSITION_TYPE_BUY) ? "Long" : "Short", lastEntry);
+   } else {
+      if(InpEntryMode == MODE_ADR) {
+         double neededRange = adrValue * (InpEntryADR_Pct / 100.0);
+         if(dayRange < neededRange) {
+            stat_EA_Action = StringFormat("Wait Range (%.5f < %.5f)", dayRange, neededRange);
+         } else {
+            stat_EA_Action = "ADR met. Scanning for Stoch Entry...";
+         }
+      } else if(InpEntryMode == MODE_RSI) {
+         stat_EA_Action = "Scanning for RSI + Stoch Entry...";
+      }
+   }
 
    // --- 4. LOGIC EXECUTION ---
-   if(openPositions > 0)
-   {
-      CheckBasketExit(basketType, openPositions);
+   if(openPositions > 0) {
+      CheckBasketExit(openType, openPositions);
       
-      double nextGridLevel = 0.0;
-      double dist = adrValue * (InpGridStep_ADR_Pct / 100.0);
-      if(basketType == POSITION_TYPE_BUY) nextGridLevel = lastEntryPrice - dist;
-      else nextGridLevel = lastEntryPrice + dist;
-      
-      stat_EA_Action = StringFormat("Basket Open (%s). Next Grid: %.5f", (basketType==POSITION_TYPE_BUY?"Long":"Short"), nextGridLevel);
-   }
-
-   if(InpUseEODClose)
-   {
-      MqlDateTime dt;
-      TimeCurrent(dt);
-      if(dt.hour == InpEODHour && dt.min >= InpEODMinute)
+      datetime currentH1Bar = iTime(_Symbol, PERIOD_H1, 0);
+      if(currentH1Bar != lastProcessedH1Bar && openPositions < InpMaxPositions)
       {
-         stat_EA_Action = "EOD Time. Closing/Waiting.";
-         if(openPositions > 0) CloseAllPositions();
-         UpdateVisuals(openPositions);
-         return;
-      }
-   }
-
-   datetime currentH1Time = iTime(_Symbol, PERIOD_H1, 0);
-   if(currentH1Time != lastProcessedH1Bar)
-   {
-      double slDistancePoints = adrValue * InpIndividualSL_ADR;
-      double slPrice = 0.0;
-
-      if(openPositions > 0 && openPositions < InpMaxPositions)
-      {
-         bool allowedToGrid = true;
-         if(g_currentFilter == FILTER_LONG && basketType == POSITION_TYPE_SELL) allowedToGrid = false;
-         if(g_currentFilter == FILTER_SHORT && basketType == POSITION_TYPE_BUY) allowedToGrid = false;
+         lastProcessedH1Bar = currentH1Bar;
          
-         // NEWS-FILTER: Kein Grid bei News (NEU)
+         // News-Filter: Grid-Nachkauf blockieren wenn News anstehen
          if(g_NewsBlockActive)
          {
-            allowedToGrid = false;
             stat_EA_Action = StringFormat("Grid blockiert: %s", g_NextNewsInfo);
          }
-
-         if(allowedToGrid)
+         else
          {
-            double requiredDist = adrValue * (InpGridStep_ADR_Pct / 100.0);
-            double dynGridLot = GetDynamicLot(InpGridLot);
+            double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
+            double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
             
-            if(basketType == POSITION_TYPE_SELL)
-            {
-               double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
-               if(ask >= (lastEntryPrice + requiredDist)) {
-                  slPrice = ask + slDistancePoints;
-                  trade.Sell(dynGridLot, _Symbol, ask, slPrice, 0, "Grid Short");
+            double requiredDist = adrValue * (InpGridStep_ADR_Pct / 100.0);
+            double slDistancePoints = adrValue * InpIndividualSL_ADR;
+            
+            double lastEntryPrice = 0.0;
+            for(int i=PositionsTotal()-1; i>=0; i--) {
+               if(PositionSelectByTicket(PositionGetTicket(i))) {
+                  if(PositionGetString(POSITION_SYMBOL) == _Symbol && PositionGetInteger(POSITION_MAGIC) == InpMagicNumber) {
+                     lastEntryPrice = PositionGetDouble(POSITION_PRICE_OPEN);
+                     break;
+                  }
                }
             }
-            else if(basketType == POSITION_TYPE_BUY)
-            {
-               double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
-               if(bid <= (lastEntryPrice - requiredDist)) {
-                  slPrice = bid - slDistancePoints;
-                  trade.Buy(dynGridLot, _Symbol, bid, slPrice, 0, "Grid Long");
+            
+            if(lastEntryPrice > 0) {
+               bool gridOk = false;
+               double dynGridLot = GetDynamicLot(InpGridLot);
+               
+               if(openType == POSITION_TYPE_SELL && ask >= (lastEntryPrice + requiredDist)) {
+                  if(g_currentFilter == FILTER_SHORT || g_currentFilter == FILTER_BOTH) {
+                     gridOk = true;
+                     string comment = BuildTradeComment(false, openPositions + 1, "Short");
+                     trade.Sell(dynGridLot, _Symbol, ask, ask + slDistancePoints, 0, comment);
+                  }
+               }
+               if(openType == POSITION_TYPE_BUY && bid <= (lastEntryPrice - requiredDist)) {
+                  if(g_currentFilter == FILTER_LONG || g_currentFilter == FILTER_BOTH) {
+                     gridOk = true;
+                     string comment = BuildTradeComment(false, openPositions + 1, "Long");
+                     trade.Buy(dynGridLot, _Symbol, bid, bid - slDistancePoints, 0, comment);
+                  }
                }
             }
          }
       }
-      else if(openPositions == 0)
-      {
-         if(g_currentFilter == FILTER_NEUTRAL) {
-            stat_EA_Action = "Filter NEUTRAL - No Entries.";
+   }
+
+   // EOD Close
+   if(InpUseEODClose) {
+      MqlDateTime tm;
+      TimeToStruct(TimeCurrent(), tm);
+      if(tm.hour == InpEODHour && tm.min >= InpEODMinute) {
+         if(openPositions > 0) {
+            CloseAllPositions();
+            stat_EA_Action = "EOD Time. Closed all positions.";
+         } else {
+            stat_EA_Action = "EOD Time. Waiting for next day.";
          }
-         // NEWS-FILTER: Kein Entry bei News (NEU)
-         else if(g_NewsBlockActive)
+      }
+   }
+
+   // ENTRY LOGIC
+   if(openPositions == 0)
+   {
+      datetime currentH1Bar = iTime(_Symbol, PERIOD_H1, 0);
+      if(currentH1Bar != lastProcessedH1Bar)
+      {
+         lastProcessedH1Bar = currentH1Bar;
+         
+         // News-Filter: Entry blockieren wenn News anstehen
+         if(g_NewsBlockActive)
          {
             stat_EA_Action = StringFormat("Entry blockiert: %s", g_NextNewsInfo);
          }
          else
          {
-            bool allowLong  = (g_currentFilter == FILTER_BOTH || g_currentFilter == FILTER_LONG);
-            bool allowShort = (g_currentFilter == FILTER_BOTH || g_currentFilter == FILTER_SHORT);
-
-            bool extremeCondition = false;
-            string conditionText = "";
+            bool entryConditionMet = false;
             
-            if (InpEntryMode == MODE_ADR)
-            {
-               double reqRange = adrValue * (InpEntryADR_Pct / 100.0);
-               if(dayRange > reqRange) {
-                  extremeCondition = true;
-                  conditionText = "ADR met";
-               } else {
-                  stat_EA_Action = StringFormat("Wait Range (%.0f < %.0f)", dayRange/_Point, reqRange/_Point);
-               }
+            if(InpEntryMode == MODE_ADR) {
+               double neededRange = adrValue * (InpEntryADR_Pct / 100.0);
+               if(dayRange > neededRange) entryConditionMet = true;
             }
-            else if (InpEntryMode == MODE_RSI && handleRSI != INVALID_HANDLE)
-            {
-               double rsiBuffer[];
-               ArraySetAsSeries(rsiBuffer, true);
-               if(CopyBuffer(handleRSI, 0, 0, 1, rsiBuffer) == 1)
-               {
-                  if(rsiBuffer[0] >= InpRSI_Upper || rsiBuffer[0] <= InpRSI_Lower) {
-                     extremeCondition = true;
-                     conditionText = "RSI met";
-                  } else {
-                     stat_EA_Action = StringFormat("Wait RSI (%.1f)", rsiBuffer[0]);
+            else if(InpEntryMode == MODE_RSI) {
+               double rsiValues[];
+               if(CopyBuffer(handleRSI, 0, 0, 1, rsiValues) == 1) {
+                  if(rsiValues[0] >= InpRSI_Upper || rsiValues[0] <= InpRSI_Lower) {
+                     entryConditionMet = true;
                   }
                }
             }
             
-            if (extremeCondition)
-            {
-               double bufK[];
-               ArraySetAsSeries(bufK, true);
-               if(CopyBuffer(handleStoch, 0, 1, 2, bufK) >= 2)
-               {
-                  double k1 = bufK[0];
-                  double k2 = bufK[1];
-                  double dynStartLot = GetDynamicLot(InpFirstLot);
-                  
-                  if(allowShort && k2 >= InpStochUpper && k1 < InpStochUpper)
-                  {
-                     double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
-                     slPrice = bid + slDistancePoints;
-                     trade.Sell(dynStartLot, _Symbol, bid, slPrice, 0, "First Short");
-                     stat_EA_Action = "Entered Short";
-                  }
-                  else if(allowLong && k2 <= InpStochLower && k1 > InpStochLower)
-                  {
-                     double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
-                     slPrice = ask - slDistancePoints;
-                     trade.Buy(dynStartLot, _Symbol, ask, slPrice, 0, "First Long");
-                     stat_EA_Action = "Entered Long";
-                  }
-                  else
-                  {
-                     stat_EA_Action = StringFormat("%s. Wait Stoch...", conditionText);
-                  }
+            if(entryConditionMet) {
+               double kBuffer[], dBuffer[];
+               ArraySetAsSeries(kBuffer, true);
+               ArraySetAsSeries(dBuffer, true);
+               
+               if(CopyBuffer(handleStoch, 0, 0, 3, kBuffer) < 3) return;
+               if(CopyBuffer(handleStoch, 1, 0, 3, dBuffer) < 3) return;
+               
+               bool shortSignal = (kBuffer[2] >= InpStochUpper && kBuffer[1] < InpStochUpper);
+               bool longSignal  = (kBuffer[2] <= InpStochLower && kBuffer[1] > InpStochLower);
+               
+               double ask = SymbolInfoDouble(_Symbol, SYMBOL_ASK);
+               double bid = SymbolInfoDouble(_Symbol, SYMBOL_BID);
+               double slDistancePoints = adrValue * InpIndividualSL_ADR;
+               double dynFirstLot = GetDynamicLot(InpFirstLot);
+               
+               if(shortSignal && (g_currentFilter == FILTER_SHORT || g_currentFilter == FILTER_BOTH)) {
+                  string comment = BuildTradeComment(true, 1, "Short");
+                  trade.Sell(dynFirstLot, _Symbol, ask, ask + slDistancePoints, 0, comment);
+                  stat_EA_Action = "Entered Short";
+               }
+               if(longSignal && (g_currentFilter == FILTER_LONG || g_currentFilter == FILTER_BOTH)) {
+                  string comment = BuildTradeComment(true, 1, "Long");
+                  trade.Buy(dynFirstLot, _Symbol, bid, bid - slDistancePoints, 0, comment);
+                  stat_EA_Action = "Entered Long";
                }
             }
          }
       }
-      lastProcessedH1Bar = currentH1Time;
    }
-   
+
    // --- 5. VISUALS UPDATE ---
    UpdateVisuals(openPositions);
 }
 
 //+------------------------------------------------------------------+
-//| News-Filter: Prüft ob relevante News anstehen (NEU)             |
+//| Chart Event Handler                                             |
 //+------------------------------------------------------------------+
-void CheckUpcomingNews()
+void OnChartEvent(const int id, const long &lparam, const double &dparam, const string &sparam)
 {
-   if(!InpUseNewsFilter)
+   if(id == CHARTEVENT_OBJECT_CLICK)
    {
-      g_NewsBlockActive = false;
-      g_NextNewsInfo = "News-Filter AUS";
-      return;
-   }
-   
-   // Zeitfenster definieren
-   datetime currentTime = TimeTradeServer();  // Wichtig: Trade Server Zeit nutzen!
-   datetime dateFrom = currentTime - (InpMinutesAfterNews * 60);   // Schaue zurück (falls News gerade war)
-   datetime dateTo = currentTime + (InpMinutesBeforeNews * 60);    // Schaue voraus
-   
-   // Währungen des aktuellen Symbols extrahieren
-   string currencyBase = SymbolInfoString(_Symbol, SYMBOL_CURRENCY_BASE);    // z.B. "EUR" bei EURUSD
-   string currencyQuote = SymbolInfoString(_Symbol, SYMBOL_CURRENCY_PROFIT); // z.B. "USD" bei EURUSD
-   
-   // Mindest-Wichtigkeit festlegen
-   ENUM_CALENDAR_EVENT_IMPORTANCE minImportance;
-   if(InpNewsImportance == NEWS_HIGH_ONLY)
-   {
-      minImportance = CALENDAR_IMPORTANCE_HIGH;
-   }
-   else // NEWS_MEDIUM_HIGH
-   {
-      minImportance = CALENDAR_IMPORTANCE_MODERATE;
-   }
-   
-   bool newsFoundBase = false;
-   bool newsFoundQuote = false;
-   datetime nearestNewsTime = 0;
-   string nearestNewsName = "";
-   ENUM_CALENDAR_EVENT_IMPORTANCE nearestImportance = CALENDAR_IMPORTANCE_NONE;
-   
-   // Prüfe Base-Währung
-   if(InpNewsFilterBothCurrencies || !newsFoundBase)
-   {
-      MqlCalendarValue valuesBase[];
-      if(CalendarValueHistory(valuesBase, dateFrom, dateTo, NULL, currencyBase))
+      if(g_CSVMode)
       {
-         for(int i = 0; i < ArraySize(valuesBase); i++)
-         {
-            MqlCalendarEvent event;
-            if(CalendarEventById(valuesBase[i].event_id, event))
-            {
-               // Nur zeitbasierte Events (nicht ganztägig)
-               if(event.time_mode == CALENDAR_TIMEMODE_DATETIME || 
-                  event.time_mode == CALENDAR_TIMEMODE_DATE)
-               {
-                  if(event.importance >= minImportance)
-                  {
-                     newsFoundBase = true;
-                     
-                     // Speichere nächstes Event
-                     if(nearestNewsTime == 0 || valuesBase[i].time < nearestNewsTime)
-                     {
-                        nearestNewsTime = valuesBase[i].time;
-                        nearestNewsName = event.name;
-                        nearestImportance = event.importance;
-                     }
-                  }
-               }
-            }
-         }
-      }
-   }
-   
-   // Prüfe Quote-Währung (wenn gewünscht)
-   if(InpNewsFilterBothCurrencies)
-   {
-      MqlCalendarValue valuesQuote[];
-      if(CalendarValueHistory(valuesQuote, dateFrom, dateTo, NULL, currencyQuote))
-      {
-         for(int i = 0; i < ArraySize(valuesQuote); i++)
-         {
-            MqlCalendarEvent event;
-            if(CalendarEventById(valuesQuote[i].event_id, event))
-            {
-               if(event.time_mode == CALENDAR_TIMEMODE_DATETIME || 
-                  event.time_mode == CALENDAR_TIMEMODE_DATE)
-               {
-                  if(event.importance >= minImportance)
-                  {
-                     newsFoundQuote = true;
-                     
-                     // Speichere nächstes Event (wenn näher als bisheriges)
-                     if(nearestNewsTime == 0 || valuesQuote[i].time < nearestNewsTime)
-                     {
-                        nearestNewsTime = valuesQuote[i].time;
-                        nearestNewsName = event.name;
-                        nearestImportance = event.importance;
-                     }
-                  }
-               }
-            }
-         }
-      }
-   }
-   
-   // Ergebnis verarbeiten
-   if(newsFoundBase || newsFoundQuote)
-   {
-      g_NewsBlockActive = true;
-      g_NextNewsTime = nearestNewsTime;
-      g_NextNewsName = nearestNewsName;
-      
-      // Berechne Minuten bis News
-      int minutesUntilNews = (int)((nearestNewsTime - currentTime) / 60);
-      
-      string importanceText = "";
-      if(nearestImportance == CALENDAR_IMPORTANCE_HIGH) importanceText = "HIGH";
-      else if(nearestImportance == CALENDAR_IMPORTANCE_MODERATE) importanceText = "MED";
-      else importanceText = "LOW";
-      
-      if(minutesUntilNews > 0)
-      {
-         g_NextNewsInfo = StringFormat("%s [%s] in %d Min", nearestNewsName, importanceText, minutesUntilNews);
-      }
-      else
-      {
-         // News war vor X Minuten
-         int minutesSinceNews = -minutesUntilNews;
-         g_NextNewsInfo = StringFormat("%s [%s] vor %d Min", nearestNewsName, importanceText, minutesSinceNews);
+         Print("WARNUNG: Manuelle Button-Steuerung deaktiviert. CSV-Datei steuert die Richtung!");
+         ObjectSetInteger(0, sparam, OBJPROP_STATE, false);
+         ChartRedraw();
+         return;
       }
       
-      // Debug-Ausgabe (nur bei Änderung)
-      static string lastNewsInfo = "";
-      if(lastNewsInfo != g_NextNewsInfo)
+      if(sparam == btnBothName)
       {
-         Print("NEWS-FILTER AKTIV: ", g_NextNewsInfo);
-         lastNewsInfo = g_NextNewsInfo;
+         g_currentFilter = FILTER_BOTH;
+         UpdateButtonsState();
+         ValidatePositionsAgainstFilter();
       }
-   }
-   else
-   {
-      g_NewsBlockActive = false;
-      g_NextNewsInfo = "Klar - Keine News";
-      g_NextNewsTime = 0;
-      g_NextNewsName = "";
+      else if(sparam == btnLongName)
+      {
+         g_currentFilter = FILTER_LONG;
+         UpdateButtonsState();
+         ValidatePositionsAgainstFilter();
+      }
+      else if(sparam == btnShortName)
+      {
+         g_currentFilter = FILTER_SHORT;
+         UpdateButtonsState();
+         ValidatePositionsAgainstFilter();
+      }
+      else if(sparam == btnNeutralName)
+      {
+         g_currentFilter = FILTER_NEUTRAL;
+         UpdateButtonsState();
+         ValidatePositionsAgainstFilter();
+      }
+      
+      ChartRedraw();
    }
 }
 
 //+------------------------------------------------------------------+
-//| CSV-Datei prüfen und auswerten                                  |
+//| CSV Integration Functions                                       |
 //+------------------------------------------------------------------+
 void CheckCSVFile()
 {
-   string filename = InpCSVFilename;
-   int fileHandle = FileOpen(filename, FILE_READ|FILE_TXT|FILE_ANSI, ';');
+   g_LastCSVCheck = TimeCurrent();
    
+   int fileHandle = FileOpen(InpCSVFilename, FILE_READ|FILE_TXT|FILE_ANSI);
    if(fileHandle == INVALID_HANDLE)
    {
-      int errorCode = GetLastError();
       g_CSVMode = false;
-      g_CSVStatus = StringFormat("WARNUNG: CSV nicht gefunden! (Error %d)", errorCode);
+      g_CSVStatus = "Datei nicht gefunden";
       g_CSVSignalText = "FILE NOT FOUND";
-      
-      Print("WARNUNG: CSV-Datei nicht gefunden: ", filename);
-      Print("Vollständiger Pfad sollte sein: ", TerminalInfoString(TERMINAL_DATA_PATH), "\\MQL5\\Files\\", filename);
-      Print("Nutze manuelle Button-Steuerung!");
-      
+      Print("FEHLER: CSV-Datei nicht gefunden: ", InpCSVFilename);
+      Print("Nutze manuelle Button-Steuerung als Fallback.");
       UpdateButtonsState();
       return;
    }
    
-   // Datei gefunden
-   g_CSVMode = true;
-   g_LastCSVCheck = TimeCurrent();
+   bool foundSymbol = false;
+   string newSignal = "NEUTRAL";
+   string matchedCsvSymbol = "";
+   int lineNumber = 0;
    
-   string currentSymbol = _Symbol;
-   bool symbolFound = false;
-   ENUM_DIR_FILTER newDirection = FILTER_NEUTRAL;
-   string signalText = "NEUTRAL";
+   // DEBUG: Nur bei aktiviertem Debug-Modus
+   if(InpDebugMode)
+   {
+      Print("========================================");
+      Print("CSV-Check: Suche Symbol '", _Symbol, "'");
+      Print("========================================");
+   }
    
-   // Erste Zeile überspringen (Header)
-   string headerLine = FileReadString(fileHandle);
-   Print("CSV Header: ", headerLine);
-   
-   // Zeilen durchgehen
    while(!FileIsEnding(fileHandle))
    {
       string line = FileReadString(fileHandle);
-      if(StringLen(line) == 0) continue;
+      lineNumber++;
       
-      // Zeile parsen: Format "SYMBOL;SIGNAL"
+      // Entferne Carriage Return und Whitespace
+      StringReplace(line, "\r", "");
+      StringReplace(line, "\n", "");
+      StringTrimLeft(line);
+      StringTrimRight(line);
+      
+      // Überspringe leere Zeilen
+      if(line == "") 
+      {
+         if(InpDebugMode) Print("Zeile ", lineNumber, ": [LEER]");
+         continue;
+      }
+      
+      // Überspringe Header-Zeile
+      if(lineNumber == 1 || StringFind(line, "Waehrungspaar") >= 0 || StringFind(line, "Letztes_Signal") >= 0)
+      {
+         if(InpDebugMode) Print("Zeile ", lineNumber, ": [HEADER] ", line);
+         continue;
+      }
+      
+      // Debug: Zeige die gelesene Zeile (nur im Debug-Modus)
+      if(InpDebugMode) Print("Zeile ", lineNumber, ": '", line, "'");
+      
       string parts[];
       int count = StringSplit(line, ';', parts);
       
       if(count >= 2)
       {
-         string symbol = parts[0];
-         string signal = parts[1];
+         string csvSymbol = parts[0];
+         StringTrimLeft(csvSymbol);
+         StringTrimRight(csvSymbol);
          
-         // Leerzeichen entfernen
-         StringTrimLeft(symbol);
-         StringTrimRight(symbol);
-         StringTrimLeft(signal);
-         StringTrimRight(signal);
+         string csvSignal = parts[1];
+         StringTrimLeft(csvSignal);
+         StringTrimRight(csvSignal);
+         StringToUpper(csvSignal);
          
-         // Prüfen ob es unser Symbol ist
-         if(symbol == currentSymbol)
+         // Debug: Zeige geparste Werte (nur im Debug-Modus)
+         if(InpDebugMode) Print("  -> Parsed: Symbol='", csvSymbol, "' Signal='", csvSignal, "'");
+         
+         // VERBESSERTE VERGLEICHSLOGIK:
+         bool isMatch = false;
+         
+         if(csvSymbol == _Symbol)
          {
-            symbolFound = true;
-            signalText = signal;
+            // Exakter Match
+            isMatch = true;
+            if(InpDebugMode) Print("  -> EXAKTER MATCH!");
+         }
+         else if(StringFind(_Symbol, csvSymbol) == 0)
+         {
+            // Symbol beginnt mit CSV-Symbol (z.B. NZDUSDm vs NZDUSD)
+            isMatch = true;
+            if(InpDebugMode) Print("  -> PREFIX MATCH!");
+         }
+         else if(StringFind(_Symbol, csvSymbol + ".") == 0 || 
+                 StringFind(_Symbol, csvSymbol + "#") == 0 ||
+                 StringFind(_Symbol, csvSymbol + "m") == 0)
+         {
+            // Symbol hat bekanntes Suffix
+            isMatch = true;
+            if(InpDebugMode) Print("  -> SUFFIX MATCH!");
+         }
+         else
+         {
+            if(InpDebugMode) Print("  -> Kein Match (suche '", _Symbol, "' vs gefunden '", csvSymbol, "')");
+         }
+         
+         if(isMatch)
+         {
+            foundSymbol = true;
+            newSignal = csvSignal;
+            matchedCsvSymbol = csvSymbol;
             
-            // Signal in Filter umwandeln
-            if(signal == "BUY")
+            if(InpDebugMode)
             {
-               newDirection = FILTER_LONG;
+               Print("========================================");
+               Print("ERFOLG! MT5-Symbol: '", _Symbol, "' = CSV-Symbol: '", csvSymbol, "' Signal: ", csvSignal);
+               Print("========================================");
             }
-            else if(signal == "SELL")
-            {
-               newDirection = FILTER_SHORT;
-            }
-            else if(signal == "NEUTRAL")
-            {
-               newDirection = FILTER_NEUTRAL;
-            }
-            else
-            {
-               Print("WARNUNG: Unbekanntes Signal für ", currentSymbol, ": ", signal);
-               newDirection = FILTER_NEUTRAL;
-            }
-            
-            Print("CSV-Signal für ", currentSymbol, " gefunden: ", signal);
             break;
          }
+      }
+      else
+      {
+         if(InpDebugMode) Print("  -> FEHLER: Konnte Zeile nicht in 2 Teile splitten (count=", count, ")");
       }
    }
    
    FileClose(fileHandle);
    
-   if(!symbolFound)
+   if(!foundSymbol)
    {
-      g_CSVStatus = StringFormat("Symbol %s nicht in CSV gefunden!", currentSymbol);
-      g_CSVSignalText = "NOT IN FILE";
+      g_CSVMode = true;
+      g_CSVStatus = "Symbol nicht in CSV gefunden";
+      g_CSVSignalText = "NOT FOUND";
       g_CSVDirection = FILTER_NEUTRAL;
-      Print("WARNUNG: ", currentSymbol, " nicht in CSV-Datei gefunden!");
-   }
-   else
-   {
-      g_CSVStatus = "CSV erfolgreich gelesen";
-      g_CSVSignalText = signalText;
       
-      // Prüfen ob sich Richtung geändert hat
-      if(newDirection != g_CSVDirection)
+      // Fehler IMMER ausgeben (nicht nur im Debug-Modus)
+      Print("WARNUNG: Symbol '", _Symbol, "' nicht in CSV gefunden! (", lineNumber, " Zeilen gelesen)");
+      if(InpDebugMode)
       {
-         ENUM_DIR_FILTER oldDirection = g_CSVDirection;
-         g_CSVDirection = newDirection;
-         g_currentFilter = newDirection;
-         
-         Print("Richtungswechsel: ", EnumToString(oldDirection), " -> ", EnumToString(newDirection));
-         
-         // Gegenpositionen schließen (nur bei echtem Gegensignal)
-         CloseOppositePositions(oldDirection, newDirection);
+         Print("Prüfe das Expert-Log oben für Details.");
       }
-      else
-      {
-         g_currentFilter = g_CSVDirection;
-      }
-   }
-   
-   UpdateButtonsState();
-   Print("CSV-Check abgeschlossen. Status: ", g_CSVStatus, " | Signal: ", g_CSVSignalText);
-}
-
-//+------------------------------------------------------------------+
-//| Schließt Gegenpositionen bei Richtungswechsel                   |
-//+------------------------------------------------------------------+
-void CloseOppositePositions(ENUM_DIR_FILTER oldDir, ENUM_DIR_FILTER newDir)
-{
-   // Nur schließen wenn echtes Gegensignal (nicht bei NEUTRAL)
-   if(newDir == FILTER_NEUTRAL)
-   {
-      Print("Neues Signal ist NEUTRAL - keine Positionen schließen");
+      
+      g_currentFilter = FILTER_NEUTRAL;
+      UpdateButtonsState();
       return;
    }
    
-   // NEUTRAL -> BUY/SELL: Nichts schließen
+   // Signal parsen
+   ENUM_DIR_FILTER oldFilter = g_currentFilter;
+   ENUM_DIR_FILTER newFilter = FILTER_NEUTRAL;
+   
+   if(newSignal == "BUY")
+   {
+      newFilter = FILTER_LONG;
+      g_CSVSignalText = "BUY";
+   }
+   else if(newSignal == "SELL")
+   {
+      newFilter = FILTER_SHORT;
+      g_CSVSignalText = "SELL";
+   }
+   else
+   {
+      newFilter = FILTER_NEUTRAL;
+      g_CSVSignalText = "NEUTRAL";
+   }
+   
+   g_CSVMode = true;
+   g_CSVDirection = newFilter;
+   g_CSVStatus = "CSV erfolgreich gelesen";
+   
+   // Erfolg IMMER ausgeben (kompakt, nicht nur im Debug-Modus)
+   Print("CSV OK: '", _Symbol, "' → Signal: ", g_CSVSignalText);
+   
+   // Ausführliche Details nur im Debug-Modus
+   if(InpDebugMode)
+   {
+      Print("========================================");
+      Print("CSV ERFOLGREICH GELESEN!");
+      Print("MT5-Symbol: '", _Symbol, "'");
+      Print("CSV-Symbol: '", matchedCsvSymbol, "'");
+      Print("Signal:     ", g_CSVSignalText);
+      Print("Filter:     ", (newFilter == FILTER_LONG ? "LONG" : (newFilter == FILTER_SHORT ? "SHORT" : "NEUTRAL")));
+      Print("========================================");
+   }
+   
+   // Wenn Signal geändert hat: Gegenpositionen schließen
+   if(oldFilter != newFilter)
+   {
+      CloseOppositePositions(oldFilter, newFilter);
+   }
+   
+   g_currentFilter = newFilter;
+   UpdateButtonsState();
+}
+
+void CloseOppositePositions(ENUM_DIR_FILTER oldDir, ENUM_DIR_FILTER newDir)
+{
+   // NEUTRAL als Ziel: Nichts schließen (einfach warten)
+   if(newDir == FILTER_NEUTRAL)
+   {
+      Print("Neues Signal: NEUTRAL - halte bestehende Positionen, keine neuen Trades");
+      return;
+   }
+   
+   // Von NEUTRAL kommend: Nichts zu schließen (keine Positionen)
    if(oldDir == FILTER_NEUTRAL)
    {
-      Print("Vorheriges Signal war NEUTRAL - keine Positionen zu schließen");
+      Print("Signal wechselt von NEUTRAL zu ", (newDir == FILTER_LONG) ? "BUY" : "SELL");
+      return;
+   }
+   
+   // BOTH sollte bei CSV-Steuerung nicht vorkommen
+   if(oldDir == FILTER_BOTH || newDir == FILTER_BOTH)
+   {
+      Print("WARNUNG: FILTER_BOTH sollte bei CSV-Steuerung nicht vorkommen!");
+      return;
+   }
+   
+   // Gleiche Richtung: Nichts zu tun
+   if(oldDir == newDir)
+   {
       return;
    }
    
@@ -846,6 +762,123 @@ void CloseOppositePositions(ENUM_DIR_FILTER oldDir, ENUM_DIR_FILTER newDir)
             }
          }
       }
+   }
+}
+
+//+------------------------------------------------------------------+
+//| News Filter Functions (MQL5 Calendar API)                       |
+//+------------------------------------------------------------------+
+void CheckUpcomingNews()
+{
+   if(!InpUseNewsFilter)
+   {
+      g_NewsBlockActive = false;
+      g_NextNewsInfo = "Deaktiviert";
+      return;
+   }
+   
+   datetime serverTime = TimeTradeServer();
+   
+   datetime dateFrom = serverTime - (InpMinutesAfterNews * 60);
+   datetime dateTo = serverTime + (InpMinutesBeforeNews * 60);
+   
+   string currencyBase = SymbolInfoString(_Symbol, SYMBOL_CURRENCY_BASE);
+   string currencyQuote = SymbolInfoString(_Symbol, SYMBOL_CURRENCY_PROFIT);
+   
+   ENUM_CALENDAR_EVENT_IMPORTANCE minImportance = (InpNewsImportance == NEWS_HIGH_ONLY) 
+      ? CALENDAR_IMPORTANCE_HIGH 
+      : CALENDAR_IMPORTANCE_MODERATE;
+   
+   MqlCalendarValue values[];
+   datetime nearestNewsTime = 0;
+   string nearestNewsName = "";
+   ENUM_CALENDAR_EVENT_IMPORTANCE nearestImportance = CALENDAR_IMPORTANCE_NONE;
+   
+   // Base-Währung prüfen
+   if(CalendarValueHistory(values, dateFrom, dateTo, NULL, currencyBase))
+   {
+      for(int i = 0; i < ArraySize(values); i++)
+      {
+         MqlCalendarEvent event;
+         if(CalendarEventById(values[i].event_id, event))
+         {
+            if(event.time_mode != CALENDAR_TIMEMODE_DATETIME && event.time_mode != CALENDAR_TIMEMODE_DATE)
+               continue;
+            
+            if(event.importance < minImportance)
+               continue;
+            
+            if(nearestNewsTime == 0 || MathAbs((int)(values[i].time - serverTime)) < MathAbs((int)(nearestNewsTime - serverTime)))
+            {
+               nearestNewsTime = values[i].time;
+               nearestNewsName = event.name;
+               nearestImportance = event.importance;
+            }
+         }
+      }
+   }
+   
+   // Quote-Währung prüfen (wenn aktiviert)
+   if(InpNewsFilterBothCurrencies && currencyBase != currencyQuote)
+   {
+      if(CalendarValueHistory(values, dateFrom, dateTo, NULL, currencyQuote))
+      {
+         for(int i = 0; i < ArraySize(values); i++)
+         {
+            MqlCalendarEvent event;
+            if(CalendarEventById(values[i].event_id, event))
+            {
+               if(event.time_mode != CALENDAR_TIMEMODE_DATETIME && event.time_mode != CALENDAR_TIMEMODE_DATE)
+                  continue;
+               
+               if(event.importance < minImportance)
+                  continue;
+               
+               if(nearestNewsTime == 0 || MathAbs((int)(values[i].time - serverTime)) < MathAbs((int)(nearestNewsTime - serverTime)))
+               {
+                  nearestNewsTime = values[i].time;
+                  nearestNewsName = event.name;
+                  nearestImportance = event.importance;
+               }
+            }
+         }
+      }
+   }
+   
+   // Auswertung
+   if(nearestNewsTime > 0)
+   {
+      int minutesDiff = (int)((nearestNewsTime - serverTime) / 60);
+      
+      string impText = "";
+      switch(nearestImportance)
+      {
+         case CALENDAR_IMPORTANCE_HIGH: impText = "HIGH"; break;
+         case CALENDAR_IMPORTANCE_MODERATE: impText = "MEDIUM"; break;
+         case CALENDAR_IMPORTANCE_LOW: impText = "LOW"; break;
+         default: impText = "NONE"; break;
+      }
+      
+      if(minutesDiff > 0)
+      {
+         g_NewsBlockActive = true;
+         g_NextNewsInfo = StringFormat("%s [%s] in %d Min", nearestNewsName, impText, minutesDiff);
+      }
+      else
+      {
+         g_NewsBlockActive = true;
+         g_NextNewsInfo = StringFormat("%s [%s] vor %d Min", nearestNewsName, impText, -minutesDiff);
+      }
+      
+      g_NextNewsTime = nearestNewsTime;
+      g_NextNewsName = nearestNewsName;
+   }
+   else
+   {
+      g_NewsBlockActive = false;
+      g_NextNewsInfo = "Klar - Keine News";
+      g_NextNewsTime = 0;
+      g_NextNewsName = "";
    }
 }
 
@@ -898,7 +931,7 @@ void UpdateVisuals(int positions)
       ObjectSetString(0, lblCSVTimeName, OBJPROP_TEXT, "");
    }
    
-   // Zeile 7: News-Filter Info (NEU)
+   // Zeile 7: News-Filter Info
    if(InpUseNewsFilter)
    {
       string newsFilterText = "";
@@ -922,6 +955,52 @@ void UpdateVisuals(int positions)
    {
       ObjectSetString(0, lblNewsInfoName, OBJPROP_TEXT, "News-Filter: DEAKTIVIERT");
       ObjectSetInteger(0, lblNewsInfoName, OBJPROP_COLOR, clrGray);
+   }
+   
+   // Zeile 8: CSV Traderichtung - NEU!
+   if(InpUseCSVSignals && g_CSVMode)
+   {
+      string directionText = "";
+      color directionColor = clrYellow;
+      
+      // Prüfe erst ob Symbol überhaupt gefunden wurde
+      if(g_CSVSignalText == "NOT FOUND")
+      {
+         directionText = StringFormat("%s: NICHT GEFUNDEN IN CSV → KEINE TRADES", _Symbol);
+         directionColor = clrOrange;
+      }
+      else
+      {
+         // Symbol wurde gefunden, schaue auf das Signal
+         switch(g_currentFilter)
+         {
+            case FILTER_LONG:
+               directionText = StringFormat("%s: BUY → NUR LONG TRADES ERLAUBT", _Symbol);
+               directionColor = clrLimeGreen;
+               break;
+            case FILTER_SHORT:
+               directionText = StringFormat("%s: SELL → NUR SHORT TRADES ERLAUBT", _Symbol);
+               directionColor = clrRed;
+               break;
+            case FILTER_NEUTRAL:
+               directionText = StringFormat("%s: NEUTRAL → KEINE NEUEN TRADES", _Symbol);
+               directionColor = clrYellow;
+               break;
+         }
+      }
+      
+      ObjectSetString(0, lblCSVDirectionName, OBJPROP_TEXT, directionText);
+      ObjectSetInteger(0, lblCSVDirectionName, OBJPROP_COLOR, directionColor);
+   }
+   else if(InpUseCSVSignals && !g_CSVMode)
+   {
+      ObjectSetString(0, lblCSVDirectionName, OBJPROP_TEXT, StringFormat("%s: CSV-DATEI NICHT GEFUNDEN → WARNUNG", _Symbol));
+      ObjectSetInteger(0, lblCSVDirectionName, OBJPROP_COLOR, clrOrange);
+   }
+   else
+   {
+      ObjectSetString(0, lblCSVDirectionName, OBJPROP_TEXT, "CSV-Steuerung: DEAKTIVIERT (Manuelle Buttons aktiv)");
+      ObjectSetInteger(0, lblCSVDirectionName, OBJPROP_COLOR, clrGray);
    }
 }
 
@@ -953,8 +1032,11 @@ void CreateLabels()
    // Label 6: CSV Time
    CreateSingleLabel(lblCSVTimeName, x, 175, "CSV Check: ...", fontSize, font, clrWhite);
    
-   // Label 7: News Info (NEU)
+   // Label 7: News Info
    CreateSingleLabel(lblNewsInfoName, x, 200, "News: Init...", fontSize, font, clrYellow);
+   
+   // Label 8: CSV Traderichtung - NEU!
+   CreateSingleLabel(lblCSVDirectionName, x, 225, "CSV-Richtung: N/A", fontSize+2, font, clrYellow);
 }
 
 void CreateSingleLabel(string name, int x, int y, string text, int fSize, string font, color c)
@@ -1074,6 +1156,28 @@ void UpdateButtonsState()
 //+------------------------------------------------------------------+
 //| Helpers                                                          |
 //+------------------------------------------------------------------+
+string BuildTradeComment(bool isFirstEntry, int positionNumber, string direction)
+{
+   // CSV-Status
+   string csvPart = g_CSVMode ? StringFormat("CSV:%s", g_CSVSignalText) : "Manual";
+   
+   // Entry-Typ
+   string entryType = "";
+   if(isFirstEntry)
+   {
+      entryType = (InpEntryMode == MODE_ADR) ? "ADR" : "RSI";
+   }
+   else
+   {
+      entryType = "Grid";
+   }
+   
+   // Vollständiger Comment
+   string comment = StringFormat("%s | %s-%s #%d", csvPart, entryType, direction, positionNumber);
+   
+   return comment;
+}
+
 void CalculateADR_and_Range()
 {
    double sum = 0;
