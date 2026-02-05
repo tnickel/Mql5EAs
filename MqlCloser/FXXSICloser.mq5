@@ -5,12 +5,13 @@
 //+------------------------------------------------------------------+
 #property copyright "Copyright 2024, SignalWatcher"
 #property link      ""
-#property version   "1.00"
+#property version   "1.10"
 #property description "Überwacht Signaldatei und schließt konfliktbehaftete Positionen"
 
 //--- Input-Parameter
 input string     SignalFileName   = "last_known_signals.csv"; // Dateiname in MQL5/Files
 input int        CheckInterval    = 5;                         // Prüfintervall in Minuten
+input int        MaxTimeout       = 0;                         // Max Alter der Datei in Minuten (0=deaktiviert)
 
 //--- Globale Variablen
 datetime         g_lastCheckTime  = 0;
@@ -18,8 +19,14 @@ int              g_timerSeconds   = 0;
 string           g_globalVarName  = "CloserConflictCount";
 
 //--- Label-Namen für Chart-Anzeige
+string           g_labelVersion   = "CloserVersion";
+string           g_labelConfig    = "CloserConfig";
 string           g_labelCountdown = "CloserCountdown";
 string           g_labelCounter   = "CloserCounter";
+string           g_labelFileWarning = "CloserFileWarning";
+
+//--- Warnung-Status
+bool             g_fileAgeWarningActive = false;
 
 //--- Struktur für Signale
 struct SignalData
@@ -75,8 +82,11 @@ void OnDeinit(const int reason)
    EventKillTimer();
    
    //--- Chart-Labels entfernen
+   ObjectDelete(0, g_labelVersion);
+   ObjectDelete(0, g_labelConfig);
    ObjectDelete(0, g_labelCountdown);
    ObjectDelete(0, g_labelCounter);
+   ObjectDelete(0, g_labelFileWarning);
    
    Print("=== Closer EA beendet ===");
    Print("Grund: ", reason);
@@ -114,11 +124,34 @@ void OnTimer()
 //+------------------------------------------------------------------+
 void CreateChartLabels()
 {
+   //--- Version-Label
+   ObjectCreate(0, g_labelVersion, OBJ_LABEL, 0, 0, 0);
+   ObjectSetInteger(0, g_labelVersion, OBJPROP_CORNER, CORNER_LEFT_UPPER);
+   ObjectSetInteger(0, g_labelVersion, OBJPROP_XDISTANCE, 10);
+   ObjectSetInteger(0, g_labelVersion, OBJPROP_YDISTANCE, 70);
+   ObjectSetInteger(0, g_labelVersion, OBJPROP_COLOR, clrAqua);
+   ObjectSetInteger(0, g_labelVersion, OBJPROP_FONTSIZE, 9);
+   ObjectSetString(0, g_labelVersion, OBJPROP_FONT, "Arial");
+   ObjectSetString(0, g_labelVersion, OBJPROP_TEXT, "FXSSICloser v1.10");
+   
+   //--- Config-Label
+   ObjectCreate(0, g_labelConfig, OBJ_LABEL, 0, 0, 0);
+   ObjectSetInteger(0, g_labelConfig, OBJPROP_CORNER, CORNER_LEFT_UPPER);
+   ObjectSetInteger(0, g_labelConfig, OBJPROP_XDISTANCE, 10);
+   ObjectSetInteger(0, g_labelConfig, OBJPROP_YDISTANCE, 90);
+   ObjectSetInteger(0, g_labelConfig, OBJPROP_COLOR, clrAqua);
+   ObjectSetInteger(0, g_labelConfig, OBJPROP_FONTSIZE, 9);
+   ObjectSetString(0, g_labelConfig, OBJPROP_FONT, "Arial");
+   string configText = StringFormat("Config: CheckInterval=%d Min | MaxTimeout=%d Min%s", 
+                                   CheckInterval, MaxTimeout, 
+                                   (MaxTimeout == 0) ? " (deaktiviert)" : "");
+   ObjectSetString(0, g_labelConfig, OBJPROP_TEXT, configText);
+   
    //--- Countdown-Label
    ObjectCreate(0, g_labelCountdown, OBJ_LABEL, 0, 0, 0);
    ObjectSetInteger(0, g_labelCountdown, OBJPROP_CORNER, CORNER_LEFT_UPPER);
    ObjectSetInteger(0, g_labelCountdown, OBJPROP_XDISTANCE, 10);
-   ObjectSetInteger(0, g_labelCountdown, OBJPROP_YDISTANCE, 30);
+   ObjectSetInteger(0, g_labelCountdown, OBJPROP_YDISTANCE, 110);
    ObjectSetInteger(0, g_labelCountdown, OBJPROP_COLOR, clrLime);
    ObjectSetInteger(0, g_labelCountdown, OBJPROP_FONTSIZE, 10);
    ObjectSetString(0, g_labelCountdown, OBJPROP_FONT, "Arial Bold");
@@ -127,10 +160,20 @@ void CreateChartLabels()
    ObjectCreate(0, g_labelCounter, OBJ_LABEL, 0, 0, 0);
    ObjectSetInteger(0, g_labelCounter, OBJPROP_CORNER, CORNER_LEFT_UPPER);
    ObjectSetInteger(0, g_labelCounter, OBJPROP_XDISTANCE, 10);
-   ObjectSetInteger(0, g_labelCounter, OBJPROP_YDISTANCE, 50);
+   ObjectSetInteger(0, g_labelCounter, OBJPROP_YDISTANCE, 130);
    ObjectSetInteger(0, g_labelCounter, OBJPROP_COLOR, clrYellow);
    ObjectSetInteger(0, g_labelCounter, OBJPROP_FONTSIZE, 10);
    ObjectSetString(0, g_labelCounter, OBJPROP_FONT, "Arial Bold");
+   
+   //--- Warning-Label (initially hidden)
+   ObjectCreate(0, g_labelFileWarning, OBJ_LABEL, 0, 0, 0);
+   ObjectSetInteger(0, g_labelFileWarning, OBJPROP_CORNER, CORNER_LEFT_UPPER);
+   ObjectSetInteger(0, g_labelFileWarning, OBJPROP_XDISTANCE, 10);
+   ObjectSetInteger(0, g_labelFileWarning, OBJPROP_YDISTANCE, 10);
+   ObjectSetInteger(0, g_labelFileWarning, OBJPROP_COLOR, clrRed);
+   ObjectSetInteger(0, g_labelFileWarning, OBJPROP_FONTSIZE, 12);
+   ObjectSetString(0, g_labelFileWarning, OBJPROP_FONT, "Arial Bold");
+   ObjectSetString(0, g_labelFileWarning, OBJPROP_TEXT, "");
 }
 
 //+------------------------------------------------------------------+
@@ -176,6 +219,49 @@ bool ReadSignalFile(SignalData &signals[])
    }
    
    Print("--- Lese Signaldatei: ", filepath, " ---");
+   
+   //--- Dateialter prüfen (wenn MaxTimeout > 0)
+   if(MaxTimeout > 0)
+   {
+      datetime fileModifyTime = (datetime)FileGetInteger(filehandle, FILE_MODIFY_DATE);
+      datetime currentTime = TimeCurrent();
+      int ageInSeconds = (int)(currentTime - fileModifyTime);
+      int ageInMinutes = ageInSeconds / 60;
+      
+      Print("Datei-Änderungszeit: ", TimeToString(fileModifyTime, TIME_DATE|TIME_SECONDS));
+      Print("Aktuelle Zeit: ", TimeToString(currentTime, TIME_DATE|TIME_SECONDS));
+      Print("Dateialter: ", ageInMinutes, " Minuten (", ageInSeconds, " Sekunden)");
+      
+      if(ageInMinutes > MaxTimeout)
+      {
+         //--- Warnung ausgeben
+         string warningMsg = StringFormat("WARNUNG: Signaldatei ist veraltet! Alter: %d Min (Max: %d Min)", 
+                                         ageInMinutes, MaxTimeout);
+         Print(warningMsg);
+         
+         //--- Sound abspielen (nur wenn noch nicht aktiv)
+         if(!g_fileAgeWarningActive)
+         {
+            PlaySound("alert.wav");
+            g_fileAgeWarningActive = true;
+         }
+         
+         //--- Chart-Label aktualisieren
+         string labelText = StringFormat("⚠ WARNUNG: Signaldatei veraltet! Alter: %d Min (Max: %d Min)", 
+                                        ageInMinutes, MaxTimeout);
+         ObjectSetString(0, g_labelFileWarning, OBJPROP_TEXT, labelText);
+      }
+      else
+      {
+         //--- Alles OK - Warnung zurücksetzen
+         if(g_fileAgeWarningActive)
+         {
+            Print("Dateialter OK - Warnung wird zurückgesetzt");
+            g_fileAgeWarningActive = false;
+         }
+         ObjectSetString(0, g_labelFileWarning, OBJPROP_TEXT, "");
+      }
+   }
    
    int lineCount = 0;
    bool isFirstLine = true; // Flag für Header-Zeile
