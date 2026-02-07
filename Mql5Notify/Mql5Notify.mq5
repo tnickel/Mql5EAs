@@ -5,7 +5,7 @@
 //+------------------------------------------------------------------+
 #property copyright "Thomas"
 #property link      ""
-#property version   "1.01"
+#property version   "1.04"
 #property description "Überwacht Trade-Aktivitäten und sendet E-Mail-Benachrichtigungen"
 #property description "bei neuen oder geschlossenen Trades in konfigurierbaren Intervallen."
 
@@ -15,12 +15,25 @@
 input int    InpCheckIntervalMinutes = 5;       // Prüf-Intervall in Minuten (1-n)
 input string InpEmailSubjectPrefix  = "[MT5] "; // E-Mail Betreff-Prefix
 input bool   InpLogToExperts        = true;     // Log-Ausgabe im Experts-Tab
+input bool   InpTradeReportEnabled  = true;     // Trade-Report bei Eröffnung/Schluss
+input bool   InpDailyReportEnabled  = true;     // Tagesreport aktivieren
+input int    InpDailyReportHour     = 23;       // Tagesreport Stunde (0-23)
+input int    InpDailyReportMinute   = 55;       // Tagesreport Minute (0-59)
 
 //+------------------------------------------------------------------+
 //| Konstanten                                                        |
 //+------------------------------------------------------------------+
-#define EA_VERSION "1.01"
+#define EA_VERSION "1.04"
 #define LABEL_PREFIX "MQL5Notify_"
+
+//+------------------------------------------------------------------+
+//| Struktur für Trade-Equity-Tracking                                |
+//+------------------------------------------------------------------+
+struct TradeEquityInfo
+{
+   ulong  positionId;     // Position-ID
+   double maxEquity;      // Maximale Equity für diesen Trade
+};
 
 //+------------------------------------------------------------------+
 //| Globale Variablen                                                 |
@@ -30,6 +43,13 @@ datetime g_lastNotificationTime  = 0;       // Zeitpunkt der letzten E-Mail
 int      g_lastDealsTotal        = 0;       // Anzahl Deals bei letzter Prüfung
 int      g_knownDealTickets[];              // Array mit bereits bekannten Deal-Tickets
 int      g_notificationCount     = 0;       // Anzahl gesendeter E-Mails
+int      g_lastDailyReportDay    = 0;       // Tag des letzten Tagesreports
+
+// Equity-Tracking
+TradeEquityInfo g_tradeEquity[];            // Array für per-Trade max Equity
+double   g_maxDailyEquity        = 0;       // Max Account-Equity des Tages
+double   g_minDailyEquity        = 0;       // Min Account-Equity des Tages
+int      g_equityTrackingDay     = 0;       // Tag für Equity-Reset
 
 //+------------------------------------------------------------------+
 //| Expert initialization function                                    |
@@ -101,11 +121,20 @@ void OnTimer()
    // Chart-Info immer aktualisieren (zeigt auch Countdown etc.)
    UpdateChartInfo();
    
+   // Tagesreport prüfen (wenn aktiviert und neuer Tag)
+   if(InpDailyReportEnabled)
+   {
+      CheckAndSendDailyReport();
+   }
+   
    // Prüfen ob das konfigurierte Intervall erreicht ist
    if(currentTime - g_lastCheckTime < InpCheckIntervalMinutes * 60)
       return;
    
    g_lastCheckTime = currentTime;
+   
+   // Equity-Tracking aktualisieren
+   UpdateEquityTracking();
    
    // History aktualisieren
    if(!HistorySelect(0, TimeCurrent()))
@@ -114,8 +143,16 @@ void OnTimer()
       return;
    }
    
-   // Neue Deals suchen
-   CheckForNewDeals();
+   // Neue Deals suchen (nur wenn Trade-Report aktiviert)
+   if(InpTradeReportEnabled)
+   {
+      CheckForNewDeals();
+   }
+   else
+   {
+      // Trotzdem Deals als bekannt markieren, damit später kein Rückstau entsteht
+      UpdateKnownDealsWithoutNotification();
+   }
 }
 
 //+------------------------------------------------------------------+
@@ -280,12 +317,54 @@ string FormatDealInfo(ulong ticket)
                               DoubleToString(price, digits),
                               posId);
    
-   // Bei geschlossenen Trades: Profit anzeigen
+   // Bei eröffneten Trades: SL/TP anzeigen (aus der Position holen)
+   if(entry == DEAL_ENTRY_IN)
+   {
+      // Versuche die zugehörige Position zu finden
+      double sl = 0;
+      double tp = 0;
+      
+      // Suche nach der Position mit dieser Position-ID
+      for(int p = 0; p < PositionsTotal(); p++)
+      {
+         ulong posTicket = PositionGetTicket(p);
+         if(posTicket > 0)
+         {
+            long positionId = PositionGetInteger(POSITION_IDENTIFIER);
+            if(positionId == posId)
+            {
+               sl = PositionGetDouble(POSITION_SL);
+               tp = PositionGetDouble(POSITION_TP);
+               break;
+            }
+         }
+      }
+      
+      // SL/TP anzeigen falls gesetzt
+      if(sl > 0 || tp > 0)
+      {
+         info += StringFormat("\n    SL: %s | TP: %s",
+                              sl > 0 ? DoubleToString(sl, digits) : "-",
+                              tp > 0 ? DoubleToString(tp, digits) : "-");
+      }
+   }
+   
+   // Bei geschlossenen Trades: Profit und Max Equity anzeigen
    if(entry == DEAL_ENTRY_OUT || entry == DEAL_ENTRY_INOUT || entry == DEAL_ENTRY_OUT_BY)
    {
       double totalResult = profit + commission + swap;
-      info += StringFormat("\n    P/L: %.2f (Profit: %.2f, Comm: %.2f, Swap: %.2f)",
-                           totalResult, profit, commission, swap);
+      info += StringFormat("\n    P/L: %.2f (Profit: %.2f, Comm: %.2f)",
+                           totalResult, profit, commission);
+      
+      // Max Open Equity für diesen Trade anzeigen
+      double maxEquity = GetMaxEquityForPosition((ulong)posId);
+      if(maxEquity != 0)
+      {
+         info += StringFormat("\n    Max Open Equity: %+.2f", maxEquity);
+      }
+      
+      // Trade aus Equity-Tracking entfernen
+      RemoveTradeFromEquityTracking((ulong)posId);
    }
    
    // Kommentar hinzufügen falls vorhanden
@@ -411,6 +490,10 @@ string GetOpenPositionsInfo()
       ENUM_POSITION_TYPE posType = (ENUM_POSITION_TYPE)PositionGetInteger(POSITION_TYPE);
       string direction = (posType == POSITION_TYPE_BUY) ? "BUY" : "SELL";
       
+      // Position-ID für Max-Equity
+      ulong posId = (ulong)PositionGetInteger(POSITION_IDENTIFIER);
+      double maxEquity = GetMaxEquityForPosition(posId);
+      
       int digits = (int)SymbolInfoInteger(symbol, SYMBOL_DIGITS);
       if(digits == 0) digits = 2;
       
@@ -422,6 +505,10 @@ string GetOpenPositionsInfo()
                            DoubleToString(curPrice, digits),
                            profit,
                            swap);
+      
+      // Max Equity anzeigen
+      if(maxEquity != 0)
+         info += StringFormat(" | Max: %+.2f", maxEquity);
       
       if(sl > 0 || tp > 0)
          info += StringFormat(" | SL: %s | TP: %s",
@@ -508,5 +595,345 @@ void UpdateChartInfo()
    CreateChartLabel("Status", x, y, statusStr, clrLimeGreen);
    
    ChartRedraw(0);
+}
+
+//+------------------------------------------------------------------+
+//| Deals ohne Benachrichtigung aktualisieren                         |
+//+------------------------------------------------------------------+
+void UpdateKnownDealsWithoutNotification()
+{
+   int totalDeals = HistoryDealsTotal();
+   
+   for(int i = 0; i < totalDeals; i++)
+   {
+      ulong ticket = HistoryDealGetTicket(i);
+      
+      if(!IsDealKnown(ticket))
+      {
+         AddKnownDeal(ticket);
+      }
+   }
+   
+   g_lastDealsTotal = totalDeals;
+}
+
+//+------------------------------------------------------------------+
+//| Prüfen ob Tagesreport gesendet werden soll                        |
+//+------------------------------------------------------------------+
+void CheckAndSendDailyReport()
+{
+   MqlDateTime dt;
+   TimeCurrent(dt);
+   
+   // Prüfen ob die konfigurierte Tageszeit erreicht oder überschritten wurde
+   // (innerhalb des Prüf-Intervalls)
+   int currentMinutes = dt.hour * 60 + dt.min;
+   int targetMinutes = InpDailyReportHour * 60 + InpDailyReportMinute;
+   
+   // Ist die Zielzeit erreicht? (aktuell >= Zielzeit UND aktuell < Zielzeit + Intervall)
+   if(currentMinutes >= targetMinutes && currentMinutes < targetMinutes + InpCheckIntervalMinutes)
+   {
+      // Wurde heute schon ein Report gesendet?
+      if(g_lastDailyReportDay != dt.day_of_year)
+      {
+         SendDailyReport();
+         g_lastDailyReportDay = dt.day_of_year;
+      }
+   }
+}
+
+//+------------------------------------------------------------------+
+//| Tagesreport senden                                                 |
+//+------------------------------------------------------------------+
+void SendDailyReport()
+{
+   datetime todayStart = StringToTime(TimeToString(TimeCurrent(), TIME_DATE));
+   datetime todayEnd = todayStart + 86400 - 1; // 23:59:59
+   
+   // History für heute laden
+   if(!HistorySelect(todayStart, TimeCurrent()))
+   {
+      Print("WARNUNG: Konnte Tages-History nicht laden!");
+      return;
+   }
+   
+   // Geschlossene Trades heute sammeln
+   string closedTrades = "";
+   int closedCount = 0;
+   double totalProfit = 0;
+   double totalCommission = 0;
+   double totalSwap = 0;
+   
+   // Array für Position-IDs zum späteren Abrufen der Max-Equity
+   ulong closedPosIds[];
+   
+   int totalDeals = HistoryDealsTotal();
+   
+   for(int i = 0; i < totalDeals; i++)
+   {
+      ulong ticket = HistoryDealGetTicket(i);
+      
+      ENUM_DEAL_ENTRY entry = (ENUM_DEAL_ENTRY)HistoryDealGetInteger(ticket, DEAL_ENTRY);
+      ENUM_DEAL_TYPE  type  = (ENUM_DEAL_TYPE)HistoryDealGetInteger(ticket, DEAL_TYPE);
+      
+      // Nur geschlossene Trades zählen
+      if(entry == DEAL_ENTRY_OUT || entry == DEAL_ENTRY_INOUT || entry == DEAL_ENTRY_OUT_BY)
+      {
+         string symbol = HistoryDealGetString(ticket, DEAL_SYMBOL);
+         if(symbol == "") continue; // Balance-Operationen überspringen
+         
+         double volume     = HistoryDealGetDouble(ticket, DEAL_VOLUME);
+         double price      = HistoryDealGetDouble(ticket, DEAL_PRICE);
+         double profit     = HistoryDealGetDouble(ticket, DEAL_PROFIT);
+         double commission = HistoryDealGetDouble(ticket, DEAL_COMMISSION);
+         double swap       = HistoryDealGetDouble(ticket, DEAL_SWAP);
+         datetime dealTime = (datetime)HistoryDealGetInteger(ticket, DEAL_TIME);
+         
+         totalProfit += profit;
+         totalCommission += commission;
+         totalSwap += swap;
+         
+         string direction = (type == DEAL_TYPE_BUY) ? "BUY" : (type == DEAL_TYPE_SELL) ? "SELL" : "OTHER";
+         int digits = (int)SymbolInfoInteger(symbol, SYMBOL_DIGITS);
+         if(digits == 0) digits = 2;
+         
+         double dealResult = profit + commission + swap;
+         
+         // Position-ID für Max-Equity und Einstiegspreis
+         long posId = HistoryDealGetInteger(ticket, DEAL_POSITION_ID);
+         double maxEquity = GetMaxEquityForPosition((ulong)posId);
+         
+         // Einstiegspreis suchen (Opening-Deal dieser Position)
+         double openPrice = 0;
+         for(int j = 0; j < totalDeals; j++)
+         {
+            ulong openTicket = HistoryDealGetTicket(j);
+            if(HistoryDealGetInteger(openTicket, DEAL_POSITION_ID) == posId &&
+               HistoryDealGetInteger(openTicket, DEAL_ENTRY) == DEAL_ENTRY_IN)
+            {
+               openPrice = HistoryDealGetDouble(openTicket, DEAL_PRICE);
+               break;
+            }
+         }
+         
+         string maxEquityStr = "";
+         if(maxEquity != 0)
+            maxEquityStr = StringFormat(" | Max: %+.2f", maxEquity);
+         
+         // Format: Open -> Close Preis
+         string priceStr = "";
+         if(openPrice > 0)
+            priceStr = StringFormat("%s -> %s", DoubleToString(openPrice, digits), DoubleToString(price, digits));
+         else
+            priceStr = DoubleToString(price, digits);
+         
+         closedTrades += StringFormat("  [%s] %s | %s %.2f @ %s | P/L: %.2f%s\n",
+                                      symbol,
+                                      TimeToString(dealTime, TIME_MINUTES),
+                                      direction,
+                                      volume,
+                                      priceStr,
+                                      dealResult,
+                                      maxEquityStr);
+         closedCount++;
+      }
+   }
+   
+   // Gesamtgewinn/Verlust berechnen
+   double dayResult = totalProfit + totalCommission + totalSwap;
+   
+   // Betreff erstellen
+   string subject = InpEmailSubjectPrefix + "Tagesreport " + TimeToString(TimeCurrent(), TIME_DATE);
+   if(dayResult >= 0)
+      subject += StringFormat(" +%.2f %s", dayResult, AccountInfoString(ACCOUNT_CURRENCY));
+   else
+      subject += StringFormat(" %.2f %s", dayResult, AccountInfoString(ACCOUNT_CURRENCY));
+   
+   // Account-Info
+   string accountInfo = StringFormat(
+      "Account: %d (%s)\n"
+      "Server: %s\n"
+      "Balance: %.2f %s\n"
+      "Equity: %.2f %s\n"
+      "Datum: %s\n",
+      AccountInfoInteger(ACCOUNT_LOGIN),
+      AccountInfoString(ACCOUNT_NAME),
+      AccountInfoString(ACCOUNT_SERVER),
+      AccountInfoDouble(ACCOUNT_BALANCE),
+      AccountInfoString(ACCOUNT_CURRENCY),
+      AccountInfoDouble(ACCOUNT_EQUITY),
+      AccountInfoString(ACCOUNT_CURRENCY),
+      TimeToString(TimeCurrent(), TIME_DATE)
+   );
+   
+   // E-Mail-Body zusammenstellen
+   string body = "=== MQL5 TAGESREPORT ===\n\n";
+   body += accountInfo;
+   body += "\n";
+   
+   // Tagesergebnis
+   body += "=== TAGESERGEBNIS ===\n";
+   body += StringFormat("Profit: %.2f %s\n", totalProfit, AccountInfoString(ACCOUNT_CURRENCY));
+   body += StringFormat("Commission: %.2f %s\n", totalCommission, AccountInfoString(ACCOUNT_CURRENCY));
+   body += StringFormat("Swap: %.2f %s\n", totalSwap, AccountInfoString(ACCOUNT_CURRENCY));
+   body += StringFormat("GESAMT: %.2f %s\n", dayResult, AccountInfoString(ACCOUNT_CURRENCY));
+   body += StringFormat("Max Account Equity heute: %+.2f %s\n", g_maxDailyEquity, AccountInfoString(ACCOUNT_CURRENCY));
+   body += StringFormat("Min Account Equity heute: %+.2f %s\n\n", g_minDailyEquity, AccountInfoString(ACCOUNT_CURRENCY));
+   
+   // Geschlossene Trades
+   if(closedCount > 0)
+   {
+      body += StringFormat("--- %d TRADE(S) HEUTE GESCHLOSSEN ---\n", closedCount);
+      body += closedTrades;
+      body += "\n";
+   }
+   else
+   {
+      body += "--- KEINE TRADES HEUTE GESCHLOSSEN ---\n\n";
+   }
+   
+   // Offene Positionen anhängen
+   body += GetOpenPositionsInfo();
+   
+   body += "\n=== Ende Tagesreport ===";
+   
+   // E-Mail senden
+   if(!SendMail(subject, body))
+   {
+      Print("FEHLER: Tagesreport E-Mail konnte nicht gesendet werden!");
+   }
+   else
+   {
+      g_lastNotificationTime = TimeCurrent();
+      g_notificationCount++;
+      UpdateChartInfo();
+      
+      if(InpLogToExperts)
+         Print("Tagesreport gesendet: ", subject);
+   }
+   
+   if(InpLogToExperts)
+   {
+      Print("---");
+      Print(body);
+      Print("---");
+   }
+}
+
+//+------------------------------------------------------------------+
+//| Equity-Tracking aktualisieren                                     |
+//+------------------------------------------------------------------+
+void UpdateEquityTracking()
+{
+   MqlDateTime dt;
+   TimeCurrent(dt);
+   
+   // Neuer Tag? Dann Tages-Equity zurücksetzen
+   if(g_equityTrackingDay != dt.day_of_year)
+   {
+      g_equityTrackingDay = dt.day_of_year;
+      g_maxDailyEquity = 0;
+      g_minDailyEquity = 0;
+      
+      if(InpLogToExperts)
+         Print("Equity-Tracking: Neuer Tag, Reset durchgeführt");
+   }
+   
+   // Account-Equity berechnen (nur offene Positionen)
+   double totalOpenEquity = 0;
+   int posTotal = PositionsTotal();
+   
+   for(int i = 0; i < posTotal; i++)
+   {
+      ulong posTicket = PositionGetTicket(i);
+      if(posTicket == 0) continue;
+      
+      ulong posId = (ulong)PositionGetInteger(POSITION_IDENTIFIER);
+      double profit = PositionGetDouble(POSITION_PROFIT);
+      double swap = PositionGetDouble(POSITION_SWAP);
+      double currentEquity = profit + swap;
+      
+      totalOpenEquity += currentEquity;
+      
+      // Per-Trade Tracking aktualisieren
+      UpdateTradeMaxEquity(posId, currentEquity);
+   }
+   
+   // Account-weites Maximum/Minimum aktualisieren
+   if(totalOpenEquity > g_maxDailyEquity)
+   {
+      g_maxDailyEquity = totalOpenEquity;
+   }
+   if(totalOpenEquity < g_minDailyEquity)
+   {
+      g_minDailyEquity = totalOpenEquity;
+   }
+}
+
+//+------------------------------------------------------------------+
+//| Max Equity für einzelnen Trade aktualisieren                      |
+//+------------------------------------------------------------------+
+void UpdateTradeMaxEquity(ulong positionId, double currentEquity)
+{
+   int size = ArraySize(g_tradeEquity);
+   
+   // Suche nach bestehendem Eintrag
+   for(int i = 0; i < size; i++)
+   {
+      if(g_tradeEquity[i].positionId == positionId)
+      {
+         // Aktualisiere Maximum wenn größer
+         if(currentEquity > g_tradeEquity[i].maxEquity)
+         {
+            g_tradeEquity[i].maxEquity = currentEquity;
+         }
+         return;
+      }
+   }
+   
+   // Neuer Trade - zum Array hinzufügen
+   ArrayResize(g_tradeEquity, size + 1);
+   g_tradeEquity[size].positionId = positionId;
+   g_tradeEquity[size].maxEquity = currentEquity;
+}
+
+//+------------------------------------------------------------------+
+//| Max Equity für Position abrufen                                   |
+//+------------------------------------------------------------------+
+double GetMaxEquityForPosition(ulong positionId)
+{
+   int size = ArraySize(g_tradeEquity);
+   
+   for(int i = 0; i < size; i++)
+   {
+      if(g_tradeEquity[i].positionId == positionId)
+      {
+         return g_tradeEquity[i].maxEquity;
+      }
+   }
+   
+   return 0; // Nicht gefunden
+}
+
+//+------------------------------------------------------------------+
+//| Trade aus Equity-Tracking entfernen                               |
+//+------------------------------------------------------------------+
+void RemoveTradeFromEquityTracking(ulong positionId)
+{
+   int size = ArraySize(g_tradeEquity);
+   
+   for(int i = 0; i < size; i++)
+   {
+      if(g_tradeEquity[i].positionId == positionId)
+      {
+         // Entferne durch Überschreiben mit letztem Element
+         if(i < size - 1)
+         {
+            g_tradeEquity[i] = g_tradeEquity[size - 1];
+         }
+         ArrayResize(g_tradeEquity, size - 1);
+         return;
+      }
+   }
 }
 //+------------------------------------------------------------------+
