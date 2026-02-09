@@ -5,7 +5,7 @@
 //+------------------------------------------------------------------+
 #property copyright "Thomas"
 #property link      ""
-#property version   "1.04"
+#property version   "1.08"
 #property description "Überwacht Trade-Aktivitäten und sendet E-Mail-Benachrichtigungen"
 #property description "bei neuen oder geschlossenen Trades in konfigurierbaren Intervallen."
 
@@ -19,11 +19,12 @@ input bool   InpTradeReportEnabled  = true;     // Trade-Report bei Eröffnung/S
 input bool   InpDailyReportEnabled  = true;     // Tagesreport aktivieren
 input int    InpDailyReportHour     = 23;       // Tagesreport Stunde (0-23)
 input int    InpDailyReportMinute   = 55;       // Tagesreport Minute (0-59)
+input bool   InpOpenEquityReport    = true;     // Open Equity Reporting aktivieren
 
 //+------------------------------------------------------------------+
 //| Konstanten                                                        |
 //+------------------------------------------------------------------+
-#define EA_VERSION "1.04"
+#define EA_VERSION "1.08"
 #define LABEL_PREFIX "MQL5Notify_"
 
 //+------------------------------------------------------------------+
@@ -90,6 +91,21 @@ int OnInit()
    // Chart-Info anzeigen
    UpdateChartInfo();
    
+   // Chart-Balkenfarben transparent machen für bessere Lesbarkeit
+   ChartSetInteger(0, CHART_COLOR_CANDLE_BULL, clrNONE);
+   ChartSetInteger(0, CHART_COLOR_CANDLE_BEAR, clrNONE);
+   ChartSetInteger(0, CHART_COLOR_CHART_UP, clrNONE);
+   ChartSetInteger(0, CHART_COLOR_CHART_DOWN, clrNONE);
+   ChartSetInteger(0, CHART_COLOR_CHART_LINE, clrNONE);
+   // Tick-Anzeige und Last-Price-Linie ausblenden
+   ChartSetInteger(0, CHART_SHOW_LAST_LINE, false);
+   ChartSetInteger(0, CHART_COLOR_LAST, clrNONE);
+   ChartSetInteger(0, CHART_COLOR_BID, clrNONE);
+   ChartSetInteger(0, CHART_COLOR_ASK, clrNONE);
+   // Trade History Pfeile ausblenden
+   ChartSetInteger(0, CHART_SHOW_TRADE_HISTORY, false);
+   ChartRedraw(0);
+   
    return(INIT_SUCCEEDED);
 }
 
@@ -106,6 +122,11 @@ void OnDeinit(const int reason)
    ObjectDelete(0, LABEL_PREFIX + "LastNotify");
    ObjectDelete(0, LABEL_PREFIX + "Status");
    ObjectDelete(0, LABEL_PREFIX + "EmailCount");
+   ObjectDelete(0, LABEL_PREFIX + "DailyEquity");
+   for(int j = 0; j < 10; j++)
+   {
+      ObjectDelete(0, LABEL_PREFIX + "PosEquity" + IntegerToString(j));
+   }
    ChartRedraw(0);
    
    Print("MQL5Notify gestoppt. Grund: ", reason);
@@ -118,9 +139,6 @@ void OnTimer()
 {
    datetime currentTime = TimeCurrent();
    
-   // Chart-Info immer aktualisieren (zeigt auch Countdown etc.)
-   UpdateChartInfo();
-   
    // Tagesreport prüfen (wenn aktiviert und neuer Tag)
    if(InpDailyReportEnabled)
    {
@@ -132,6 +150,9 @@ void OnTimer()
       return;
    
    g_lastCheckTime = currentTime;
+   
+   // Chart-Info aktualisieren (nur im Prüf-Intervall)
+   UpdateChartInfo();
    
    // Equity-Tracking aktualisieren
    UpdateEquityTracking();
@@ -356,11 +377,14 @@ string FormatDealInfo(ulong ticket)
       info += StringFormat("\n    P/L: %.2f (Profit: %.2f, Comm: %.2f)",
                            totalResult, profit, commission);
       
-      // Max Open Equity für diesen Trade anzeigen
-      double maxEquity = GetMaxEquityForPosition((ulong)posId);
-      if(maxEquity != 0)
+      // Max Open Equity für diesen Trade anzeigen (falls aktiviert)
+      if(InpOpenEquityReport)
       {
-         info += StringFormat("\n    Max Open Equity: %+.2f", maxEquity);
+         double maxEquity = GetMaxEquityForPosition((ulong)posId);
+         if(maxEquity != 0)
+         {
+            info += StringFormat("\n    Max Open Equity: %+.2f", maxEquity);
+         }
       }
       
       // Trade aus Equity-Tracking entfernen
@@ -506,8 +530,8 @@ string GetOpenPositionsInfo()
                            profit,
                            swap);
       
-      // Max Equity anzeigen
-      if(maxEquity != 0)
+      // Max Equity anzeigen (falls aktiviert)
+      if(InpOpenEquityReport && maxEquity != 0)
          info += StringFormat(" | Max: %+.2f", maxEquity);
       
       if(sl > 0 || tp > 0)
@@ -541,7 +565,7 @@ void CreateChartLabel(string name, int xDist, int yDist, string text, color clr)
       ObjectSetInteger(0, fullName, OBJPROP_CORNER, CORNER_LEFT_UPPER);
       ObjectSetInteger(0, fullName, OBJPROP_ANCHOR, ANCHOR_LEFT_UPPER);
       ObjectSetString(0, fullName, OBJPROP_FONT, "Consolas");
-      ObjectSetInteger(0, fullName, OBJPROP_FONTSIZE, 9);
+      ObjectSetInteger(0, fullName, OBJPROP_FONTSIZE, 11);
       ObjectSetInteger(0, fullName, OBJPROP_BACK, false);
       ObjectSetInteger(0, fullName, OBJPROP_SELECTABLE, false);
    }
@@ -559,7 +583,7 @@ void UpdateChartInfo()
 {
    int x = 15;
    int y = 30;
-   int lineHeight = 18;
+   int lineHeight = 22;
    
    // Zeile 1: Version
    CreateChartLabel("Version", x, y,
@@ -593,6 +617,97 @@ void UpdateChartInfo()
       statusStr = StringFormat("Nächste Prüfung in: %d:%02d", secsLeft / 60, secsLeft % 60);
    }
    CreateChartLabel("Status", x, y, statusStr, clrLimeGreen);
+   
+   // Open Equity Informationen anzeigen (falls aktiviert)
+   if(InpOpenEquityReport)
+   {
+      // Tages-Equity
+      y += lineHeight;
+      string dailyEquityStr = StringFormat("Tages-Equity: Max %+.2f / Min %+.2f", 
+                                           g_maxDailyEquity, g_minDailyEquity);
+      CreateChartLabel("DailyEquity", x, y, dailyEquityStr, clrCyan);
+      
+      // Open Equity pro Magic Number (gruppiert)
+      int posTotal = PositionsTotal();
+      
+      // Arrays zum Sammeln der Magic-Daten
+      long magicNumbers[];
+      double magicEquity[];
+      double magicMaxEquity[];
+      int magicCount = 0;
+      
+      // Positionen durchgehen und nach Magic gruppieren
+      for(int i = 0; i < posTotal; i++)
+      {
+         ulong posTicket = PositionGetTicket(i);
+         if(posTicket == 0) continue;
+         
+         long magic = PositionGetInteger(POSITION_MAGIC);
+         ulong posId = (ulong)PositionGetInteger(POSITION_IDENTIFIER);
+         double profit = PositionGetDouble(POSITION_PROFIT);
+         double swap = PositionGetDouble(POSITION_SWAP);
+         double currentEquity = profit + swap;
+         double maxEquity = GetMaxEquityForPosition(posId);
+         
+         // Suche ob Magic bereits existiert
+         int foundIdx = -1;
+         for(int m = 0; m < magicCount; m++)
+         {
+            if(magicNumbers[m] == magic)
+            {
+               foundIdx = m;
+               break;
+            }
+         }
+         
+         if(foundIdx >= 0)
+         {
+            // Magic existiert - Werte addieren
+            magicEquity[foundIdx] += currentEquity;
+            magicMaxEquity[foundIdx] += maxEquity;
+         }
+         else
+         {
+            // Neue Magic hinzufügen
+            ArrayResize(magicNumbers, magicCount + 1);
+            ArrayResize(magicEquity, magicCount + 1);
+            ArrayResize(magicMaxEquity, magicCount + 1);
+            magicNumbers[magicCount] = magic;
+            magicEquity[magicCount] = currentEquity;
+            magicMaxEquity[magicCount] = maxEquity;
+            magicCount++;
+         }
+      }
+      
+      // Gruppierte Magic-Equity anzeigen
+      int equityLabelCount = 0;
+      for(int m = 0; m < magicCount && equityLabelCount < 10; m++)
+      {
+         y += lineHeight;
+         string magicEquityStr = StringFormat("  M%d: %+.2f (Max: %+.2f)", 
+                                              magicNumbers[m], magicEquity[m], magicMaxEquity[m]);
+         
+         // Farbe basierend auf Equity
+         color eqColor = magicEquity[m] >= 0 ? clrLime : clrOrangeRed;
+         CreateChartLabel("PosEquity" + IntegerToString(equityLabelCount), x, y, magicEquityStr, eqColor);
+         equityLabelCount++;
+      }
+      
+      // Nicht mehr verwendete Labels entfernen
+      for(int j = equityLabelCount; j < 10; j++)
+      {
+         ObjectDelete(0, LABEL_PREFIX + "PosEquity" + IntegerToString(j));
+      }
+   }
+   else
+   {
+      // Labels entfernen wenn deaktiviert
+      ObjectDelete(0, LABEL_PREFIX + "DailyEquity");
+      for(int j = 0; j < 10; j++)
+      {
+         ObjectDelete(0, LABEL_PREFIX + "PosEquity" + IntegerToString(j));
+      }
+   }
    
    ChartRedraw(0);
 }
@@ -717,7 +832,7 @@ void SendDailyReport()
          }
          
          string maxEquityStr = "";
-         if(maxEquity != 0)
+         if(InpOpenEquityReport && maxEquity != 0)
             maxEquityStr = StringFormat(" | Max: %+.2f", maxEquity);
          
          // Format: Open -> Close Preis
@@ -777,8 +892,15 @@ void SendDailyReport()
    body += StringFormat("Commission: %.2f %s\n", totalCommission, AccountInfoString(ACCOUNT_CURRENCY));
    body += StringFormat("Swap: %.2f %s\n", totalSwap, AccountInfoString(ACCOUNT_CURRENCY));
    body += StringFormat("GESAMT: %.2f %s\n", dayResult, AccountInfoString(ACCOUNT_CURRENCY));
-   body += StringFormat("Max Account Equity heute: %+.2f %s\n", g_maxDailyEquity, AccountInfoString(ACCOUNT_CURRENCY));
-   body += StringFormat("Min Account Equity heute: %+.2f %s\n\n", g_minDailyEquity, AccountInfoString(ACCOUNT_CURRENCY));
+   if(InpOpenEquityReport)
+   {
+      body += StringFormat("Max Account Equity heute: %+.2f %s\n", g_maxDailyEquity, AccountInfoString(ACCOUNT_CURRENCY));
+      body += StringFormat("Min Account Equity heute: %+.2f %s\n\n", g_minDailyEquity, AccountInfoString(ACCOUNT_CURRENCY));
+   }
+   else
+   {
+      body += "\n";
+   }
    
    // Geschlossene Trades
    if(closedCount > 0)
