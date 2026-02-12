@@ -5,7 +5,7 @@
 //+------------------------------------------------------------------+
 #property copyright "Thomas"
 #property link      ""
-#property version   "1.08"
+#property version   "1.15"
 #property description "Überwacht Trade-Aktivitäten und sendet E-Mail-Benachrichtigungen"
 #property description "bei neuen oder geschlossenen Trades in konfigurierbaren Intervallen."
 
@@ -24,7 +24,7 @@ input bool   InpOpenEquityReport    = true;     // Open Equity Reporting aktivie
 //+------------------------------------------------------------------+
 //| Konstanten                                                        |
 //+------------------------------------------------------------------+
-#define EA_VERSION "1.08"
+#define EA_VERSION "1.15"
 #define LABEL_PREFIX "MQL5Notify_"
 
 //+------------------------------------------------------------------+
@@ -51,6 +51,12 @@ TradeEquityInfo g_tradeEquity[];            // Array für per-Trade max Equity
 double   g_maxDailyEquity        = 0;       // Max Account-Equity des Tages
 double   g_minDailyEquity        = 0;       // Min Account-Equity des Tages
 int      g_equityTrackingDay     = 0;       // Tag für Equity-Reset
+
+// Cache für geschlossene Trades (Optimierung)
+long     g_closedMagicNumbers[];            // Magic Numbers mit geschlossenen Trades heute
+double   g_closedMagicProfit[];             // Profit pro Magic (geschlossen)
+int      g_closedCacheDay        = 0;       // Tag für den der Cache gilt
+int      g_closedCacheDealsCount = 0;       // Anzahl Deals beim letzten Cache-Update
 
 //+------------------------------------------------------------------+
 //| Expert initialization function                                    |
@@ -123,7 +129,7 @@ void OnDeinit(const int reason)
    ObjectDelete(0, LABEL_PREFIX + "Status");
    ObjectDelete(0, LABEL_PREFIX + "EmailCount");
    ObjectDelete(0, LABEL_PREFIX + "DailyEquity");
-   for(int j = 0; j < 10; j++)
+   for(int j = 0; j < 20; j++)
    {
       ObjectDelete(0, LABEL_PREFIX + "PosEquity" + IntegerToString(j));
    }
@@ -151,11 +157,11 @@ void OnTimer()
    
    g_lastCheckTime = currentTime;
    
+   // Equity-Tracking zuerst aktualisieren (damit Chart aktuelle Werte zeigt)
+   UpdateEquityTracking();
+   
    // Chart-Info aktualisieren (nur im Prüf-Intervall)
    UpdateChartInfo();
-   
-   // Equity-Tracking aktualisieren
-   UpdateEquityTracking();
    
    // History aktualisieren
    if(!HistorySelect(0, TimeCurrent()))
@@ -541,7 +547,6 @@ string GetOpenPositionsInfo()
       
       info += StringFormat(" | Offen seit: %s", TimeToString(openTime, TIME_DATE | TIME_MINUTES));
       info += "\n";
-      
       totalProfit += profit + swap;
    }
    
@@ -606,15 +611,19 @@ void UpdateChartInfo()
    CreateChartLabel("EmailCount", x, y,
       StringFormat("Gesendete Mails: %d", g_notificationCount), clrWhite);
    
-   // Zeile 5: Status (nächste Prüfung)
+   // Zeile 5: Status (nächste Prüfung mit lokaler Uhrzeit)
    y += lineHeight;
    string statusStr = "Status: Aktiv";
    if(g_lastCheckTime > 0)
    {
+      // Berechne Zeitdifferenz zwischen Broker und lokal
+      datetime brokerTime = TimeCurrent();
+      datetime localTime = TimeLocal();
+      int timeDiff = (int)(localTime - brokerTime);
+      
       datetime nextCheck = g_lastCheckTime + InpCheckIntervalMinutes * 60;
-      int secsLeft = (int)(nextCheck - TimeCurrent());
-      if(secsLeft < 0) secsLeft = 0;
-      statusStr = StringFormat("Nächste Prüfung in: %d:%02d", secsLeft / 60, secsLeft % 60);
+      datetime nextCheckLocal = nextCheck + timeDiff;
+      statusStr = StringFormat("Nächste Prüfung: %s", TimeToString(nextCheckLocal, TIME_MINUTES));
    }
    CreateChartLabel("Status", x, y, statusStr, clrLimeGreen);
    
@@ -623,20 +632,19 @@ void UpdateChartInfo()
    {
       // Tages-Equity
       y += lineHeight;
-      string dailyEquityStr = StringFormat("Tages-Equity: Max %+.2f / Min %+.2f", 
-                                           g_maxDailyEquity, g_minDailyEquity);
+      string dailyEquityStr = StringFormat("Tages-Equity: Min %+.2f / Max %+.2f", 
+                                           g_minDailyEquity, g_maxDailyEquity);
       CreateChartLabel("DailyEquity", x, y, dailyEquityStr, clrCyan);
       
-      // Open Equity pro Magic Number (gruppiert)
-      int posTotal = PositionsTotal();
-      
-      // Arrays zum Sammeln der Magic-Daten
+      // Arrays zum Sammeln der Magic-Daten (offen + geschlossen heute)
       long magicNumbers[];
-      double magicEquity[];
-      double magicMaxEquity[];
+      double magicEquity[];      // Aktueller Equity (offen) + Profit (geschlossen)
+      double magicMaxEquity[];   // Max Equity (nur für offene)
+      double magicClosedProfit[]; // Nur geschlossene Profits heute
       int magicCount = 0;
       
-      // Positionen durchgehen und nach Magic gruppieren
+      // 1. Offene Positionen durchgehen
+      int posTotal = PositionsTotal();
       for(int i = 0; i < posTotal; i++)
       {
          ulong posTicket = PositionGetTicket(i);
@@ -662,30 +670,148 @@ void UpdateChartInfo()
          
          if(foundIdx >= 0)
          {
-            // Magic existiert - Werte addieren
             magicEquity[foundIdx] += currentEquity;
             magicMaxEquity[foundIdx] += maxEquity;
          }
          else
          {
-            // Neue Magic hinzufügen
             ArrayResize(magicNumbers, magicCount + 1);
             ArrayResize(magicEquity, magicCount + 1);
             ArrayResize(magicMaxEquity, magicCount + 1);
+            ArrayResize(magicClosedProfit, magicCount + 1);
             magicNumbers[magicCount] = magic;
             magicEquity[magicCount] = currentEquity;
             magicMaxEquity[magicCount] = maxEquity;
+            magicClosedProfit[magicCount] = 0;
             magicCount++;
          }
       }
       
-      // Gruppierte Magic-Equity anzeigen
+      // 2. Geschlossene Deals von heute aus Cache holen (optimiert)
+      MqlDateTime dtNow;
+      TimeCurrent(dtNow);
+      datetime todayStart = StringToTime(TimeToString(TimeCurrent(), TIME_DATE));
+      
+      // Cache aktualisieren nur wenn nötig (neuer Tag oder neue Deals)
+      if(HistorySelect(todayStart, TimeCurrent()))
+      {
+         int totalDeals = HistoryDealsTotal();
+         
+         // Prüfen ob Cache neu aufgebaut werden muss
+         if(g_closedCacheDay != dtNow.day_of_year || g_closedCacheDealsCount != totalDeals)
+         {
+            // Cache neu aufbauen
+            ArrayResize(g_closedMagicNumbers, 0);
+            ArrayResize(g_closedMagicProfit, 0);
+            int closedCount = 0;
+            
+            for(int i = 0; i < totalDeals; i++)
+            {
+               ulong ticket = HistoryDealGetTicket(i);
+               ENUM_DEAL_ENTRY entry = (ENUM_DEAL_ENTRY)HistoryDealGetInteger(ticket, DEAL_ENTRY);
+               
+               if(entry == DEAL_ENTRY_OUT || entry == DEAL_ENTRY_INOUT || entry == DEAL_ENTRY_OUT_BY)
+               {
+                  string symbol = HistoryDealGetString(ticket, DEAL_SYMBOL);
+                  if(symbol == "") continue;
+                  
+                  long magic = HistoryDealGetInteger(ticket, DEAL_MAGIC);
+                  double profit = HistoryDealGetDouble(ticket, DEAL_PROFIT);
+                  double commission = HistoryDealGetDouble(ticket, DEAL_COMMISSION);
+                  double swap = HistoryDealGetDouble(ticket, DEAL_SWAP);
+                  double closedResult = profit + commission + swap;
+                  
+                  // Im Cache suchen/hinzufügen
+                  int foundIdx = -1;
+                  for(int c = 0; c < closedCount; c++)
+                  {
+                     if(g_closedMagicNumbers[c] == magic)
+                     {
+                        foundIdx = c;
+                        break;
+                     }
+                  }
+                  
+                  if(foundIdx >= 0)
+                  {
+                     g_closedMagicProfit[foundIdx] += closedResult;
+                  }
+                  else
+                  {
+                     ArrayResize(g_closedMagicNumbers, closedCount + 1);
+                     ArrayResize(g_closedMagicProfit, closedCount + 1);
+                     g_closedMagicNumbers[closedCount] = magic;
+                     g_closedMagicProfit[closedCount] = closedResult;
+                     closedCount++;
+                  }
+               }
+            }
+            
+            g_closedCacheDay = dtNow.day_of_year;
+            g_closedCacheDealsCount = totalDeals;
+            
+            if(InpLogToExperts)
+               Print("Closed-Trades Cache: ", closedCount, " Magic(s) aktualisiert");
+         }
+      }
+      
+      // Gecachte geschlossene Trades zu den lokalen Arrays hinzufügen
+      int closedCacheSize = ArraySize(g_closedMagicNumbers);
+      for(int c = 0; c < closedCacheSize; c++)
+      {
+         long magic = g_closedMagicNumbers[c];
+         double closedResult = g_closedMagicProfit[c];
+         
+         // Suche ob Magic bereits in lokalen Arrays existiert
+         int foundIdx = -1;
+         for(int m = 0; m < magicCount; m++)
+         {
+            if(magicNumbers[m] == magic)
+            {
+               foundIdx = m;
+               break;
+            }
+         }
+         
+         if(foundIdx >= 0)
+         {
+            magicEquity[foundIdx] += closedResult;
+            magicClosedProfit[foundIdx] += closedResult;
+         }
+         else
+         {
+            ArrayResize(magicNumbers, magicCount + 1);
+            ArrayResize(magicEquity, magicCount + 1);
+            ArrayResize(magicMaxEquity, magicCount + 1);
+            ArrayResize(magicClosedProfit, magicCount + 1);
+            magicNumbers[magicCount] = magic;
+            magicEquity[magicCount] = closedResult;
+            magicMaxEquity[magicCount] = 0;
+            magicClosedProfit[magicCount] = closedResult;
+            magicCount++;
+         }
+      }
+      
+      // Gruppierte Magic-Equity anzeigen (max 20)
       int equityLabelCount = 0;
-      for(int m = 0; m < magicCount && equityLabelCount < 10; m++)
+      for(int m = 0; m < magicCount && equityLabelCount < 20; m++)
       {
          y += lineHeight;
-         string magicEquityStr = StringFormat("  M%d: %+.2f (Max: %+.2f)", 
-                                              magicNumbers[m], magicEquity[m], magicMaxEquity[m]);
+         string magicEquityStr;
+         
+         // Unterscheide zwischen rein geschlossen (kein Max) und mit offenen Positionen
+         if(magicMaxEquity[m] != 0 || magicClosedProfit[m] == 0)
+         {
+            // Hat offene Positionen - Tabellenformat mit fester Breite
+            magicEquityStr = StringFormat("  M%-12d %+10.2f  Max:%+9.2f", 
+                                          magicNumbers[m], magicEquity[m], magicMaxEquity[m]);
+         }
+         else
+         {
+            // Nur geschlossene Trades heute
+            magicEquityStr = StringFormat("  M%-12d %+10.2f  (closed)", 
+                                          magicNumbers[m], magicEquity[m]);
+         }
          
          // Farbe basierend auf Equity
          color eqColor = magicEquity[m] >= 0 ? clrLime : clrOrangeRed;
@@ -694,7 +820,7 @@ void UpdateChartInfo()
       }
       
       // Nicht mehr verwendete Labels entfernen
-      for(int j = equityLabelCount; j < 10; j++)
+      for(int j = equityLabelCount; j < 20; j++)
       {
          ObjectDelete(0, LABEL_PREFIX + "PosEquity" + IntegerToString(j));
       }
@@ -703,7 +829,7 @@ void UpdateChartInfo()
    {
       // Labels entfernen wenn deaktiviert
       ObjectDelete(0, LABEL_PREFIX + "DailyEquity");
-      for(int j = 0; j < 10; j++)
+      for(int j = 0; j < 20; j++)
       {
          ObjectDelete(0, LABEL_PREFIX + "PosEquity" + IntegerToString(j));
       }
@@ -954,8 +1080,8 @@ void UpdateEquityTracking()
    if(g_equityTrackingDay != dt.day_of_year)
    {
       g_equityTrackingDay = dt.day_of_year;
-      g_maxDailyEquity = 0;
-      g_minDailyEquity = 0;
+      g_maxDailyEquity = -DBL_MAX;  // Wird beim ersten Update überschrieben
+      g_minDailyEquity = DBL_MAX;   // Wird beim ersten Update überschrieben
       
       if(InpLogToExperts)
          Print("Equity-Tracking: Neuer Tag, Reset durchgeführt");

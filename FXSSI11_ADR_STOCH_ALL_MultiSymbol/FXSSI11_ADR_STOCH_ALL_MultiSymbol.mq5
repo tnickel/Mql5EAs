@@ -680,11 +680,11 @@ void OnTick()
    }
    
    // --- 4. VISUALS UPDATE (nur alle 500ms) ---
-   static datetime lastVisualUpdate = 0;
-   datetime currentTime = GetTickCount();
-   if(currentTime - lastVisualUpdate >= 500)
+   static uint lastVisualUpdate = 0;
+   uint currentTick = GetTickCount();
+   if(currentTick - lastVisualUpdate >= 500)
    {
-      lastVisualUpdate = currentTime;
+      lastVisualUpdate = currentTick;
       stat_EA_Action = StringFormat("Trading %d Symbole | %d Positionen", g_SymbolCount, totalPositions);
       UpdateVisuals(totalPositions);
    }
@@ -826,34 +826,6 @@ void CountAllPositionsOptimized()
 }
 
 //+------------------------------------------------------------------+
-//| Positionen zählen für Symbol (BACKUP - wird nicht mehr genutzt)  |
-//+------------------------------------------------------------------+
-void CountPositionsForSymbol(int idx)
-{
-   string sym = g_Symbols[idx].brokerSymbol;
-   int magic = g_Symbols[idx].magic;
-   
-   int count = 0;
-   ENUM_POSITION_TYPE lastType = POSITION_TYPE_BUY;
-   
-   for(int i = 0; i < PositionsTotal(); i++)
-   {
-      if(PositionSelectByTicket(PositionGetTicket(i)))
-      {
-         if(PositionGetString(POSITION_SYMBOL) == sym && 
-            PositionGetInteger(POSITION_MAGIC) == magic)
-         {
-            count++;
-            lastType = (ENUM_POSITION_TYPE)PositionGetInteger(POSITION_TYPE);
-         }
-      }
-   }
-   
-   g_Symbols[idx].openPositions = count;
-   g_Symbols[idx].openType = lastType;
-}
-
-//+------------------------------------------------------------------+
 //| Positionen validieren gegen Filter                               |
 //+------------------------------------------------------------------+
 void ValidatePositionsForSymbol(int idx)
@@ -981,9 +953,9 @@ void ProcessEntryForSymbol(int idx)
    if(shortSignal && (direction == FILTER_SHORT || direction == FILTER_BOTH))
    {
       string comment = BuildTradeComment(g_Symbols[idx].symbol, true, 1, "Short");
-      if(trade.Sell(dynFirstLot, sym, ask, ask + slDistancePoints, 0, comment))
+      if(trade.Sell(dynFirstLot, sym, bid, bid + slDistancePoints, 0, comment))
       {
-         Print("ENTRY SHORT: ", sym, " @ ", ask, " | Lot: ", dynFirstLot);
+         Print("ENTRY SHORT: ", sym, " @ ", bid, " | Lot: ", dynFirstLot);
       }
    }
    
@@ -1015,8 +987,9 @@ void ProcessGridEntryForSymbol(int idx)
    double requiredDist = adrValue * (InpGridStep_ADR_Pct / 100.0);
    double slDistancePoints = adrValue * InpIndividualSL_ADR;
    
-   // Letzte Entry-Price finden
+   // Letzte Entry-Price finden (neueste Position nach Zeit)
    double lastEntryPrice = 0.0;
+   datetime lastEntryTime = 0;
    for(int i = PositionsTotal() - 1; i >= 0; i--)
    {
       if(PositionSelectByTicket(PositionGetTicket(i)))
@@ -1024,8 +997,12 @@ void ProcessGridEntryForSymbol(int idx)
          if(PositionGetString(POSITION_SYMBOL) == sym && 
             PositionGetInteger(POSITION_MAGIC) == magic)
          {
-            lastEntryPrice = PositionGetDouble(POSITION_PRICE_OPEN);
-            break;
+            datetime posTime = (datetime)PositionGetInteger(POSITION_TIME);
+            if(posTime > lastEntryTime)
+            {
+               lastEntryTime = posTime;
+               lastEntryPrice = PositionGetDouble(POSITION_PRICE_OPEN);
+            }
          }
       }
    }
@@ -1040,9 +1017,9 @@ void ProcessGridEntryForSymbol(int idx)
       if(direction == FILTER_SHORT || direction == FILTER_BOTH)
       {
          string comment = BuildTradeComment(g_Symbols[idx].symbol, false, openPos + 1, "Short");
-         if(trade.Sell(dynGridLot, sym, ask, ask + slDistancePoints, 0, comment))
+         if(trade.Sell(dynGridLot, sym, bid, bid + slDistancePoints, 0, comment))
          {
-            Print("GRID SHORT: ", sym, " #", openPos + 1, " @ ", ask);
+            Print("GRID SHORT: ", sym, " #", openPos + 1, " @ ", bid);
          }
       }
    }
@@ -1098,6 +1075,7 @@ void CheckBasketExitForSymbol(int idx)
    {
       targetPct = targetPct - ((count - 1) * InpTargetDecay_ADR);
    }
+   if(targetPct < 1.0) targetPct = 1.0;  // Minimum-Schutz: Target nie unter 1% ADR
    
    double targetDistPoints = adrValue * (targetPct / 100.0);
    bool triggerClose = false;
@@ -1156,17 +1134,20 @@ void CheckNewsForSymbol(int idx)
       return;
    }
    
-   // Caching: News-Check nur alle X Sekunden (global für alle Symbole gleichzeitig)
+   // Caching: News-Check nur alle X Sekunden
    datetime currentTime = TimeCurrent();
-   if(currentTime - g_LastNewsCheckTime < g_NewsCheckInterval && g_LastNewsCheckTime > 0)
-   {
-      return;  // Gecachte Werte behalten
-   }
+   bool cacheValid = (currentTime - g_LastNewsCheckTime < g_NewsCheckInterval && g_LastNewsCheckTime > 0);
    
-   // Nur beim ersten Symbol den Timer zurücksetzen
-   if(idx == 0)
+   // Cache nur zurücksetzen wenn wir beim ersten Symbol sind UND Cache abgelaufen ist
+   if(idx == 0 && !cacheValid)
    {
       g_LastNewsCheckTime = currentTime;
+   }
+   
+   // Wenn Cache noch gültig, gecachte Werte behalten
+   if(cacheValid)
+   {
+      return;
    }
    
    string sym = g_Symbols[idx].brokerSymbol;
