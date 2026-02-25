@@ -5,7 +5,7 @@
 //+------------------------------------------------------------------+
 #property copyright "Thomas"
 #property link      ""
-#property version   "1.15"
+#property version   "1.20"
 #property description "Überwacht Trade-Aktivitäten und sendet E-Mail-Benachrichtigungen"
 #property description "bei neuen oder geschlossenen Trades in konfigurierbaren Intervallen."
 
@@ -20,11 +20,15 @@ input bool   InpDailyReportEnabled  = true;     // Tagesreport aktivieren
 input int    InpDailyReportHour     = 23;       // Tagesreport Stunde (0-23)
 input int    InpDailyReportMinute   = 55;       // Tagesreport Minute (0-59)
 input bool   InpOpenEquityReport    = true;     // Open Equity Reporting aktivieren
+input bool   InpWeeklyReportEnabled = true;     // Wochenreport aktivieren (Freitag 22:00)
+input int    InpWeeklyReportHour    = 22;       // Wochenreport Stunde (0-23)
+input bool   InpMonthlyReportEnabled= true;     // Monatsreport aktivieren (Monatsende 22:00)
+input int    InpMonthlyReportHour   = 22;       // Monatsreport Stunde (0-23)
 
 //+------------------------------------------------------------------+
 //| Konstanten                                                        |
 //+------------------------------------------------------------------+
-#define EA_VERSION "1.15"
+#define EA_VERSION "1.20"
 #define LABEL_PREFIX "MQL5Notify_"
 
 //+------------------------------------------------------------------+
@@ -45,6 +49,8 @@ int      g_lastDealsTotal        = 0;       // Anzahl Deals bei letzter Prüfung
 int      g_knownDealTickets[];              // Array mit bereits bekannten Deal-Tickets
 int      g_notificationCount     = 0;       // Anzahl gesendeter E-Mails
 int      g_lastDailyReportDay    = 0;       // Tag des letzten Tagesreports
+int      g_lastWeeklyReportDay   = 0;       // Tag (day_of_year) des letzten Wochenreports
+int      g_lastMonthlyReportMonth= 0;       // Monat des letzten Monatsreports
 
 // Equity-Tracking
 TradeEquityInfo g_tradeEquity[];            // Array für per-Trade max Equity
@@ -151,6 +157,18 @@ void OnTimer()
       CheckAndSendDailyReport();
    }
    
+   // Wochenreport prüfen (wenn aktiviert)
+   if(InpWeeklyReportEnabled)
+   {
+      CheckAndSendWeeklyReport();
+   }
+   
+   // Monatsreport prüfen (wenn aktiviert)
+   if(InpMonthlyReportEnabled)
+   {
+      CheckAndSendMonthlyReport();
+   }
+   
    // Prüfen ob das konfigurierte Intervall erreicht ist
    if(currentTime - g_lastCheckTime < InpCheckIntervalMinutes * 60)
       return;
@@ -213,6 +231,7 @@ void CheckForNewDeals()
    // Neue Deals sammeln
    string openedTrades  = "";
    string closedTrades  = "";
+   string tradeSymbols  = "";  // Unique Symbole für Betreff
    int    openCount     = 0;
    int    closeCount    = 0;
    
@@ -232,6 +251,11 @@ void CheckForNewDeals()
       
       if(dealInfo == "")
          continue;
+      
+      // Symbol für Betreff sammeln
+      string dealSymbol = HistoryDealGetString(ticket, DEAL_SYMBOL);
+      if(dealSymbol != "")
+         tradeSymbols = AddUniqueSymbol(tradeSymbols, dealSymbol);
       
       // Deal-Typ bestimmen
       ENUM_DEAL_ENTRY entry = (ENUM_DEAL_ENTRY)HistoryDealGetInteger(ticket, DEAL_ENTRY);
@@ -267,7 +291,7 @@ void CheckForNewDeals()
    // E-Mail zusammenstellen und senden
    if(openCount > 0 || closeCount > 0)
    {
-      SendNotificationEmail(openedTrades, closedTrades, openCount, closeCount);
+      SendNotificationEmail(openedTrades, closedTrades, openCount, closeCount, tradeSymbols);
    }
 }
 
@@ -410,17 +434,14 @@ string FormatDealInfo(ulong ticket)
 //+------------------------------------------------------------------+
 //| E-Mail-Benachrichtigung senden                                    |
 //+------------------------------------------------------------------+
-void SendNotificationEmail(string openedTrades, string closedTrades, int openCount, int closeCount)
+void SendNotificationEmail(string openedTrades, string closedTrades, int openCount, int closeCount, string tradeSymbols)
 {
-   // Betreff erstellen
+   // Betreff: NUR die betroffenen Währungspaare
    string subject = InpEmailSubjectPrefix;
-   
-   if(openCount > 0 && closeCount > 0)
-      subject += StringFormat("%d Trade(s) eröffnet, %d Trade(s) geschlossen", openCount, closeCount);
-   else if(openCount > 0)
-      subject += StringFormat("%d Trade(s) eröffnet", openCount);
+   if(tradeSymbols != "")
+      subject += tradeSymbols;
    else
-      subject += StringFormat("%d Trade(s) geschlossen", closeCount);
+      subject += "Trade Notification";
    
    // Account-Info
    string accountInfo = StringFormat(
@@ -460,6 +481,11 @@ void SendNotificationEmail(string openedTrades, string closedTrades, int openCou
    
    // Offene Positionen anhängen
    body += GetOpenPositionsInfo();
+   
+   // Tagesbilanz (heute bereits geschlossene Trades)
+   double todayPL = GetTodayClosedPL();
+   string todayPLStr = StringFormat("%+.2f %s", todayPL, AccountInfoString(ACCOUNT_CURRENCY));
+   body += StringFormat("--- TAGESBILANZ (heute geschlossen): %s ---\n", todayPLStr);
    
    body += "\n=== Ende der Benachrichtigung ===";
    
@@ -1183,5 +1209,344 @@ void RemoveTradeFromEquityTracking(ulong positionId)
          return;
       }
    }
+}
+
+//+------------------------------------------------------------------+
+//| Unique Symbol zur Liste hinzufügen (Hilfsfunktion)               |
+//+------------------------------------------------------------------+
+string AddUniqueSymbol(string symbolList, string symbol)
+{
+   if(StringFind(symbolList, symbol) >= 0)
+      return symbolList;
+   if(symbolList == "")
+      return symbol;
+   return symbolList + ", " + symbol;
+}
+
+//+------------------------------------------------------------------+
+//| Heutigen geschlossenen P/L berechnen                             |
+//+------------------------------------------------------------------+
+double GetTodayClosedPL()
+{
+   datetime todayStart = StringToTime(TimeToString(TimeCurrent(), TIME_DATE));
+   
+   if(!HistorySelect(todayStart, TimeCurrent()))
+      return 0;
+   
+   double total = 0;
+   int totalDeals = HistoryDealsTotal();
+   
+   for(int i = 0; i < totalDeals; i++)
+   {
+      ulong ticket = HistoryDealGetTicket(i);
+      ENUM_DEAL_ENTRY entry = (ENUM_DEAL_ENTRY)HistoryDealGetInteger(ticket, DEAL_ENTRY);
+      
+      if(entry == DEAL_ENTRY_OUT || entry == DEAL_ENTRY_INOUT || entry == DEAL_ENTRY_OUT_BY)
+      {
+         string sym = HistoryDealGetString(ticket, DEAL_SYMBOL);
+         if(sym == "") continue;
+         
+         total += HistoryDealGetDouble(ticket, DEAL_PROFIT);
+         total += HistoryDealGetDouble(ticket, DEAL_COMMISSION);
+         total += HistoryDealGetDouble(ticket, DEAL_SWAP);
+      }
+   }
+   
+   // History wieder vollständig laden
+   HistorySelect(0, TimeCurrent());
+   return total;
+}
+
+//+------------------------------------------------------------------+
+//| Prüfen ob letzter Tag des Monats                                  |
+//+------------------------------------------------------------------+
+bool IsLastDayOfMonth()
+{
+   datetime tomorrow = TimeCurrent() + 86400;
+   MqlDateTime dtToday, dtTomorrow;
+   TimeCurrent(dtToday);
+   TimeToStruct(tomorrow, dtTomorrow);
+   return dtTomorrow.mon != dtToday.mon;
+}
+
+//+------------------------------------------------------------------+
+//| Prüfen ob Wochenreport gesendet werden soll (Freitag 22:00)      |
+//+------------------------------------------------------------------+
+void CheckAndSendWeeklyReport()
+{
+   MqlDateTime dt;
+   TimeCurrent(dt);
+   
+   // Nur freitags (day_of_week == 5)
+   if(dt.day_of_week != 5)
+      return;
+   
+   int currentMinutes = dt.hour * 60 + dt.min;
+   int targetMinutes  = InpWeeklyReportHour * 60;
+   
+   if(currentMinutes >= targetMinutes && currentMinutes < targetMinutes + InpCheckIntervalMinutes)
+   {
+      // Heute schon gesendet?
+      if(g_lastWeeklyReportDay != dt.day_of_year)
+      {
+         SendWeeklyReport();
+         g_lastWeeklyReportDay = dt.day_of_year;
+      }
+   }
+}
+
+//+------------------------------------------------------------------+
+//| Wochenreport senden                                               |
+//+------------------------------------------------------------------+
+void SendWeeklyReport()
+{
+   // Montag dieser Woche berechnen
+   MqlDateTime dtNow;
+   TimeCurrent(dtNow);
+   // day_of_week: 0=So, 1=Mo, 2=Di, 3=Mi, 4=Do, 5=Fr, 6=Sa
+   int daysFromMonday = dtNow.day_of_week - 1;
+   if(daysFromMonday < 0) daysFromMonday = 6; // Sonntag
+   datetime weekStart = StringToTime(TimeToString(TimeCurrent(), TIME_DATE)) - daysFromMonday * 86400;
+   
+   if(!HistorySelect(weekStart, TimeCurrent()))
+   {
+      Print("WARNUNG: Konnte Wochen-History nicht laden!");
+      return;
+   }
+   
+   // Trades der Woche sammeln
+   string closedTrades  = "";
+   int    closedCount   = 0;
+   double totalProfit   = 0;
+   double totalComm     = 0;
+   double totalSwap     = 0;
+   
+   int totalDeals = HistoryDealsTotal();
+   
+   for(int i = 0; i < totalDeals; i++)
+   {
+      ulong ticket = HistoryDealGetTicket(i);
+      ENUM_DEAL_ENTRY entry = (ENUM_DEAL_ENTRY)HistoryDealGetInteger(ticket, DEAL_ENTRY);
+      ENUM_DEAL_TYPE  type  = (ENUM_DEAL_TYPE)HistoryDealGetInteger(ticket, DEAL_TYPE);
+      
+      if(entry == DEAL_ENTRY_OUT || entry == DEAL_ENTRY_INOUT || entry == DEAL_ENTRY_OUT_BY)
+      {
+         string symbol = HistoryDealGetString(ticket, DEAL_SYMBOL);
+         if(symbol == "") continue;
+         
+         double volume     = HistoryDealGetDouble(ticket, DEAL_VOLUME);
+         double price      = HistoryDealGetDouble(ticket, DEAL_PRICE);
+         double profit     = HistoryDealGetDouble(ticket, DEAL_PROFIT);
+         double commission = HistoryDealGetDouble(ticket, DEAL_COMMISSION);
+         double swap       = HistoryDealGetDouble(ticket, DEAL_SWAP);
+         datetime dealTime = (datetime)HistoryDealGetInteger(ticket, DEAL_TIME);
+         
+         totalProfit += profit;
+         totalComm   += commission;
+         totalSwap   += swap;
+         
+         string direction = (type == DEAL_TYPE_BUY) ? "BUY" : (type == DEAL_TYPE_SELL) ? "SELL" : "OTHER";
+         int digits = (int)SymbolInfoInteger(symbol, SYMBOL_DIGITS);
+         if(digits == 0) digits = 2;
+         double dealResult = profit + commission + swap;
+         
+         closedTrades += StringFormat("  [%s] %s | %s %.2f @ %s | P/L: %.2f\n",
+                                      symbol,
+                                      TimeToString(dealTime, TIME_DATE | TIME_MINUTES),
+                                      direction,
+                                      volume,
+                                      DoubleToString(price, digits),
+                                      dealResult);
+         closedCount++;
+      }
+   }
+   
+   double weekResult = totalProfit + totalComm + totalSwap;
+   string currency   = AccountInfoString(ACCOUNT_CURRENCY);
+   
+   string subject = InpEmailSubjectPrefix + "Wochenreport KW" +
+                    IntegerToString(dtNow.day_of_year / 7 + 1) +
+                    StringFormat(" %+.2f %s", weekResult, currency);
+   
+   string body = "=== MQL5 WOCHENREPORT ===\n\n";
+   body += StringFormat("Account: %d (%s)\nServer: %s\nBalance: %.2f %s\nEquity: %.2f %s\n"
+                        "Zeitraum: %s - %s\n\n",
+                        AccountInfoInteger(ACCOUNT_LOGIN),
+                        AccountInfoString(ACCOUNT_NAME),
+                        AccountInfoString(ACCOUNT_SERVER),
+                        AccountInfoDouble(ACCOUNT_BALANCE), currency,
+                        AccountInfoDouble(ACCOUNT_EQUITY),  currency,
+                        TimeToString(weekStart, TIME_DATE),
+                        TimeToString(TimeCurrent(), TIME_DATE));
+   
+   body += "=== WOCHENERGEBNIS ===\n";
+   body += StringFormat("Profit: %.2f %s\n",     totalProfit, currency);
+   body += StringFormat("Commission: %.2f %s\n", totalComm,   currency);
+   body += StringFormat("Swap: %.2f %s\n",       totalSwap,   currency);
+   body += StringFormat("GESAMT: %+.2f %s\n\n",  weekResult,  currency);
+   
+   if(closedCount > 0)
+      body += StringFormat("--- %d TRADE(S) DIESE WOCHE ---\n%s\n", closedCount, closedTrades);
+   else
+      body += "--- KEINE TRADES DIESE WOCHE ---\n\n";
+   
+   body += GetOpenPositionsInfo();
+   body += "\n=== Ende Wochenreport ===";
+   
+   if(!SendMail(subject, body))
+   {
+      Print("FEHLER: Wochenreport E-Mail konnte nicht gesendet werden!");
+   }
+   else
+   {
+      g_lastNotificationTime = TimeCurrent();
+      g_notificationCount++;
+      UpdateChartInfo();
+      if(InpLogToExperts)
+         Print("Wochenreport gesendet: ", subject);
+   }
+   
+   HistorySelect(0, TimeCurrent());
+}
+
+//+------------------------------------------------------------------+
+//| Prüfen ob Monatsreport gesendet werden soll (letzter Monatstag)  |
+//+------------------------------------------------------------------+
+void CheckAndSendMonthlyReport()
+{
+   MqlDateTime dt;
+   TimeCurrent(dt);
+   
+   if(!IsLastDayOfMonth())
+      return;
+   
+   int currentMinutes = dt.hour * 60 + dt.min;
+   int targetMinutes  = InpMonthlyReportHour * 60;
+   
+   if(currentMinutes >= targetMinutes && currentMinutes < targetMinutes + InpCheckIntervalMinutes)
+   {
+      // Diesen Monat schon gesendet?
+      if(g_lastMonthlyReportMonth != dt.mon)
+      {
+         SendMonthlyReport();
+         g_lastMonthlyReportMonth = dt.mon;
+      }
+   }
+}
+
+//+------------------------------------------------------------------+
+//| Monatsreport senden                                               |
+//+------------------------------------------------------------------+
+void SendMonthlyReport()
+{
+   MqlDateTime dtNow;
+   TimeCurrent(dtNow);
+   
+   // Erster Tag dieses Monats
+   string monthStartStr = StringFormat("%04d.%02d.01", dtNow.year, dtNow.mon);
+   datetime monthStart  = StringToTime(monthStartStr);
+   
+   if(!HistorySelect(monthStart, TimeCurrent()))
+   {
+      Print("WARNUNG: Konnte Monats-History nicht laden!");
+      return;
+   }
+   
+   string closedTrades = "";
+   int    closedCount  = 0;
+   double totalProfit  = 0;
+   double totalComm    = 0;
+   double totalSwap    = 0;
+   
+   int totalDeals = HistoryDealsTotal();
+   
+   for(int i = 0; i < totalDeals; i++)
+   {
+      ulong ticket = HistoryDealGetTicket(i);
+      ENUM_DEAL_ENTRY entry = (ENUM_DEAL_ENTRY)HistoryDealGetInteger(ticket, DEAL_ENTRY);
+      ENUM_DEAL_TYPE  type  = (ENUM_DEAL_TYPE)HistoryDealGetInteger(ticket, DEAL_TYPE);
+      
+      if(entry == DEAL_ENTRY_OUT || entry == DEAL_ENTRY_INOUT || entry == DEAL_ENTRY_OUT_BY)
+      {
+         string symbol = HistoryDealGetString(ticket, DEAL_SYMBOL);
+         if(symbol == "") continue;
+         
+         double volume     = HistoryDealGetDouble(ticket, DEAL_VOLUME);
+         double price      = HistoryDealGetDouble(ticket, DEAL_PRICE);
+         double profit     = HistoryDealGetDouble(ticket, DEAL_PROFIT);
+         double commission = HistoryDealGetDouble(ticket, DEAL_COMMISSION);
+         double swap       = HistoryDealGetDouble(ticket, DEAL_SWAP);
+         datetime dealTime = (datetime)HistoryDealGetInteger(ticket, DEAL_TIME);
+         
+         totalProfit += profit;
+         totalComm   += commission;
+         totalSwap   += swap;
+         
+         string direction = (type == DEAL_TYPE_BUY) ? "BUY" : (type == DEAL_TYPE_SELL) ? "SELL" : "OTHER";
+         int digits = (int)SymbolInfoInteger(symbol, SYMBOL_DIGITS);
+         if(digits == 0) digits = 2;
+         double dealResult = profit + commission + swap;
+         
+         closedTrades += StringFormat("  [%s] %s | %s %.2f @ %s | P/L: %.2f\n",
+                                      symbol,
+                                      TimeToString(dealTime, TIME_DATE | TIME_MINUTES),
+                                      direction,
+                                      volume,
+                                      DoubleToString(price, digits),
+                                      dealResult);
+         closedCount++;
+      }
+   }
+   
+   double monthResult = totalProfit + totalComm + totalSwap;
+   string currency    = AccountInfoString(ACCOUNT_CURRENCY);
+   
+   string monthNames[] = {"", "Jan", "Feb", "Mär", "Apr", "Mai", "Jun",
+                              "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"};
+   string monthName = (dtNow.mon >= 1 && dtNow.mon <= 12) ? monthNames[dtNow.mon] : IntegerToString(dtNow.mon);
+   
+   string subject = InpEmailSubjectPrefix + "Monatsreport " + monthName + " " +
+                    IntegerToString(dtNow.year) +
+                    StringFormat(" %+.2f %s", monthResult, currency);
+   
+   string body = "=== MQL5 MONATSREPORT ===\n\n";
+   body += StringFormat("Account: %d (%s)\nServer: %s\nBalance: %.2f %s\nEquity: %.2f %s\n"
+                        "Zeitraum: %s - %s\n\n",
+                        AccountInfoInteger(ACCOUNT_LOGIN),
+                        AccountInfoString(ACCOUNT_NAME),
+                        AccountInfoString(ACCOUNT_SERVER),
+                        AccountInfoDouble(ACCOUNT_BALANCE), currency,
+                        AccountInfoDouble(ACCOUNT_EQUITY),  currency,
+                        TimeToString(monthStart, TIME_DATE),
+                        TimeToString(TimeCurrent(), TIME_DATE));
+   
+   body += "=== MONATSERGEBNIS ===\n";
+   body += StringFormat("Profit: %.2f %s\n",     totalProfit, currency);
+   body += StringFormat("Commission: %.2f %s\n", totalComm,   currency);
+   body += StringFormat("Swap: %.2f %s\n",       totalSwap,   currency);
+   body += StringFormat("GESAMT: %+.2f %s\n\n",  monthResult, currency);
+   
+   if(closedCount > 0)
+      body += StringFormat("--- %d TRADE(S) DIESEN MONAT ---\n%s\n", closedCount, closedTrades);
+   else
+      body += "--- KEINE TRADES DIESEN MONAT ---\n\n";
+   
+   body += GetOpenPositionsInfo();
+   body += "\n=== Ende Monatsreport ===";
+   
+   if(!SendMail(subject, body))
+   {
+      Print("FEHLER: Monatsreport E-Mail konnte nicht gesendet werden!");
+   }
+   else
+   {
+      g_lastNotificationTime = TimeCurrent();
+      g_notificationCount++;
+      UpdateChartInfo();
+      if(InpLogToExperts)
+         Print("Monatsreport gesendet: ", subject);
+   }
+   
+   HistorySelect(0, TimeCurrent());
 }
 //+------------------------------------------------------------------+
