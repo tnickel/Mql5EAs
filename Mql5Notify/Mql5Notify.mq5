@@ -5,7 +5,7 @@
 //+------------------------------------------------------------------+
 #property copyright "Thomas"
 #property link      ""
-#property version   "1.20"
+#property version   "1.21"
 #property description "Überwacht Trade-Aktivitäten und sendet E-Mail-Benachrichtigungen"
 #property description "bei neuen oder geschlossenen Trades in konfigurierbaren Intervallen."
 
@@ -17,8 +17,8 @@ input string InpEmailSubjectPrefix  = "[MT5] "; // E-Mail Betreff-Prefix
 input bool   InpLogToExperts        = true;     // Log-Ausgabe im Experts-Tab
 input bool   InpTradeReportEnabled  = true;     // Trade-Report bei Eröffnung/Schluss
 input bool   InpDailyReportEnabled  = true;     // Tagesreport aktivieren
-input int    InpDailyReportHour     = 23;       // Tagesreport Stunde (0-23)
-input int    InpDailyReportMinute   = 55;       // Tagesreport Minute (0-59)
+input int    InpDailyReportHour     = 22;       // Tagesreport Stunde (0-23)
+input int    InpDailyReportMinute   = 00;       // Tagesreport Minute (0-59)
 input bool   InpOpenEquityReport    = true;     // Open Equity Reporting aktivieren
 input bool   InpWeeklyReportEnabled = true;     // Wochenreport aktivieren (Freitag 22:00)
 input int    InpWeeklyReportHour    = 22;       // Wochenreport Stunde (0-23)
@@ -28,7 +28,7 @@ input int    InpMonthlyReportHour   = 22;       // Monatsreport Stunde (0-23)
 //+------------------------------------------------------------------+
 //| Konstanten                                                        |
 //+------------------------------------------------------------------+
-#define EA_VERSION "1.20"
+#define EA_VERSION "1.21"
 #define LABEL_PREFIX "MQL5Notify_"
 
 //+------------------------------------------------------------------+
@@ -229,11 +229,14 @@ void CheckForNewDeals()
       return;
    
    // Neue Deals sammeln
-   string openedTrades  = "";
-   string closedTrades  = "";
-   string tradeSymbols  = "";  // Unique Symbole für Betreff
-   int    openCount     = 0;
-   int    closeCount    = 0;
+   string openedTrades     = "";
+   string closedTrades     = "";
+   string openedSymbols    = "";  // Unique Symbole für eröffnete Trades
+   string closedSymbols    = "";  // Unique Symbole für geschlossene Trades
+   string openedDirSymbols = "";  // "BUY EURGBP" / "SELL USDJPY" für Betreff
+   double closedProfit     = 0.0; // Summe Profit+Comm+Swap aller geschlossenen Trades
+   int    openCount        = 0;
+   int    closeCount       = 0;
    
    for(int i = 0; i < totalDeals; i++)
    {
@@ -252,26 +255,44 @@ void CheckForNewDeals()
       if(dealInfo == "")
          continue;
       
-      // Symbol für Betreff sammeln
-      string dealSymbol = HistoryDealGetString(ticket, DEAL_SYMBOL);
-      if(dealSymbol != "")
-         tradeSymbols = AddUniqueSymbol(tradeSymbols, dealSymbol);
-      
       // Deal-Typ bestimmen
       ENUM_DEAL_ENTRY entry = (ENUM_DEAL_ENTRY)HistoryDealGetInteger(ticket, DEAL_ENTRY);
       ENUM_DEAL_TYPE  type  = (ENUM_DEAL_TYPE)HistoryDealGetInteger(ticket, DEAL_TYPE);
+      string dealSymbol = HistoryDealGetString(ticket, DEAL_SYMBOL);
       
       if(entry == DEAL_ENTRY_IN)
       {
          // Trade eröffnet
          openedTrades += dealInfo + "\n";
          openCount++;
+         
+         if(dealSymbol != "")
+         {
+            openedSymbols = AddUniqueSymbol(openedSymbols, dealSymbol);
+            
+            // "BUY EURUSD" oder "SELL EURUSD" für Betreff aufbauen
+            string direction = (type == DEAL_TYPE_BUY) ? "BUY" : "SELL";
+            string dirSym    = direction + " " + dealSymbol;
+            if(StringFind(openedDirSymbols, dirSym) < 0)
+            {
+               if(openedDirSymbols != "") openedDirSymbols += " ";
+               openedDirSymbols += dirSym;
+            }
+         }
       }
       else if(entry == DEAL_ENTRY_OUT || entry == DEAL_ENTRY_INOUT || entry == DEAL_ENTRY_OUT_BY)
       {
          // Trade geschlossen
          closedTrades += dealInfo + "\n";
          closeCount++;
+         
+         if(dealSymbol != "")
+            closedSymbols = AddUniqueSymbol(closedSymbols, dealSymbol);
+         
+         // Profit für Betreff summieren
+         closedProfit += HistoryDealGetDouble(ticket, DEAL_PROFIT)
+                       + HistoryDealGetDouble(ticket, DEAL_COMMISSION)
+                       + HistoryDealGetDouble(ticket, DEAL_SWAP);
       }
       else if(type == DEAL_TYPE_BALANCE || type == DEAL_TYPE_CREDIT)
       {
@@ -283,6 +304,9 @@ void CheckForNewDeals()
          // Sonstige Deals (z.B. Korrekturen)
          closedTrades += dealInfo + "\n";
          closeCount++;
+         
+         if(dealSymbol != "")
+            closedSymbols = AddUniqueSymbol(closedSymbols, dealSymbol);
       }
    }
    
@@ -291,7 +315,8 @@ void CheckForNewDeals()
    // E-Mail zusammenstellen und senden
    if(openCount > 0 || closeCount > 0)
    {
-      SendNotificationEmail(openedTrades, closedTrades, openCount, closeCount, tradeSymbols);
+      SendNotificationEmail(openedTrades, closedTrades, openCount, closeCount,
+                            openedSymbols, openedDirSymbols, closedSymbols, closedProfit);
    }
 }
 
@@ -434,16 +459,58 @@ string FormatDealInfo(ulong ticket)
 //+------------------------------------------------------------------+
 //| E-Mail-Benachrichtigung senden                                    |
 //+------------------------------------------------------------------+
-void SendNotificationEmail(string openedTrades, string closedTrades, int openCount, int closeCount, string tradeSymbols)
+void SendNotificationEmail(string openedTrades, string closedTrades,
+                           int openCount,       int closeCount,
+                           string openedSymbols,    string openedDirSymbols,
+                           string closedSymbols,    double closedProfit)
 {
-   // Betreff: NUR die betroffenen Währungspaare
-   string subject = InpEmailSubjectPrefix;
-   if(tradeSymbols != "")
-      subject += tradeSymbols;
-   else
-      subject += "Trade Notification";
+   string currency = AccountInfoString(ACCOUNT_CURRENCY);
    
-   // Account-Info
+   // --- Betreff zusammenbauen ---
+   string subject = InpEmailSubjectPrefix;
+   
+   if(closeCount > 0 && openCount == 0)
+   {
+      // Nur geschlossene Trades
+      if(closedSymbols != "")
+         subject += closedSymbols + " ";
+      
+      if(closeCount == 1)
+         subject += StringFormat("1 Trade(s) geschlossen: Profit %+.2f %s", closedProfit, currency);
+      else
+         subject += StringFormat("%d Trade(s) geschlossen: Summe Profits %+.2f %s",
+                                 closeCount, closedProfit, currency);
+   }
+   else if(openCount > 0 && closeCount == 0)
+   {
+      // Nur eröffnete Trades
+      if(openedSymbols != "")
+         subject += openedSymbols + " ";
+      
+      subject += StringFormat("%d Trade(s) %s eröffnet",
+                              openCount,
+                              openedDirSymbols != "" ? openedDirSymbols : "");
+   }
+   else
+   {
+      // Gemischte Benachrichtigung (eröffnet + geschlossen)
+      string parts = "";
+      
+      if(openCount > 0)
+      {
+         if(openedSymbols != "") parts += openedSymbols + " ";
+         parts += StringFormat("%d eröffnet", openCount);
+      }
+      if(closeCount > 0)
+      {
+         if(parts != "") parts += " | ";
+         if(closedSymbols != "") parts += closedSymbols + " ";
+         parts += StringFormat("%d geschlossen %+.2f %s", closeCount, closedProfit, currency);
+      }
+      subject += parts;
+   }
+   
+   // --- Account-Info ---
    string accountInfo = StringFormat(
       "Account: %d (%s)\n"
       "Server: %s\n"
@@ -453,14 +520,12 @@ void SendNotificationEmail(string openedTrades, string closedTrades, int openCou
       AccountInfoInteger(ACCOUNT_LOGIN),
       AccountInfoString(ACCOUNT_NAME),
       AccountInfoString(ACCOUNT_SERVER),
-      AccountInfoDouble(ACCOUNT_BALANCE),
-      AccountInfoString(ACCOUNT_CURRENCY),
-      AccountInfoDouble(ACCOUNT_EQUITY),
-      AccountInfoString(ACCOUNT_CURRENCY),
+      AccountInfoDouble(ACCOUNT_BALANCE), currency,
+      AccountInfoDouble(ACCOUNT_EQUITY),  currency,
       TimeToString(TimeCurrent(), TIME_DATE | TIME_MINUTES)
    );
    
-   // E-Mail-Body zusammenstellen
+   // --- E-Mail-Body ---
    string body = "=== MQL5 Trade Notification ===\n\n";
    body += accountInfo;
    body += "\n";
@@ -476,15 +541,15 @@ void SendNotificationEmail(string openedTrades, string closedTrades, int openCou
    {
       body += StringFormat("--- %d TRADE(S) GESCHLOSSEN ---\n", closeCount);
       body += closedTrades;
-      body += "\n";
+      body += StringFormat("Gesamt geschlossener P/L: %+.2f %s\n\n", closedProfit, currency);
    }
    
    // Offene Positionen anhängen
    body += GetOpenPositionsInfo();
    
-   // Tagesbilanz (heute bereits geschlossene Trades)
-   double todayPL = GetTodayClosedPL();
-   string todayPLStr = StringFormat("%+.2f %s", todayPL, AccountInfoString(ACCOUNT_CURRENCY));
+   // Tagesbilanz
+   double todayPL    = GetTodayClosedPL();
+   string todayPLStr = StringFormat("%+.2f %s", todayPL, currency);
    body += StringFormat("--- TAGESBILANZ (heute geschlossen): %s ---\n", todayPLStr);
    
    body += "\n=== Ende der Benachrichtigung ===";
