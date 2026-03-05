@@ -419,7 +419,7 @@ string FormatDealInfo(ulong ticket)
       // SL/TP anzeigen falls gesetzt
       if(sl > 0 || tp > 0)
       {
-         info += StringFormat("\n    SL: %s | TP: %s",
+         info += StringFormat(" | SL: %s | TP: %s",
                               sl > 0 ? DoubleToString(sl, digits) : "-",
                               tp > 0 ? DoubleToString(tp, digits) : "-");
       }
@@ -429,7 +429,7 @@ string FormatDealInfo(ulong ticket)
    if(entry == DEAL_ENTRY_OUT || entry == DEAL_ENTRY_INOUT || entry == DEAL_ENTRY_OUT_BY)
    {
       double totalResult = profit + commission + swap;
-      info += StringFormat("\n    P/L: %.2f (Profit: %.2f, Comm: %.2f)",
+      info += StringFormat(" | P/L: %.2f (Profit: %.2f, Comm: %.2f)",
                            totalResult, profit, commission);
       
       // Max Open Equity für diesen Trade anzeigen (falls aktiviert)
@@ -438,7 +438,7 @@ string FormatDealInfo(ulong ticket)
          double maxEquity = GetMaxEquityForPosition((ulong)posId);
          if(maxEquity != 0)
          {
-            info += StringFormat("\n    Max Open Equity: %+.2f", maxEquity);
+            info += StringFormat(" | Max Open Equity: %+.2f", maxEquity);
          }
       }
       
@@ -448,7 +448,7 @@ string FormatDealInfo(ulong ticket)
    
    // Kommentar hinzufügen falls vorhanden
    if(comment != "")
-      info += "\n    Kommentar: " + comment;
+      info += " | Kommentar: " + comment;
    
    // Symbol hervorheben
    info = "  [" + symbol + "] " + info;
