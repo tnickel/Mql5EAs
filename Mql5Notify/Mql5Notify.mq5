@@ -5,7 +5,7 @@
 //+------------------------------------------------------------------+
 #property copyright "Thomas"
 #property link      ""
-#property version   "1.21"
+#property version   "1.23"
 #property description "Überwacht Trade-Aktivitäten und sendet E-Mail-Benachrichtigungen"
 #property description "bei neuen oder geschlossenen Trades in konfigurierbaren Intervallen."
 
@@ -19,7 +19,7 @@ input bool   InpTradeReportEnabled  = true;     // Trade-Report bei Eröffnung/S
 input bool   InpDailyReportEnabled  = true;     // Tagesreport aktivieren
 input int    InpDailyReportHour     = 22;       // Tagesreport Stunde (0-23)
 input int    InpDailyReportMinute   = 00;       // Tagesreport Minute (0-59)
-input bool   InpOpenEquityReport    = true;     // Open Equity Reporting aktivieren
+input bool   InpOpenEquityReport    = false;    // Open Equity Reporting aktivieren
 input bool   InpWeeklyReportEnabled = true;     // Wochenreport aktivieren (Freitag 22:00)
 input int    InpWeeklyReportHour    = 22;       // Wochenreport Stunde (0-23)
 input bool   InpMonthlyReportEnabled= true;     // Monatsreport aktivieren (Monatsende 22:00)
@@ -28,8 +28,13 @@ input int    InpMonthlyReportHour   = 22;       // Monatsreport Stunde (0-23)
 //+------------------------------------------------------------------+
 //| Konstanten                                                        |
 //+------------------------------------------------------------------+
-#define EA_VERSION "1.21"
+#define EA_VERSION "1.23"
 #define LABEL_PREFIX "MQL5Notify_"
+
+// GlobalVariable-Keys für Report-Persistenz über Neustarts
+#define GV_DAILY_REPORT_DAY     "MQL5Notify_DailyReportDay"
+#define GV_WEEKLY_REPORT_DAY    "MQL5Notify_WeeklyReportDay"
+#define GV_MONTHLY_REPORT_MONTH "MQL5Notify_MonthlyReportMonth"
 
 //+------------------------------------------------------------------+
 //| Struktur für Trade-Equity-Tracking                                |
@@ -64,6 +69,9 @@ double   g_closedMagicProfit[];             // Profit pro Magic (geschlossen)
 int      g_closedCacheDay        = 0;       // Tag für den der Cache gilt
 int      g_closedCacheDealsCount = 0;       // Anzahl Deals beim letzten Cache-Update
 
+// Startup-Schutz
+int      g_startupTickCount      = 0;       // Zählt Timer-Ticks seit Startup (Warmup)
+
 //+------------------------------------------------------------------+
 //| Expert initialization function                                    |
 //+------------------------------------------------------------------+
@@ -92,6 +100,12 @@ int OnInit()
    
    // Initiale Deal-Liste aufbauen (damit wir beim Start keine Altdaten mailen)
    InitializeKnownDeals();
+   
+   // Report-Status aus GlobalVariables laden (Persistenz über Neustarts)
+   LoadReportTrackingState();
+   
+   // Startup-Warmup zurücksetzen
+   g_startupTickCount = 0;
    
    // Timer starten (jede Minute prüfen, ob Intervall erreicht)
    EventSetTimer(60);
@@ -151,22 +165,33 @@ void OnTimer()
 {
    datetime currentTime = TimeCurrent();
    
-   // Tagesreport prüfen (wenn aktiviert und neuer Tag)
-   if(InpDailyReportEnabled)
-   {
-      CheckAndSendDailyReport();
-   }
+   // Startup-Warmup: Erste 2 Minuten nach Start keine Reports prüfen
+   // (TimeCurrent() kann nach Neustart veraltete Daten der letzten Sitzung liefern)
+   g_startupTickCount++;
    
-   // Wochenreport prüfen (wenn aktiviert)
-   if(InpWeeklyReportEnabled)
+   if(g_startupTickCount > 2)
    {
-      CheckAndSendWeeklyReport();
+      // Tagesreport prüfen (wenn aktiviert und neuer Tag)
+      if(InpDailyReportEnabled)
+      {
+         CheckAndSendDailyReport();
+      }
+      
+      // Wochenreport prüfen (wenn aktiviert)
+      if(InpWeeklyReportEnabled)
+      {
+         CheckAndSendWeeklyReport();
+      }
+      
+      // Monatsreport prüfen (wenn aktiviert)
+      if(InpMonthlyReportEnabled)
+      {
+         CheckAndSendMonthlyReport();
+      }
    }
-   
-   // Monatsreport prüfen (wenn aktiviert)
-   if(InpMonthlyReportEnabled)
+   else if(InpLogToExperts)
    {
-      CheckAndSendMonthlyReport();
+      Print("Startup-Warmup: Report-Prüfung übersprungen (", g_startupTickCount, "/2)");
    }
    
    // Prüfen ob das konfigurierte Intervall erreicht ist
@@ -215,6 +240,69 @@ void InitializeKnownDeals()
    }
    
    g_lastDealsTotal = totalDeals;
+}
+
+//+------------------------------------------------------------------+
+//| Report-Status aus GlobalVariables laden (Neustart-Schutz)         |
+//+------------------------------------------------------------------+
+void LoadReportTrackingState()
+{
+   MqlDateTime dtInit;
+   TimeCurrent(dtInit);
+   int currentMinutes = dtInit.hour * 60 + dtInit.min;
+   
+   // --- Daily Report Status ---
+   if(GlobalVariableCheck(GV_DAILY_REPORT_DAY))
+   {
+      g_lastDailyReportDay = (int)GlobalVariableGet(GV_DAILY_REPORT_DAY);
+   }
+   else
+   {
+      // Erster Start: Wenn aktuelle Zeit >= Report-Zeit, als gesendet markieren
+      // Verhindert sofortigen Report nach erstmaligem Start
+      int dailyTarget = InpDailyReportHour * 60 + InpDailyReportMinute;
+      if(currentMinutes >= dailyTarget)
+         g_lastDailyReportDay = dtInit.day_of_year;
+   }
+   
+   // --- Weekly Report Status ---
+   if(GlobalVariableCheck(GV_WEEKLY_REPORT_DAY))
+   {
+      g_lastWeeklyReportDay = (int)GlobalVariableGet(GV_WEEKLY_REPORT_DAY);
+   }
+   else
+   {
+      // Erster Start an einem Freitag: Wenn aktuelle Zeit >= Report-Zeit, als gesendet markieren
+      if(dtInit.day_of_week == 5)
+      {
+         int weeklyTarget = InpWeeklyReportHour * 60;
+         if(currentMinutes >= weeklyTarget)
+            g_lastWeeklyReportDay = dtInit.day_of_year;
+      }
+   }
+   
+   // --- Monthly Report Status ---
+   if(GlobalVariableCheck(GV_MONTHLY_REPORT_MONTH))
+   {
+      g_lastMonthlyReportMonth = (int)GlobalVariableGet(GV_MONTHLY_REPORT_MONTH);
+   }
+   else
+   {
+      // Erster Start am Monatsende: Wenn aktuelle Zeit >= Report-Zeit, als gesendet markieren
+      if(IsLastDayOfMonth())
+      {
+         int monthlyTarget = InpMonthlyReportHour * 60;
+         if(currentMinutes >= monthlyTarget)
+            g_lastMonthlyReportMonth = dtInit.mon;
+      }
+   }
+   
+   if(InpLogToExperts)
+   {
+      Print("Report-Status geladen - Daily: Tag ", g_lastDailyReportDay,
+            ", Weekly: Tag ", g_lastWeeklyReportDay,
+            ", Monthly: Monat ", g_lastMonthlyReportMonth);
+   }
 }
 
 //+------------------------------------------------------------------+
@@ -368,10 +456,23 @@ string FormatDealInfo(ulong ticket)
       return "";
    
    // Richtung bestimmen
+   // Bei CLOSE-Deals ist der Deal-Typ invertiert (Schließen eines SELL = BUY-Deal),
+   // daher invertieren wir die Richtung für die Anzeige der ursprünglichen Position.
    string direction = "";
-   if(type == DEAL_TYPE_BUY)       direction = "BUY";
-   else if(type == DEAL_TYPE_SELL) direction = "SELL";
-   else                            direction = "OTHER";
+   if(entry == DEAL_ENTRY_OUT || entry == DEAL_ENTRY_INOUT || entry == DEAL_ENTRY_OUT_BY)
+   {
+      // Close: invertieren -> SELL-Position schließen = BUY-Deal -> zeige "SELL"
+      if(type == DEAL_TYPE_BUY)       direction = "SELL";
+      else if(type == DEAL_TYPE_SELL) direction = "BUY";
+      else                            direction = "OTHER";
+   }
+   else
+   {
+      // Open: Deal-Typ entspricht der Positionsrichtung
+      if(type == DEAL_TYPE_BUY)       direction = "BUY";
+      else if(type == DEAL_TYPE_SELL) direction = "SELL";
+      else                            direction = "OTHER";
+   }
    
    // Entry-Typ bestimmen
    string entryStr = "";
@@ -970,6 +1071,7 @@ void CheckAndSendDailyReport()
       {
          SendDailyReport();
          g_lastDailyReportDay = dt.day_of_year;
+         GlobalVariableSet(GV_DAILY_REPORT_DAY, g_lastDailyReportDay);
       }
    }
 }
@@ -1025,7 +1127,8 @@ void SendDailyReport()
          totalCommission += commission;
          totalSwap += swap;
          
-         string direction = (type == DEAL_TYPE_BUY) ? "BUY" : (type == DEAL_TYPE_SELL) ? "SELL" : "OTHER";
+         // Close-Deal: Richtung invertieren (SELL schließen = BUY-Deal -> zeige "SELL")
+         string direction = (type == DEAL_TYPE_BUY) ? "SELL" : (type == DEAL_TYPE_SELL) ? "BUY" : "OTHER";
          int digits = (int)SymbolInfoInteger(symbol, SYMBOL_DIGITS);
          if(digits == 0) digits = 2;
          
@@ -1356,6 +1459,7 @@ void CheckAndSendWeeklyReport()
       {
          SendWeeklyReport();
          g_lastWeeklyReportDay = dt.day_of_year;
+         GlobalVariableSet(GV_WEEKLY_REPORT_DAY, g_lastWeeklyReportDay);
       }
    }
 }
@@ -1410,7 +1514,8 @@ void SendWeeklyReport()
          totalComm   += commission;
          totalSwap   += swap;
          
-         string direction = (type == DEAL_TYPE_BUY) ? "BUY" : (type == DEAL_TYPE_SELL) ? "SELL" : "OTHER";
+         // Close-Deal: Richtung invertieren (SELL schließen = BUY-Deal -> zeige "SELL")
+         string direction = (type == DEAL_TYPE_BUY) ? "SELL" : (type == DEAL_TYPE_SELL) ? "BUY" : "OTHER";
          int digits = (int)SymbolInfoInteger(symbol, SYMBOL_DIGITS);
          if(digits == 0) digits = 2;
          double dealResult = profit + commission + swap;
@@ -1495,6 +1600,7 @@ void CheckAndSendMonthlyReport()
       {
          SendMonthlyReport();
          g_lastMonthlyReportMonth = dt.mon;
+         GlobalVariableSet(GV_MONTHLY_REPORT_MONTH, g_lastMonthlyReportMonth);
       }
    }
 }
@@ -1547,7 +1653,8 @@ void SendMonthlyReport()
          totalComm   += commission;
          totalSwap   += swap;
          
-         string direction = (type == DEAL_TYPE_BUY) ? "BUY" : (type == DEAL_TYPE_SELL) ? "SELL" : "OTHER";
+         // Close-Deal: Richtung invertieren (SELL schließen = BUY-Deal -> zeige "SELL")
+         string direction = (type == DEAL_TYPE_BUY) ? "SELL" : (type == DEAL_TYPE_SELL) ? "BUY" : "OTHER";
          int digits = (int)SymbolInfoInteger(symbol, SYMBOL_DIGITS);
          if(digits == 0) digits = 2;
          double dealResult = profit + commission + swap;
