@@ -1,6 +1,6 @@
 # MQL5Notify - Expert Advisor Dokumentation
 
-**Version:** 1.22  
+**Version:** 1.24  
 **Autor:** Thomas  
 **Plattform:** MetaTrader 5
 
@@ -64,9 +64,9 @@ Ob Sie ein Vollzeit-Trader sind, der seine Strategien automatisiert laufen läss
 | InpDailyReportMinute | int | 00 | Tagesreport Minute (0-59) |
 | InpOpenEquityReport | bool | false | Open Equity Reporting aktivieren |
 | InpWeeklyReportEnabled | bool | true | Wochenreport aktivieren (Freitag) |
-| InpWeeklyReportHour | int | 22 | Wochenreport Stunde (0-23) |
+| InpWeeklyReportHour | int | 20 | Wochenreport Stunde (0-23) |
 | InpMonthlyReportEnabled | bool | true | Monatsreport aktivieren (Monatsende) |
-| InpMonthlyReportHour | int | 22 | Monatsreport Stunde (0-23) |
+| InpMonthlyReportHour | int | 20 | Monatsreport Stunde (0-23) |
 
 #### Details
 
@@ -101,15 +101,17 @@ Ob Sie ein Vollzeit-Trader sind, der seine Strategien automatisiert laufen läss
 - Wochenreport ein-/ausschalten
 - Wird freitags zur konfigurierten Stunde gesendet
 
-**`InpWeeklyReportHour`** (int, Standard: 22)
+**`InpWeeklyReportHour`** (int, Standard: 20)
 - Stunde für den Wochenreport (Broker-Zeit, nur freitags)
+- **Hinweis:** Standard ist 20:00 statt 22:00, da der Forex-Markt freitags oft um 22:00 schließt und `TimeCurrent()` dann nicht mehr aktualisiert wird
 
 **`InpMonthlyReportEnabled`** (bool, Standard: true)
 - Monatsreport ein-/ausschalten
 - Wird am letzten Tag des Monats zur konfigurierten Stunde gesendet
 
-**`InpMonthlyReportHour`** (int, Standard: 22)
+**`InpMonthlyReportHour`** (int, Standard: 20)
 - Stunde für den Monatsreport (Broker-Zeit, nur letzter Monatstag)
+- **Hinweis:** Alle Reports werden freitags automatisch auf spätestens 20:00 begrenzt, da der Forex-Markt um ~22:00 schließt
 
 ---
 
@@ -444,6 +446,9 @@ int    g_closedCacheDealsCount; // Anzahl Deals beim letzten Cache-Update
 | `OnTimer()` | Hauptschleife: Reports prüfen, Equity tracken, neue Deals suchen |
 | `OnDeinit()` | Aufräumen: Timer stoppen, Chart-Labels entfernen |
 | `InitializeKnownDeals()` | Initiale Deal-Liste aufbauen (keine Altdaten mailen) |
+| `InitReportLog()` | Report-Logdatei initialisieren, beim ersten Start vergangene Zeiten markieren |
+| `IsReportAlreadySent()` | Prüft in der Logdatei ob ein Report (Typ+Datum) bereits gesendet wurde |
+| `LogReportSent()` | Protokolliert einen gesendeten Report in der Logdatei |
 | `CheckForNewDeals()` | Prüft auf neue Deals und sendet Trade-Report E-Mail |
 | `UpdateKnownDealsWithoutNotification()` | Deals als bekannt markieren ohne E-Mail (wenn Report deaktiviert) |
 | `FormatDealInfo()` | Formatiert Deal-Informationen (Symbol, Richtung, Preis, SL/TP, P/L, Max Equity) |
@@ -474,7 +479,7 @@ int    g_closedCacheDealsCount; // Anzahl Deals beim letzten Cache-Update
 Der EA zeigt folgende Informationen auf dem Chart an (Schriftart: Consolas, 11pt):
 
 ```
-MQL5Notify v1.22
+MQL5Notify v1.24
 Intervall: 5 Min
 Letzte Mail: 2026.02.07 18:30
 Gesendete Mails: 12
@@ -499,6 +504,18 @@ Tages-Equity: Min -180.00 / Max +425.50   ← nur wenn OpenEquityReport=true
 ---
 
 ## Changelog
+
+### Version 1.24
+- **Report-Tracking komplett überarbeitet:** GlobalVariables durch Logdatei (`MQL5Notify_ReportLog.txt`) ersetzt
+- Logdatei protokolliert jeden gesendeten Report mit Datum, Typ und Status
+- Vor jedem Report wird die Logdatei geprüft, ob bereits ein Report gesendet wurde
+- Beim allerersten Start werden bereits vergangene Report-Zeiten als gesendet markiert (kein Rückstau)
+- **Wochenreport und Monatsreport Default-Stunde von 22:00 auf 20:00 geändert** (Forex-Markt schließt freitags um ~22:00, `TimeCurrent()` stoppt)
+- **Freitags-Sicherheit:** Alle Reports werden freitags automatisch auf spätestens 20:00 begrenzt, auch wenn eine spätere Stunde konfiguriert ist
+
+### Version 1.23
+- **Bugfix:** Neustart-Schutz verbessert (Warmup-Phase, GlobalVariable-Persistenz)
+- Verhindert fehlerhafte Reports nach EA-Neustart
 
 ### Version 1.22
 - **Bugfix:** Richtungsanzeige bei geschlossenen Trades korrigiert (zeigte "CLOSE BUY" statt "CLOSE SELL" und umgekehrt)

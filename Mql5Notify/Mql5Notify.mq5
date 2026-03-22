@@ -5,7 +5,7 @@
 //+------------------------------------------------------------------+
 #property copyright "Thomas"
 #property link      ""
-#property version   "1.23"
+#property version   "1.25"
 #property description "Überwacht Trade-Aktivitäten und sendet E-Mail-Benachrichtigungen"
 #property description "bei neuen oder geschlossenen Trades in konfigurierbaren Intervallen."
 
@@ -20,21 +20,19 @@ input bool   InpDailyReportEnabled  = true;     // Tagesreport aktivieren
 input int    InpDailyReportHour     = 22;       // Tagesreport Stunde (0-23)
 input int    InpDailyReportMinute   = 00;       // Tagesreport Minute (0-59)
 input bool   InpOpenEquityReport    = false;    // Open Equity Reporting aktivieren
-input bool   InpWeeklyReportEnabled = true;     // Wochenreport aktivieren (Freitag 22:00)
-input int    InpWeeklyReportHour    = 22;       // Wochenreport Stunde (0-23)
-input bool   InpMonthlyReportEnabled= true;     // Monatsreport aktivieren (Monatsende 22:00)
-input int    InpMonthlyReportHour   = 22;       // Monatsreport Stunde (0-23)
+input bool   InpWeeklyReportEnabled = true;     // Wochenreport aktivieren (Freitag 20:00)
+input int    InpWeeklyReportHour    = 20;       // Wochenreport Stunde (0-23)
+input bool   InpMonthlyReportEnabled= true;     // Monatsreport aktivieren (Monatsende 20:00)
+input int    InpMonthlyReportHour   = 20;       // Monatsreport Stunde (0-23)
 
 //+------------------------------------------------------------------+
 //| Konstanten                                                        |
 //+------------------------------------------------------------------+
-#define EA_VERSION "1.23"
+#define EA_VERSION "1.25"
 #define LABEL_PREFIX "MQL5Notify_"
 
-// GlobalVariable-Keys für Report-Persistenz über Neustarts
-#define GV_DAILY_REPORT_DAY     "MQL5Notify_DailyReportDay"
-#define GV_WEEKLY_REPORT_DAY    "MQL5Notify_WeeklyReportDay"
-#define GV_MONTHLY_REPORT_MONTH "MQL5Notify_MonthlyReportMonth"
+// Logdatei für Report-Persistenz über Neustarts
+#define REPORT_LOG_FILE "MQL5Notify_ReportLog.txt"
 
 //+------------------------------------------------------------------+
 //| Struktur für Trade-Equity-Tracking                                |
@@ -51,11 +49,9 @@ struct TradeEquityInfo
 datetime g_lastCheckTime         = 0;       // Zeitpunkt der letzten Prüfung
 datetime g_lastNotificationTime  = 0;       // Zeitpunkt der letzten E-Mail
 int      g_lastDealsTotal        = 0;       // Anzahl Deals bei letzter Prüfung
-int      g_knownDealTickets[];              // Array mit bereits bekannten Deal-Tickets
+ulong    g_knownDealTickets[];              // Array mit bereits bekannten Deal-Tickets
 int      g_notificationCount     = 0;       // Anzahl gesendeter E-Mails
-int      g_lastDailyReportDay    = 0;       // Tag des letzten Tagesreports
-int      g_lastWeeklyReportDay   = 0;       // Tag (day_of_year) des letzten Wochenreports
-int      g_lastMonthlyReportMonth= 0;       // Monat des letzten Monatsreports
+
 
 // Equity-Tracking
 TradeEquityInfo g_tradeEquity[];            // Array für per-Trade max Equity
@@ -101,8 +97,8 @@ int OnInit()
    // Initiale Deal-Liste aufbauen (damit wir beim Start keine Altdaten mailen)
    InitializeKnownDeals();
    
-   // Report-Status aus GlobalVariables laden (Persistenz über Neustarts)
-   LoadReportTrackingState();
+   // Report-Logdatei initialisieren (Persistenz über Neustarts)
+   InitReportLog();
    
    // Startup-Warmup zurücksetzen
    g_startupTickCount = 0;
@@ -236,73 +232,125 @@ void InitializeKnownDeals()
    for(int i = 0; i < totalDeals; i++)
    {
       ulong ticket = HistoryDealGetTicket(i);
-      g_knownDealTickets[i] = (int)ticket;
+      g_knownDealTickets[i] = ticket;
    }
    
    g_lastDealsTotal = totalDeals;
 }
 
 //+------------------------------------------------------------------+
-//| Report-Status aus GlobalVariables laden (Neustart-Schutz)         |
+//| Report-Logdatei initialisieren                                    |
 //+------------------------------------------------------------------+
-void LoadReportTrackingState()
+void InitReportLog()
 {
-   MqlDateTime dtInit;
-   TimeCurrent(dtInit);
-   int currentMinutes = dtInit.hour * 60 + dtInit.min;
-   
-   // --- Daily Report Status ---
-   if(GlobalVariableCheck(GV_DAILY_REPORT_DAY))
+   // Prüfen ob die Logdatei existiert, wenn nicht erstellen
+   int handle = FileOpen(REPORT_LOG_FILE, FILE_READ | FILE_TXT | FILE_ANSI);
+   if(handle == INVALID_HANDLE)
    {
-      g_lastDailyReportDay = (int)GlobalVariableGet(GV_DAILY_REPORT_DAY);
-   }
-   else
-   {
-      // Erster Start: Wenn aktuelle Zeit >= Report-Zeit, als gesendet markieren
-      // Verhindert sofortigen Report nach erstmaligem Start
-      int dailyTarget = InpDailyReportHour * 60 + InpDailyReportMinute;
-      if(currentMinutes >= dailyTarget)
-         g_lastDailyReportDay = dtInit.day_of_year;
-   }
-   
-   // --- Weekly Report Status ---
-   if(GlobalVariableCheck(GV_WEEKLY_REPORT_DAY))
-   {
-      g_lastWeeklyReportDay = (int)GlobalVariableGet(GV_WEEKLY_REPORT_DAY);
-   }
-   else
-   {
-      // Erster Start an einem Freitag: Wenn aktuelle Zeit >= Report-Zeit, als gesendet markieren
-      if(dtInit.day_of_week == 5)
+      // Datei existiert noch nicht - erstellen mit Header
+      handle = FileOpen(REPORT_LOG_FILE, FILE_WRITE | FILE_TXT | FILE_ANSI);
+      if(handle != INVALID_HANDLE)
       {
-         int weeklyTarget = InpWeeklyReportHour * 60;
-         if(currentMinutes >= weeklyTarget)
-            g_lastWeeklyReportDay = dtInit.day_of_year;
+         FileWriteString(handle, "# MQL5Notify Report-Log\n");
+         
+         // Beim allerersten Start: Bereits vergangene Report-Zeiten als gesendet markieren
+         // Verhindert dass beim ersten Start sofort Reports auf Vorrat gesendet werden
+         MqlDateTime dtInit;
+         TimeCurrent(dtInit);
+         int currentMinutes = dtInit.hour * 60 + dtInit.min;
+         string todayStr = TimeToString(TimeCurrent(), TIME_DATE);
+         
+         // Tagesreport: Wenn aktuelle Zeit >= Report-Zeit, als gesendet markieren
+         int dailyTarget = InpDailyReportHour * 60 + InpDailyReportMinute;
+         if(currentMinutes >= dailyTarget)
+         {
+            FileWriteString(handle, todayStr + "|DAILY|OK|INIT\n");
+            if(InpLogToExperts) Print("Report-Log Init: Daily als gesendet markiert (Zeit bereits vorbei)");
+         }
+         
+         // Wochenreport: Wenn Freitag und aktuelle Zeit >= Report-Zeit
+         if(dtInit.day_of_week == 5)
+         {
+            int weeklyTarget = InpWeeklyReportHour * 60;
+            if(currentMinutes >= weeklyTarget)
+            {
+               FileWriteString(handle, todayStr + "|WEEKLY|OK|INIT\n");
+               if(InpLogToExperts) Print("Report-Log Init: Weekly als gesendet markiert (Zeit bereits vorbei)");
+            }
+         }
+         
+         // Monatsreport: Wenn letzter Monatstag und aktuelle Zeit >= Report-Zeit
+         if(IsLastDayOfMonth())
+         {
+            int monthlyTarget = InpMonthlyReportHour * 60;
+            if(currentMinutes >= monthlyTarget)
+            {
+               FileWriteString(handle, todayStr + "|MONTHLY|OK|INIT\n");
+               if(InpLogToExperts) Print("Report-Log Init: Monthly als gesendet markiert (Zeit bereits vorbei)");
+            }
+         }
+         
+         FileClose(handle);
+         if(InpLogToExperts) Print("Report-Logdatei erstellt: ", REPORT_LOG_FILE);
+      }
+      else
+      {
+         Print("FEHLER: Konnte Report-Logdatei nicht erstellen!");
+      }
+   }
+   else
+   {
+      FileClose(handle);
+      if(InpLogToExperts) Print("Report-Logdatei gefunden: ", REPORT_LOG_FILE);
+   }
+}
+
+//+------------------------------------------------------------------+
+//| Prüfen ob ein Report bereits gesendet wurde (aus Logdatei)        |
+//+------------------------------------------------------------------+
+bool IsReportAlreadySent(string reportType, string dateKey)
+{
+   int handle = FileOpen(REPORT_LOG_FILE, FILE_READ | FILE_TXT | FILE_ANSI);
+   if(handle == INVALID_HANDLE)
+      return false;
+   
+   string searchPattern = dateKey + "|" + reportType + "|OK";
+   
+   while(!FileIsEnding(handle))
+   {
+      string line = FileReadString(handle);
+      if(StringFind(line, searchPattern) >= 0)
+      {
+         FileClose(handle);
+         return true;
       }
    }
    
-   // --- Monthly Report Status ---
-   if(GlobalVariableCheck(GV_MONTHLY_REPORT_MONTH))
+   FileClose(handle);
+   return false;
+}
+
+//+------------------------------------------------------------------+
+//| Report-Sendung in Logdatei protokollieren                         |
+//+------------------------------------------------------------------+
+void LogReportSent(string reportType, string dateKey)
+{
+   int handle = FileOpen(REPORT_LOG_FILE, FILE_READ | FILE_WRITE | FILE_TXT | FILE_ANSI);
+   if(handle == INVALID_HANDLE)
    {
-      g_lastMonthlyReportMonth = (int)GlobalVariableGet(GV_MONTHLY_REPORT_MONTH);
+      Print("FEHLER: Konnte Report-Logdatei nicht öffnen zum Schreiben!");
+      return;
    }
-   else
-   {
-      // Erster Start am Monatsende: Wenn aktuelle Zeit >= Report-Zeit, als gesendet markieren
-      if(IsLastDayOfMonth())
-      {
-         int monthlyTarget = InpMonthlyReportHour * 60;
-         if(currentMinutes >= monthlyTarget)
-            g_lastMonthlyReportMonth = dtInit.mon;
-      }
-   }
+   
+   // Ans Ende der Datei springen
+   FileSeek(handle, 0, SEEK_END);
+   
+   string logEntry = dateKey + "|" + reportType + "|OK\n";
+   FileWriteString(handle, logEntry);
+   FileClose(handle);
    
    if(InpLogToExperts)
-   {
-      Print("Report-Status geladen - Daily: Tag ", g_lastDailyReportDay,
-            ", Weekly: Tag ", g_lastWeeklyReportDay,
-            ", Monthly: Monat ", g_lastMonthlyReportMonth);
-   }
+      Print("Report-Log: ", reportType, " für ", dateKey, " als gesendet protokolliert");
 }
 
 //+------------------------------------------------------------------+
@@ -416,7 +464,7 @@ bool IsDealKnown(ulong ticket)
    int size = ArraySize(g_knownDealTickets);
    for(int i = 0; i < size; i++)
    {
-      if(g_knownDealTickets[i] == (int)ticket)
+      if(g_knownDealTickets[i] == ticket)
          return true;
    }
    return false;
@@ -429,7 +477,7 @@ void AddKnownDeal(ulong ticket)
 {
    int size = ArraySize(g_knownDealTickets);
    ArrayResize(g_knownDealTickets, size + 1);
-   g_knownDealTickets[size] = (int)ticket;
+   g_knownDealTickets[size] = ticket;
 }
 
 //+------------------------------------------------------------------+
@@ -1063,15 +1111,23 @@ void CheckAndSendDailyReport()
    int currentMinutes = dt.hour * 60 + dt.min;
    int targetMinutes = InpDailyReportHour * 60 + InpDailyReportMinute;
    
+   // Freitags-Sicherheit: Spätestens um 20:00 senden (Markt schließt um ~22:00)
+   if(dt.day_of_week == 5 && targetMinutes > 20 * 60)
+   {
+      if(InpLogToExperts)
+         Print("HINWEIS: Tagesreport von ", InpDailyReportHour, ":00 auf 20:00 vorgezogen (Freitag Marktschluss)");
+      targetMinutes = 20 * 60;
+   }
+   
    // Ist die Zielzeit erreicht? (aktuell >= Zielzeit UND aktuell < Zielzeit + Intervall)
    if(currentMinutes >= targetMinutes && currentMinutes < targetMinutes + InpCheckIntervalMinutes)
    {
-      // Wurde heute schon ein Report gesendet?
-      if(g_lastDailyReportDay != dt.day_of_year)
+      // Wurde heute schon ein Report gesendet? (Logdatei prüfen)
+      string todayStr = TimeToString(TimeCurrent(), TIME_DATE);
+      if(!IsReportAlreadySent("DAILY", todayStr))
       {
-         SendDailyReport();
-         g_lastDailyReportDay = dt.day_of_year;
-         GlobalVariableSet(GV_DAILY_REPORT_DAY, g_lastDailyReportDay);
+         if(SendDailyReport())
+            LogReportSent("DAILY", todayStr);
       }
    }
 }
@@ -1079,16 +1135,15 @@ void CheckAndSendDailyReport()
 //+------------------------------------------------------------------+
 //| Tagesreport senden                                                 |
 //+------------------------------------------------------------------+
-void SendDailyReport()
+bool SendDailyReport()
 {
    datetime todayStart = StringToTime(TimeToString(TimeCurrent(), TIME_DATE));
-   datetime todayEnd = todayStart + 86400 - 1; // 23:59:59
    
    // History für heute laden
    if(!HistorySelect(todayStart, TimeCurrent()))
    {
       Print("WARNUNG: Konnte Tages-History nicht laden!");
-      return;
+      return false;
    }
    
    // Geschlossene Trades heute sammeln
@@ -1098,8 +1153,7 @@ void SendDailyReport()
    double totalCommission = 0;
    double totalSwap = 0;
    
-   // Array für Position-IDs zum späteren Abrufen der Max-Equity
-   ulong closedPosIds[];
+
    
    int totalDeals = HistoryDealsTotal();
    
@@ -1240,7 +1294,9 @@ void SendDailyReport()
    body += "\n=== Ende Tagesreport ===";
    
    // E-Mail senden
-   if(!SendMail(subject, body))
+   bool mailSent = SendMail(subject, body);
+   
+   if(!mailSent)
    {
       Print("FEHLER: Tagesreport E-Mail konnte nicht gesendet werden!");
    }
@@ -1260,6 +1316,10 @@ void SendDailyReport()
       Print(body);
       Print("---");
    }
+   
+   // History wieder vollständig laden
+   HistorySelect(0, TimeCurrent());
+   return mailSent;
 }
 
 //+------------------------------------------------------------------+
@@ -1438,7 +1498,7 @@ bool IsLastDayOfMonth()
 }
 
 //+------------------------------------------------------------------+
-//| Prüfen ob Wochenreport gesendet werden soll (Freitag 22:00)      |
+//| Prüfen ob Wochenreport gesendet werden soll (Freitag 20:00)      |
 //+------------------------------------------------------------------+
 void CheckAndSendWeeklyReport()
 {
@@ -1452,14 +1512,22 @@ void CheckAndSendWeeklyReport()
    int currentMinutes = dt.hour * 60 + dt.min;
    int targetMinutes  = InpWeeklyReportHour * 60;
    
+   // Freitags-Sicherheit: Spätestens um 20:00 senden (Markt schließt um ~22:00)
+   if(targetMinutes > 20 * 60)
+   {
+      if(InpLogToExperts)
+         Print("HINWEIS: Wochenreport von ", InpWeeklyReportHour, ":00 auf 20:00 vorgezogen (Freitag Marktschluss)");
+      targetMinutes = 20 * 60;
+   }
+   
    if(currentMinutes >= targetMinutes && currentMinutes < targetMinutes + InpCheckIntervalMinutes)
    {
-      // Heute schon gesendet?
-      if(g_lastWeeklyReportDay != dt.day_of_year)
+      // Heute schon gesendet? (Logdatei prüfen)
+      string todayStr = TimeToString(TimeCurrent(), TIME_DATE);
+      if(!IsReportAlreadySent("WEEKLY", todayStr))
       {
-         SendWeeklyReport();
-         g_lastWeeklyReportDay = dt.day_of_year;
-         GlobalVariableSet(GV_WEEKLY_REPORT_DAY, g_lastWeeklyReportDay);
+         if(SendWeeklyReport())
+            LogReportSent("WEEKLY", todayStr);
       }
    }
 }
@@ -1467,7 +1535,7 @@ void CheckAndSendWeeklyReport()
 //+------------------------------------------------------------------+
 //| Wochenreport senden                                               |
 //+------------------------------------------------------------------+
-void SendWeeklyReport()
+bool SendWeeklyReport()
 {
    // Montag dieser Woche berechnen
    MqlDateTime dtNow;
@@ -1480,7 +1548,7 @@ void SendWeeklyReport()
    if(!HistorySelect(weekStart, TimeCurrent()))
    {
       Print("WARNUNG: Konnte Wochen-History nicht laden!");
-      return;
+      return false;
    }
    
    // Trades der Woche sammeln
@@ -1563,7 +1631,9 @@ void SendWeeklyReport()
    body += GetOpenPositionsInfo();
    body += "\n=== Ende Wochenreport ===";
    
-   if(!SendMail(subject, body))
+   bool mailSent = SendMail(subject, body);
+   
+   if(!mailSent)
    {
       Print("FEHLER: Wochenreport E-Mail konnte nicht gesendet werden!");
    }
@@ -1577,6 +1647,7 @@ void SendWeeklyReport()
    }
    
    HistorySelect(0, TimeCurrent());
+   return mailSent;
 }
 
 //+------------------------------------------------------------------+
@@ -1593,14 +1664,23 @@ void CheckAndSendMonthlyReport()
    int currentMinutes = dt.hour * 60 + dt.min;
    int targetMinutes  = InpMonthlyReportHour * 60;
    
+   // Freitags-Sicherheit: Wenn Monatsende auf Freitag fällt,
+   // spätestens um 20:00 senden (Markt schließt um ~22:00)
+   if(dt.day_of_week == 5 && targetMinutes > 20 * 60)
+   {
+      if(InpLogToExperts)
+         Print("HINWEIS: Monatsreport von ", InpMonthlyReportHour, ":00 auf 20:00 vorgezogen (Freitag Marktschluss)");
+      targetMinutes = 20 * 60;
+   }
+   
    if(currentMinutes >= targetMinutes && currentMinutes < targetMinutes + InpCheckIntervalMinutes)
    {
-      // Diesen Monat schon gesendet?
-      if(g_lastMonthlyReportMonth != dt.mon)
+      // Diesen Monat schon gesendet? (Logdatei prüfen)
+      string todayStr = TimeToString(TimeCurrent(), TIME_DATE);
+      if(!IsReportAlreadySent("MONTHLY", todayStr))
       {
-         SendMonthlyReport();
-         g_lastMonthlyReportMonth = dt.mon;
-         GlobalVariableSet(GV_MONTHLY_REPORT_MONTH, g_lastMonthlyReportMonth);
+         if(SendMonthlyReport())
+            LogReportSent("MONTHLY", todayStr);
       }
    }
 }
@@ -1608,7 +1688,7 @@ void CheckAndSendMonthlyReport()
 //+------------------------------------------------------------------+
 //| Monatsreport senden                                               |
 //+------------------------------------------------------------------+
-void SendMonthlyReport()
+bool SendMonthlyReport()
 {
    MqlDateTime dtNow;
    TimeCurrent(dtNow);
@@ -1620,7 +1700,7 @@ void SendMonthlyReport()
    if(!HistorySelect(monthStart, TimeCurrent()))
    {
       Print("WARNUNG: Konnte Monats-History nicht laden!");
-      return;
+      return false;
    }
    
    string closedTrades = "";
@@ -1706,7 +1786,9 @@ void SendMonthlyReport()
    body += GetOpenPositionsInfo();
    body += "\n=== Ende Monatsreport ===";
    
-   if(!SendMail(subject, body))
+   bool mailSent = SendMail(subject, body);
+   
+   if(!mailSent)
    {
       Print("FEHLER: Monatsreport E-Mail konnte nicht gesendet werden!");
    }
@@ -1720,5 +1802,6 @@ void SendMonthlyReport()
    }
    
    HistorySelect(0, TimeCurrent());
+   return mailSent;
 }
 //+------------------------------------------------------------------+
