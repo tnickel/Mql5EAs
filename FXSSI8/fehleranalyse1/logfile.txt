@@ -1,0 +1,2048 @@
+2026.07.01 19:17:59.820	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 19:17:59.820	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:17:59.820	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 19:17:59.820	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:17:59.820	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: NEUTRAL) ---
+2026.07.01 19:17:59.820	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:17:59.820	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 19:17:59.820	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 19:17:59.820	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 19:17:59.820	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 19:17:59.820	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 19:17:59.820	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:17:59.820	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 19:17:59.820	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 19:17:59.820	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 19:17:59.820	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 19:17:59.820	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 19:17:59.820	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:17:59.820	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:17:59.820	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 19:17:59.820	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 19:17:59.820	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:22:33.047	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 19:22:59.836	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:22:59.836	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 19:22:59.836	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 19:23:00
+2026.07.01 19:22:59.836	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:22:59.836	FXXSICloser (EURUSD,H1)	FEHLER: Signaldatei konnte nicht geöffnet werden: last_known_signals.csv
+2026.07.01 19:22:59.836	FXXSICloser (EURUSD,H1)	Fehlercode: 5004
+2026.07.01 19:22:59.836	FXXSICloser (EURUSD,H1)	FEHLER: Signaldatei konnte nicht gelesen werden!
+2026.07.01 19:27:39.885	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 19:27:59.823	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:27:59.823	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 19:27:59.823	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 19:28:00
+2026.07.01 19:27:59.823	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:27:59.823	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 19:27:59.823	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 18:50:30
+2026.07.01 19:27:59.823	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 19:28:00
+2026.07.01 19:27:59.823	FXXSICloser (EURUSD,H1)	Dateialter: 37 Minuten (2250 Sekunden)
+2026.07.01 19:27:59.823	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 19:27:59.823	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 19:27:59.823	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 19:27:59.823	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 19:27:59.823	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 19:27:59.823	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 19:27:59.823	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 19:27:59.823	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 19:27:59.823	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 19:27:59.823	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> NEUTRAL
+2026.07.01 19:27:59.823	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 19:27:59.823	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: NEUTRAL) ---
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 19:27:59.824	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:32:45.242	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 19:33:00
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 18:50:30
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 19:33:00
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Dateialter: 42 Minuten (2550 Sekunden)
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> NEUTRAL
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: NEUTRAL) ---
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 19:32:59.843	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:37:51.514	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 19:37:59.846	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:37:59.846	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 19:37:59.846	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 19:38:00
+2026.07.01 19:37:59.846	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:37:59.846	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 19:37:59.846	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 18:50:30
+2026.07.01 19:37:59.846	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 19:38:00
+2026.07.01 19:37:59.846	FXXSICloser (EURUSD,H1)	Dateialter: 47 Minuten (2850 Sekunden)
+2026.07.01 19:37:59.846	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 19:37:59.846	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 19:37:59.846	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 19:37:59.846	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 19:37:59.846	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 19:37:59.846	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 19:37:59.846	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 19:37:59.846	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 19:37:59.846	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 19:37:59.846	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> NEUTRAL
+2026.07.01 19:37:59.846	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 19:37:59.846	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 19:37:59.846	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 19:37:59.846	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 19:37:59.846	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 19:37:59.846	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 19:37:59.846	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 19:37:59.846	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: NEUTRAL) ---
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 19:37:59.847	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:42:52.093	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 19:42:59.857	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:42:59.857	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 19:42:59.857	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 19:43:00
+2026.07.01 19:42:59.857	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 18:50:30
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 19:43:00
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Dateialter: 52 Minuten (3150 Sekunden)
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> NEUTRAL
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: NEUTRAL) ---
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 19:42:59.858	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:47:55.738	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 19:48:00
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 18:50:30
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 19:48:00
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	Dateialter: 57 Minuten (3450 Sekunden)
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> NEUTRAL
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 19:47:59.880	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 19:47:59.881	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 19:47:59.881	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 19:47:59.881	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 19:47:59.881	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 19:47:59.881	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 19:47:59.881	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:47:59.881	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 19:47:59.881	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:47:59.881	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: NEUTRAL) ---
+2026.07.01 19:47:59.881	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:47:59.881	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 19:47:59.881	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 19:47:59.881	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 19:47:59.881	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 19:47:59.881	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 19:47:59.881	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:47:59.881	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 19:47:59.881	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 19:47:59.881	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 19:47:59.881	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 19:47:59.881	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 19:47:59.881	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:47:59.881	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:47:59.881	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 19:47:59.881	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 19:47:59.881	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:52:56.380	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 19:52:59.921	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:52:59.921	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 19:52:59.921	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 19:53:00
+2026.07.01 19:52:59.921	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 18:50:30
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 19:53:00
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Dateialter: 62 Minuten (3750 Sekunden)
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	WARNUNG: Signaldatei ist veraltet! Alter: 62 Min (Max: 60 Min)
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> NEUTRAL
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: NEUTRAL) ---
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 19:52:59.922	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:57:57.502	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 19:57:59.931	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:57:59.931	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 19:57:59.931	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 19:58:00
+2026.07.01 19:57:59.931	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 19:50:30
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 19:58:00
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Dateialter: 7 Minuten (450 Sekunden)
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Dateialter OK - Warnung wird zurückgesetzt
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 19:57:59.933	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:00:57.968	CC_FXSSI_EA_8 (EURUSD,H4)	CTrade::OrderSend: modify position #5033323144 BTCUSD (sl: 40187.14, tp: 61980.76) [no changes]
+2026.07.01 20:00:57.968	CC_FXSSI_EA_8 (EURUSD,H4)	CTrade::OrderSend: modify position #5033166318 BTCUSD (sl: 42780.33, tp: 61980.76) [no changes]
+2026.07.01 20:02:57.925	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 20:03:00
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 19:50:30
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 20:03:00
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Dateialter: 12 Minuten (750 Sekunden)
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 20:02:59.965	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:07:58.836	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 20:08:00.001	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:08:00.001	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 20:08:00.001	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 20:08:00
+2026.07.01 20:08:00.001	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 19:50:30
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 20:08:00
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Dateialter: 17 Minuten (1050 Sekunden)
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 20:08:00.002	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:13:00.023	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:13:00.023	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 20:13:00.023	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 20:13:00
+2026.07.01 20:13:00.023	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:13:00.023	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 20:13:00.023	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 19:50:30
+2026.07.01 20:13:00.023	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 20:13:00
+2026.07.01 20:13:00.023	FXXSICloser (EURUSD,H1)	Dateialter: 22 Minuten (1350 Sekunden)
+2026.07.01 20:13:00.023	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 20:13:00.023	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 20:13:00.023	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 20:13:00.023	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 20:13:00.023	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 20:13:00.023	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 20:13:00.023	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 20:13:00.023	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 20:13:00.023	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 20:13:00.023	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 20:13:00.023	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 20:13:00.023	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 20:13:00.024	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:13:01.425	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 20:18:00
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 19:50:30
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 20:18:00
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Dateialter: 27 Minuten (1650 Sekunden)
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 20:18:00.044	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:18:02.841	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 20:23:00.065	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:23:00.065	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 20:23:00.065	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 20:23:00
+2026.07.01 20:23:00.065	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 19:50:30
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 20:23:00
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Dateialter: 32 Minuten (1950 Sekunden)
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 20:23:00.066	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:23:03.428	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 20:28:00.097	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:28:00.097	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 20:28:00.097	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 20:28:00
+2026.07.01 20:28:00.097	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:28:00.097	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 20:28:00.097	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 19:50:30
+2026.07.01 20:28:00.097	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 20:28:00
+2026.07.01 20:28:00.097	FXXSICloser (EURUSD,H1)	Dateialter: 37 Minuten (2250 Sekunden)
+2026.07.01 20:28:00.097	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 20:28:00.097	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 20:28:00.097	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 20:28:00.097	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 20:28:00.098	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:28:04.250	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 20:33:00
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 19:50:30
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 20:33:00
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Dateialter: 42 Minuten (2550 Sekunden)
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 20:33:00.111	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:33:05.037	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 20:38:00
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 19:50:30
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 20:38:00
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Dateialter: 47 Minuten (2850 Sekunden)
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 20:38:00.151	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:38:10.706	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 20:43:00.171	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:43:00.171	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 20:43:00.171	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 20:43:00
+2026.07.01 20:43:00.171	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:43:00.171	FXXSICloser (EURUSD,H1)	FEHLER: Signaldatei konnte nicht geöffnet werden: last_known_signals.csv
+2026.07.01 20:43:00.171	FXXSICloser (EURUSD,H1)	Fehlercode: 5004
+2026.07.01 20:43:00.171	FXXSICloser (EURUSD,H1)	FEHLER: Signaldatei konnte nicht gelesen werden!
+2026.07.01 20:43:11.029	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 20:48:00
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 19:50:30
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 20:48:00
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Dateialter: 57 Minuten (3450 Sekunden)
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 20:48:00.188	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:48:13.503	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 20:53:00
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 19:50:30
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 20:53:00
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	Dateialter: 62 Minuten (3750 Sekunden)
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	WARNUNG: Signaldatei ist veraltet! Alter: 62 Min (Max: 60 Min)
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 20:53:00.207	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 20:53:00.208	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:53:14.111	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 20:58:00.219	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:58:00.219	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 20:58:00.219	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 20:58:00
+2026.07.01 20:58:00.219	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 20:50:31
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 20:58:00
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Dateialter: 7 Minuten (449 Sekunden)
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Dateialter OK - Warnung wird zurückgesetzt
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 20:58:00.221	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 20:58:15.024	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 21:03:00
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 20:50:31
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 21:03:00
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Dateialter: 12 Minuten (749 Sekunden)
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 21:03:00.221	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:03:17.400	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 21:08:00
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 20:50:31
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 21:08:00
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Dateialter: 17 Minuten (1049 Sekunden)
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 21:08:00.252	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:08:18.663	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 21:13:00
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 20:50:31
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 21:13:00
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Dateialter: 22 Minuten (1349 Sekunden)
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 21:13:00.267	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:13:25.262	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 21:18:00
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 20:50:31
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 21:18:00
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Dateialter: 27 Minuten (1649 Sekunden)
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 21:18:00.295	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:18:26.156	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 21:23:00.297	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:23:00.297	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 21:23:00.297	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 21:23:00
+2026.07.01 21:23:00.297	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 20:50:31
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 21:23:00
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Dateialter: 32 Minuten (1949 Sekunden)
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 21:23:00.298	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:23:27.207	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 21:28:00.323	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:28:00.323	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 21:28:00.323	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 21:28:00
+2026.07.01 21:28:00.323	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 20:50:31
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 21:28:00
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Dateialter: 37 Minuten (2249 Sekunden)
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 21:28:00.324	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:28:29.350	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 21:33:00
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 20:50:31
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 21:33:00
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Dateialter: 42 Minuten (2549 Sekunden)
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 21:33:00.331	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:33:30.823	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 21:38:00.349	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:38:00.349	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 21:38:00.349	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 21:38:00
+2026.07.01 21:38:00.349	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 20:50:31
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 21:38:00
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Dateialter: 47 Minuten (2849 Sekunden)
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 21:38:00.350	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:38:31.566	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 21:43:00.374	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:43:00.374	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 21:43:00.374	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 21:43:00
+2026.07.01 21:43:00.374	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 20:50:31
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 21:43:00
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Dateialter: 52 Minuten (3149 Sekunden)
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 21:43:00.375	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:43:36.645	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 21:48:00
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 20:50:31
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 21:48:00
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Dateialter: 57 Minuten (3449 Sekunden)
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 21:48:00.384	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:48:39.929	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 21:53:00
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 20:50:31
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 21:53:00
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Dateialter: 62 Minuten (3749 Sekunden)
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	WARNUNG: Signaldatei ist veraltet! Alter: 62 Min (Max: 60 Min)
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> BUY
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: BUY) ---
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 21:53:00.386	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:53:40.123	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 21:58:00.394	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:58:00.394	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 21:58:00.394	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 21:58:00
+2026.07.01 21:58:00.394	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 21:50:31
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 21:58:00
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Dateialter: 7 Minuten (449 Sekunden)
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Dateialter OK - Warnung wird zurückgesetzt
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> NEUTRAL
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: NEUTRAL) ---
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 21:58:00.396	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 21:58:41.069	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 22:03:00.413	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 22:03:00.413	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 22:03:00.413	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 22:03:00
+2026.07.01 22:03:00.413	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 22:03:00.413	FXXSICloser (EURUSD,H1)	FEHLER: Signaldatei konnte nicht geöffnet werden: last_known_signals.csv
+2026.07.01 22:03:00.413	FXXSICloser (EURUSD,H1)	Fehlercode: 5004
+2026.07.01 22:03:00.413	FXXSICloser (EURUSD,H1)	FEHLER: Signaldatei konnte nicht gelesen werden!
+2026.07.01 22:03:05.015	CC_FXSSI_EA_8 (EURUSD,H4)	Modus-Wechsel für EURJPY von MODE_LONG zu MODE_NEUTRAL - Positionen geschlossen.
+2026.07.01 22:03:49.262	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 22:08:00.418	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 22:08:00.418	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 22:08:00.418	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 22:08:00
+2026.07.01 22:08:00.418	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 22:08:00.418	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 21:50:31
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 22:08:00
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Dateialter: 17 Minuten (1049 Sekunden)
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> NEUTRAL
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: NEUTRAL) ---
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 22:08:00.419	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 22:08:51.148	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 22:13:00.428	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 22:13:00.428	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 22:13:00.428	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 22:13:00
+2026.07.01 22:13:00.428	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 21:50:31
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 22:13:00
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Dateialter: 22 Minuten (1349 Sekunden)
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> NEUTRAL
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: NEUTRAL) ---
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 22:13:00.429	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 22:14:04.687	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 22:18:00.438	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 22:18:00.438	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 22:18:00.438	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 22:18:00
+2026.07.01 22:18:00.438	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 21:50:31
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 22:18:00
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Dateialter: 27 Minuten (1649 Sekunden)
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> NEUTRAL
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: NEUTRAL) ---
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 22:18:00.439	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 22:19:06.741	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 22:23:00
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 21:50:31
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 22:23:00
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Dateialter: 32 Minuten (1949 Sekunden)
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> NEUTRAL
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: NEUTRAL) ---
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 22:23:00.456	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 22:24:10.305	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 22:28:00.465	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 22:28:00.465	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 22:28:00.466	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 22:28:00
+2026.07.01 22:28:00.466	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 22:28:00.466	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 22:28:00.466	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 21:50:31
+2026.07.01 22:28:00.466	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 22:28:00
+2026.07.01 22:28:00.466	FXXSICloser (EURUSD,H1)	Dateialter: 37 Minuten (2249 Sekunden)
+2026.07.01 22:28:00.466	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 22:28:00.466	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 22:28:00.466	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 22:28:00.466	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 22:28:00.466	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 22:28:00.466	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 22:28:00.466	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 22:28:00.466	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 22:28:00.466	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 22:28:00.466	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 22:28:00.466	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 22:28:00.466	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 22:28:00.466	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 22:28:00.466	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> NEUTRAL
+2026.07.01 22:28:00.466	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 22:28:00.466	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 22:28:00.466	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 22:28:00.466	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: NEUTRAL) ---
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 22:28:00.467	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 22:29:15.027	Myfxbook (EURUSD,H1)	Statement uploaded successfully
+2026.07.01 22:33:00.466	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 22:33:00.466	FXXSICloser (EURUSD,H1)	=== Starte Konfliktprüfung ===
+2026.07.01 22:33:00.466	FXXSICloser (EURUSD,H1)	Zeit: 2026.07.01 22:33:00
+2026.07.01 22:33:00.466	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 22:33:00.466	FXXSICloser (EURUSD,H1)	--- Lese Signaldatei: last_known_signals.csv ---
+2026.07.01 22:33:00.466	FXXSICloser (EURUSD,H1)	Datei-Änderungszeit: 2026.07.01 21:50:31
+2026.07.01 22:33:00.466	FXXSICloser (EURUSD,H1)	Aktuelle Zeit: 2026.07.01 22:33:00
+2026.07.01 22:33:00.466	FXXSICloser (EURUSD,H1)	Dateialter: 42 Minuten (2549 Sekunden)
+2026.07.01 22:33:00.466	FXXSICloser (EURUSD,H1)	Header übersprungen: Waehrungspaar;Letztes_Signal
+2026.07.01 22:33:00.466	FXXSICloser (EURUSD,H1)	Signal gelesen: NZDUSD -> SELL
+2026.07.01 22:33:00.466	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPJPY -> BUY
+2026.07.01 22:33:00.466	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDJPY -> SELL
+2026.07.01 22:33:00.466	FXXSICloser (EURUSD,H1)	Signal gelesen: USDJPY -> BUY
+2026.07.01 22:33:00.466	FXXSICloser (EURUSD,H1)	Signal gelesen: EURCHF -> SELL
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	Signal gelesen: EURUSD -> SELL
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	Signal gelesen: EURAUD -> NEUTRAL
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCHF -> NEUTRAL
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	Signal gelesen: GOLD -> SELL
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	Signal gelesen: BTCUSD -> BUY
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	Signal gelesen: AUDUSD -> SELL
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPUSD -> NEUTRAL
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	Signal gelesen: EURJPY -> NEUTRAL
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	Signal gelesen: USDCAD -> BUY
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	Signal gelesen: EURGBP -> SELL
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	Signal gelesen: SILVER -> SELL
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	Signal gelesen: GBPCHF -> NEUTRAL
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	Signaldatei geschlossen. 17 Signale geladen.
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: NZDUSD (Signal: SELL) ---
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPJPY (Signal: BUY) ---
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDJPY (Signal: SELL) ---
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDJPY (Signal: BUY) ---
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURCHF (Signal: SELL) ---
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURUSD (Signal: SELL) ---
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURAUD (Signal: NEUTRAL) ---
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCHF (Signal: NEUTRAL) ---
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GOLD (Signal: SELL) ---
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: BTCUSD (Signal: BUY) ---
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	Position #5033323144 (BUY) ist OK mit Signal (BUY)
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	Position #5033166318 (BUY) ist OK mit Signal (BUY)
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: AUDUSD (Signal: SELL) ---
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPUSD (Signal: NEUTRAL) ---
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURJPY (Signal: NEUTRAL) ---
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: USDCAD (Signal: BUY) ---
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: EURGBP (Signal: SELL) ---
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: SILVER (Signal: SELL) ---
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	--- Prüfe Symbol: GBPCHF (Signal: NEUTRAL) ---
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	Signal ist NEUTRAL - keine Aktion
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	=== Konfliktprüfung abgeschlossen ===
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	Geschlossene Positionen: 0
+2026.07.01 22:33:00.467	FXXSICloser (EURUSD,H1)	========================================
+2026.07.01 22:34:27.830	Myfxbook (EURUSD,H1)	Statement uploaded successfully
