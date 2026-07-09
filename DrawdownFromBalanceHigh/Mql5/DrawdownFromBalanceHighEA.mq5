@@ -6,9 +6,7 @@
 //+------------------------------------------------------------------+
 #property copyright "Copyright 2025, Thomas Nickel"
 #property link      "https://monitortool.jimdofree.com/"
-#property version   "1.03"
-
-#property strict
+#property version   "1.04"
 
 // Eingabeparameter
 input color TextColor = clrYellow;      // Textfarbe
@@ -18,7 +16,7 @@ input int Corner = 0;                   // Ecke für Anzeige (0=links oben, 1=re
 input int DistanceX = 20;               // X-Abstand
 input int DistanceY = 20;               // Y-Abstand
 input double AlarmDrawdownProzent = 5.0; // Alarmschwelle für Drawdown in %
-input bool PlaySound = true;           // Sound bei Alarm abspielen
+input bool EnableSound = true;         // Sound bei Alarm abspielen
 input color AlarmTextColor = clrRed;    // Farbe für Alarmtext
 
 // Globale Variablen
@@ -29,6 +27,8 @@ double maxBalance = 0;
 bool alarmTriggered = false;
 double alarmEquity = 0;
 bool lastAccessSuccessful = true;   // Flag für erfolgreichen Zugriff auf Kontodaten
+string globalVarPrefix = "DrawdownEA_MaxBalance"; // Prefix für GlobalVariable Persistenz
+string globalVarName = ""; // Kontospezifischer GlobalVariable Name
 
 // Neue globale Variablen für Open Equity Tracking
 double currentOpenEquity = 0;
@@ -37,10 +37,21 @@ double dailyMinOpenEquity = 0;
 double dailyMaxOpenEquity = 0;
 double dailyMinOpenEquityCurrency = 0;
 double dailyMaxOpenEquityCurrency = 0;
+bool dailyMinMaxInitialized = false; // Flag für Min/Max Initialisierung
 datetime lastResetTime = 0;
 string openEquityLabelName = "OpenEquityLabel";
 string minMaxLabelName = "MinMaxLabel";
 string minMaxCurrencyLabelName = "MinMaxCurrencyLabel";
+
+struct EquityLogEntry
+{
+   string date;
+   double minPercent;
+   double maxPercent;
+   double minCurrency;
+   double maxCurrency;
+   string currency;
+};
 
 //+------------------------------------------------------------------+
 //| Expert initialization function                                   |
@@ -53,7 +64,8 @@ int OnInit()
    ObjectDelete(0, openEquityLabelName);
    ObjectDelete(0, minMaxLabelName);
    ObjectDelete(0, minMaxCurrencyLabelName);
-   
+   ObjectDelete(0, errorLabelName);
+
    // Erstelle ein neues Label für die Drawdown-Anzeige
    ObjectCreate(0, objectName, OBJ_LABEL, 0, 0, 0);
    ObjectSetInteger(0, objectName, OBJPROP_CORNER, Corner);
@@ -98,17 +110,35 @@ int OnInit()
    ObjectSetInteger(0, minMaxCurrencyLabelName, OBJPROP_COLOR, TextColor);
    ObjectSetInteger(0, minMaxCurrencyLabelName, OBJPROP_FONTSIZE, FontSize);
    ObjectSetString(0, minMaxCurrencyLabelName, OBJPROP_FONT, FontName);
-   
+
+   // Erstelle Label für Fehlermeldungen
+   ObjectCreate(0, errorLabelName, OBJ_LABEL, 0, 0, 0);
+   ObjectSetInteger(0, errorLabelName, OBJPROP_CORNER, Corner);
+   ObjectSetInteger(0, errorLabelName, OBJPROP_XDISTANCE, DistanceX);
+   ObjectSetInteger(0, errorLabelName, OBJPROP_YDISTANCE, DistanceY + (FontSize + 25) * 5);
+   ObjectSetInteger(0, errorLabelName, OBJPROP_COLOR, clrRed);
+   ObjectSetInteger(0, errorLabelName, OBJPROP_FONTSIZE, FontSize);
+   ObjectSetString(0, errorLabelName, OBJPROP_FONT, FontName);
+
    // Reset Alarm-Status
    alarmTriggered = false;
    alarmEquity = 0;
    lastAccessSuccessful = true;
-   
+
+   globalVarName = BuildGlobalVarName();
+
+   // Lade maxBalance aus GlobalVariable (Persistenz über Neustarts)
+   if(GlobalVariableCheck(globalVarName))
+   {
+      maxBalance = GlobalVariableGet(globalVarName);
+      Print("maxBalance aus GlobalVariable geladen: ", DoubleToString(maxBalance, 2));
+   }
+
    // Initialisiere Open Equity Tracking
    InitializeOpenEquityTracking();
    
-   // Aktiviere Timer für regelmäßige Updates (1 Sekunde)
-   EventSetTimer(1);
+   // Aktiviere Timer für regelmäßige Updates (3 Sekunden)
+   EventSetTimer(3);
    
    // Ausgabe im Log
    double initialAlarmEquityThreshold = maxBalance > 0 ? maxBalance * (1 - AlarmDrawdownProzent/100) : 0;
@@ -124,9 +154,9 @@ int OnInit()
 void OnDeinit(const int reason)
 {
    // Schreibe aktuelle Werte ins Logfile bevor der EA beendet wird
-   if(dailyMinOpenEquity != 0 || dailyMaxOpenEquity != 0) // Nur loggen wenn Daten vorhanden
+   if(dailyMinMaxInitialized) // Nur loggen wenn Daten vorhanden
    {
-      WriteEquityLogEntry();
+      WriteEquityLogEntry(GetLogDateForCurrentPeriod(TimeLocal()));
       Print("Aktuelle Equity Drawdown Daten beim EA-Stop ins Logfile geschrieben");
    }
    
@@ -169,7 +199,7 @@ void OnTimer()
    currentEquity = AccountInfoDouble(ACCOUNT_EQUITY);
    
    // Prüfe, ob die gelesenen Werte gültig sind
-   if(currentBalance <= 0 || currentEquity <= 0)
+   if(currentBalance <= 0)
    {
       accessSuccessful = false;
       
@@ -197,15 +227,15 @@ void OnTimer()
       lastAccessSuccessful = true;
    }
    
-   // Prüfe täglichen Reset um 10 Uhr
-   CheckDailyReset();
-   
    // Berechne Open Equity in Prozent und Währung
    if(currentBalance > 0)
    {
       currentOpenEquity = (currentEquity - currentBalance) / currentBalance * 100;
       currentOpenEquityCurrency = currentEquity - currentBalance;
    }
+
+   // Prüfe täglichen Reset um 10 Uhr
+   CheckDailyReset();
    
    // Aktualisiere Min/Max für den Tag
    UpdateDailyMinMax();
@@ -214,6 +244,8 @@ void OnTimer()
    if(currentBalance > maxBalance)
    {
       maxBalance = currentBalance;
+      // Speichere maxBalance persistent in GlobalVariable
+      GlobalVariableSet(globalVarName, maxBalance);
       // Bei neuem Balance-High den Alarm zurücksetzen
       alarmTriggered = false;
    }
@@ -281,7 +313,7 @@ void OnTimer()
             "Equity-Alarmschwelle: " + DoubleToString(alarmEquityThreshold, 2));
       
       // Optional Sound abspielen
-      if(PlaySound)
+      if(EnableSound)
          PlaySound("alert.wav");
    }
    
@@ -295,12 +327,13 @@ void OnTimer()
 void InitializeOpenEquityTracking()
 {
    datetime currentTime = TimeLocal();
-   lastResetTime = currentTime;
+   lastResetTime = GetResetBoundary(currentTime);
    dailyMinOpenEquity = 0;
    dailyMaxOpenEquity = 0;
    dailyMinOpenEquityCurrency = 0;
    dailyMaxOpenEquityCurrency = 0;
-   
+   dailyMinMaxInitialized = false;
+
    Print("Open Equity Tracking initialisiert um ", TimeToString(currentTime));
 }
 
@@ -310,30 +343,25 @@ void InitializeOpenEquityTracking()
 void CheckDailyReset()
 {
    datetime currentTime = TimeLocal();
-   MqlDateTime currentStruct, lastResetStruct;
-   
-   TimeToStruct(currentTime, currentStruct);
-   TimeToStruct(lastResetTime, lastResetStruct);
-   
-   // Prüfe ob ein neuer Tag ist und es nach 10 Uhr ist
-   if((currentStruct.day != lastResetStruct.day || 
-       currentStruct.mon != lastResetStruct.mon || 
-       currentStruct.year != lastResetStruct.year) && 
-      currentStruct.hour >= 10)
+   datetime currentResetBoundary = GetResetBoundary(currentTime);
+
+   // Prüfe ob die nächste tägliche Reset-Grenze erreicht wurde
+   if(currentResetBoundary > lastResetTime)
    {
       // Schreibe aktuelle Werte ins Logfile BEVOR sie zurückgesetzt werden
-      if(dailyMinOpenEquity != 0 || dailyMaxOpenEquity != 0) // Nur loggen wenn Daten vorhanden
+      if(dailyMinMaxInitialized) // Nur loggen wenn Daten vorhanden
       {
-         WriteEquityLogEntry();
+         WriteEquityLogEntry(GetLogDateFromResetBoundary(lastResetTime));
       }
-      
+
       // Reset der täglichen Min/Max Werte
       dailyMinOpenEquity = currentOpenEquity;
       dailyMaxOpenEquity = currentOpenEquity;
       dailyMinOpenEquityCurrency = currentOpenEquityCurrency;
       dailyMaxOpenEquityCurrency = currentOpenEquityCurrency;
-      lastResetTime = currentTime;
-      
+      dailyMinMaxInitialized = true;
+      lastResetTime = currentResetBoundary;
+
       Print("Täglicher Reset der Open Equity Min/Max Werte um ", TimeToString(currentTime));
    }
 }
@@ -344,75 +372,188 @@ void CheckDailyReset()
 void UpdateDailyMinMax()
 {
    // Beim ersten Mal initialisieren
-   if(dailyMinOpenEquity == 0 && dailyMaxOpenEquity == 0)
+   if(!dailyMinMaxInitialized)
    {
       dailyMinOpenEquity = currentOpenEquity;
       dailyMaxOpenEquity = currentOpenEquity;
       dailyMinOpenEquityCurrency = currentOpenEquityCurrency;
       dailyMaxOpenEquityCurrency = currentOpenEquityCurrency;
+      dailyMinMaxInitialized = true;
    }
    else
    {
+      // Prozent-Min/Max unabhängig tracken
       if(currentOpenEquity < dailyMinOpenEquity)
-      {
          dailyMinOpenEquity = currentOpenEquity;
-         dailyMinOpenEquityCurrency = currentOpenEquityCurrency;
-      }
-      
+
       if(currentOpenEquity > dailyMaxOpenEquity)
-      {
          dailyMaxOpenEquity = currentOpenEquity;
+
+      // Währungs-Min/Max unabhängig tracken
+      if(currentOpenEquityCurrency < dailyMinOpenEquityCurrency)
+         dailyMinOpenEquityCurrency = currentOpenEquityCurrency;
+
+      if(currentOpenEquityCurrency > dailyMaxOpenEquityCurrency)
          dailyMaxOpenEquityCurrency = currentOpenEquityCurrency;
-      }
    }
 }
 
 //+------------------------------------------------------------------+
-//| Schreibt einen Eintrag ins Equity Drawdown Logfile              |
+//| Erstellt den kontospezifischen GlobalVariable Namen              |
 //+------------------------------------------------------------------+
-void WriteEquityLogEntry()
+string BuildGlobalVarName()
+{
+   long accountLogin = AccountInfoInteger(ACCOUNT_LOGIN);
+
+   if(accountLogin > 0)
+      return globalVarPrefix + "_" + IntegerToString(accountLogin);
+
+   return globalVarPrefix;
+}
+
+//+------------------------------------------------------------------+
+//| Ermittelt die letzte erreichte Reset-Grenze um 10:00 Uhr         |
+//+------------------------------------------------------------------+
+datetime GetResetBoundary(datetime currentTime)
+{
+   MqlDateTime timeStruct;
+   TimeToStruct(currentTime, timeStruct);
+   timeStruct.hour = 10;
+   timeStruct.min = 0;
+   timeStruct.sec = 0;
+
+   datetime todayReset = StructToTime(timeStruct);
+
+   if(currentTime >= todayReset)
+      return todayReset;
+
+   return todayReset - 86400;
+}
+
+//+------------------------------------------------------------------+
+//| Formatiert das Log-Datum aus einer Reset-Grenze                  |
+//+------------------------------------------------------------------+
+string GetLogDateFromResetBoundary(datetime resetBoundary)
+{
+   MqlDateTime dateStruct;
+   TimeToStruct(resetBoundary, dateStruct);
+   return StringFormat("%04d-%02d-%02d", dateStruct.year, dateStruct.mon, dateStruct.day);
+}
+
+//+------------------------------------------------------------------+
+//| Ermittelt das Log-Datum für die aktuelle 10-Uhr-Periode          |
+//+------------------------------------------------------------------+
+string GetLogDateForCurrentPeriod(datetime currentTime)
+{
+   return GetLogDateFromResetBoundary(GetResetBoundary(currentTime));
+}
+
+//+------------------------------------------------------------------+
+//| Fuegt einen Logeintrag zu einem Array hinzu                      |
+//+------------------------------------------------------------------+
+void AddEquityLogEntry(EquityLogEntry &rows[], int &rowCount, string dateString,
+                       double minPercent, double maxPercent,
+                       double minCurrency, double maxCurrency,
+                       string currencySymbol)
+{
+   ArrayResize(rows, rowCount + 1);
+   rows[rowCount].date = dateString;
+   rows[rowCount].minPercent = minPercent;
+   rows[rowCount].maxPercent = maxPercent;
+   rows[rowCount].minCurrency = minCurrency;
+   rows[rowCount].maxCurrency = maxCurrency;
+   rows[rowCount].currency = currencySymbol;
+   rowCount++;
+}
+
+//+------------------------------------------------------------------+
+//| Schreibt oder aktualisiert einen Equity Drawdown Logfile Eintrag |
+//+------------------------------------------------------------------+
+void WriteEquityLogEntry(string dateString)
 {
    string filename = "equitydrawdown.log";
-   int fileHandle;
-   
-   // Versuche die Datei zum Anhängen zu öffnen, falls sie nicht existiert wird sie erstellt
-   fileHandle = FileOpen(filename, FILE_READ|FILE_WRITE|FILE_CSV|FILE_ANSI, ";");
-   
-   if(fileHandle != INVALID_HANDLE)
+   string currencySymbol = AccountInfoString(ACCOUNT_CURRENCY);
+
+   double entryMinPercent = dailyMinOpenEquity;
+   double entryMaxPercent = dailyMaxOpenEquity;
+   double entryMinCurrency = dailyMinOpenEquityCurrency;
+   double entryMaxCurrency = dailyMaxOpenEquityCurrency;
+
+   EquityLogEntry rows[];
+   int rowCount = 0;
+   bool entryUpdated = false;
+
+   int readHandle = FileOpen(filename, FILE_READ|FILE_CSV|FILE_ANSI, ';');
+
+   if(readHandle != INVALID_HANDLE)
    {
-      // Gehe ans Ende der Datei
-      FileSeek(fileHandle, 0, SEEK_END);
-      
-      // Erstelle Header falls die Datei leer ist
-      if(FileSize(fileHandle) == 0)
+      while(!FileIsEnding(readHandle))
       {
-         FileWrite(fileHandle, "Datum", "Min_Prozent", "Max_Prozent", "Min_Waehrung", "Max_Waehrung", "Waehrung");
+         string rowDate = FileReadString(readHandle);
+
+         if(rowDate == "" && FileIsEnding(readHandle))
+            break;
+
+         string minPercentText = FileReadString(readHandle);
+         string maxPercentText = FileReadString(readHandle);
+         string minCurrencyText = FileReadString(readHandle);
+         string maxCurrencyText = FileReadString(readHandle);
+         string rowCurrency = FileReadString(readHandle);
+
+         if(rowDate == "" || rowDate == "Datum")
+            continue;
+
+         double rowMinPercent = StringToDouble(minPercentText);
+         double rowMaxPercent = StringToDouble(maxPercentText);
+         double rowMinCurrency = StringToDouble(minCurrencyText);
+         double rowMaxCurrency = StringToDouble(maxCurrencyText);
+
+         if(rowDate == dateString)
+         {
+            entryMinPercent = MathMin(entryMinPercent, rowMinPercent);
+            entryMaxPercent = MathMax(entryMaxPercent, rowMaxPercent);
+            entryMinCurrency = MathMin(entryMinCurrency, rowMinCurrency);
+            entryMaxCurrency = MathMax(entryMaxCurrency, rowMaxCurrency);
+            entryUpdated = true;
+            continue;
+         }
+
+         AddEquityLogEntry(rows, rowCount, rowDate,
+                           rowMinPercent, rowMaxPercent,
+                           rowMinCurrency, rowMaxCurrency,
+                           rowCurrency);
       }
-      
-      // Erstelle Datumsstring für den gestrigen Tag (da um 10 Uhr resettet wird)
-      datetime yesterday = TimeLocal() - 86400; // Minus 1 Tag
-      MqlDateTime dateStruct;
-      TimeToStruct(yesterday, dateStruct);
-      string dateString = StringFormat("%04d-%02d-%02d", dateStruct.year, dateStruct.mon, dateStruct.day);
-      
-      // Hole Währungssymbol
-      string currencySymbol = AccountInfoString(ACCOUNT_CURRENCY);
-      
-      // Schreibe die Daten
-      FileWrite(fileHandle, 
-                dateString,
-                DoubleToString(dailyMinOpenEquity, 2),
-                DoubleToString(dailyMaxOpenEquity, 2), 
-                DoubleToString(dailyMinOpenEquityCurrency, 2),
-                DoubleToString(dailyMaxOpenEquityCurrency, 2),
-                currencySymbol);
-      
-      // Schließe die Datei
-      FileClose(fileHandle);
-      
-      Print("Equity Drawdown Daten für ", dateString, " ins Logfile geschrieben: Min ", 
-            DoubleToString(dailyMinOpenEquity, 2), "% (", DoubleToString(dailyMinOpenEquityCurrency, 2), " ", currencySymbol, "), Max ", 
-            DoubleToString(dailyMaxOpenEquity, 2), "% (", DoubleToString(dailyMaxOpenEquityCurrency, 2), " ", currencySymbol, ")");
+
+      FileClose(readHandle);
+   }
+
+   AddEquityLogEntry(rows, rowCount, dateString,
+                     entryMinPercent, entryMaxPercent,
+                     entryMinCurrency, entryMaxCurrency,
+                     currencySymbol);
+
+   int writeHandle = FileOpen(filename, FILE_WRITE|FILE_CSV|FILE_ANSI, ';');
+
+   if(writeHandle != INVALID_HANDLE)
+   {
+      FileWrite(writeHandle, "Datum", "Min_Prozent", "Max_Prozent", "Min_Waehrung", "Max_Waehrung", "Waehrung");
+
+      for(int i = 0; i < rowCount; i++)
+      {
+         FileWrite(writeHandle,
+                   rows[i].date,
+                   DoubleToString(rows[i].minPercent, 2),
+                   DoubleToString(rows[i].maxPercent, 2),
+                   DoubleToString(rows[i].minCurrency, 2),
+                   DoubleToString(rows[i].maxCurrency, 2),
+                   rows[i].currency);
+      }
+
+      FileClose(writeHandle);
+
+      Print("Equity Drawdown Daten für ", dateString, entryUpdated ? " im Logfile aktualisiert: Min " : " ins Logfile geschrieben: Min ",
+            DoubleToString(entryMinPercent, 2), "% (", DoubleToString(entryMinCurrency, 2), " ", currencySymbol, "), Max ",
+            DoubleToString(entryMaxPercent, 2), "% (", DoubleToString(entryMaxCurrency, 2), " ", currencySymbol, ")");
    }
    else
    {
